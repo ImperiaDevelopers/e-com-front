@@ -1,4 +1,5 @@
 <template>
+  <!-- <MainCarouselVue></MainCarouselVue> -->
   <router-view></router-view>
 </template>
 
