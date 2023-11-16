@@ -4,7 +4,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
   />
   <div
-    class="flex w-[100%] mb-[70px] mt-[70px] left-[131px] gap-[150px] items-start justify-center"
+    class="flex w-[100%] mb-[70px] mt-[70px]  gap-[150px] items-start justify-center"
   >
     <div class="flex-col">
       <h2 class="font-bold mt-[6px]">Bizning ijtimoiy tarmoqlarda</h2>

@@ -3,7 +3,7 @@
     <el-carousel-item v-for="(img, index) in imgs" :key="index">
       <div
         :style="{ background: img.bgColor }"
-        class="flex justify-between items-center"
+        class="flex justify-between  items-center"
       >
         <div class="flex flex-col items-start pl-[200px] gap-4">
           <h1 class="text-2xl">{{ img.text }}</h1>
@@ -14,7 +14,7 @@
             Batafsil
           </button>
         </div>
-        <img class="h-1/4 w-1/3" :src="img.content" alt="Slide Image" />
+        <img class="h-1/2 w-1/3 " :src="img.content" alt="Slide Image" />
       </div>
     </el-carousel-item>
   </el-carousel>
@@ -23,6 +23,8 @@
 <script setup>
 import "vue3-carousel/dist/carousel.css";
 import { computed, ref } from "vue";
+import { Carousel, Navigation, Slide } from "vue3-carousel";
+
 
 const imgs = ref([
   {
@@ -46,11 +48,11 @@ const imgs = ref([
 ]);
 </script>
 <style scoped></style>
-
-<!-- <template>
+<!-- 
+<template>
   <div>
     <div>
-      <carousel :items-to-show="1" :autoplay="5000">
+      <carousel :items-to-show="1" :autoplay="5000" :wrap-around="true">
         <slide v-for="(img, index) in imgs" :key="index">
           <div
             :style="{ background: img.bgColor }"
