@@ -8,7 +8,7 @@
   >
     <Slide v-for="(img, index) in imgs" :key="index">
       <div
-        class="carousel__item w-[300px] h-[400px] bg-[#EBEFF3] rounded"
+        class="carousel__item w-[273px] h-[330px] bg-[#EBEFF3] rounded"
         style="{ width: img.width, height: img.height }"
       >
         <div class="flex-col">
