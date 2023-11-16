@@ -12,6 +12,7 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.3.67",
+    "element-plus": "^2.4.2",
     "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.1.7",
     "swiper": "^8.4.7",
