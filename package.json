@@ -10,8 +10,12 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "@jamescoyle/vue-icon": "^0.1.2",
-    "@mdi/js": "^7.3.67",
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
     "element-plus": "^2.4.2",
     "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.1.7",

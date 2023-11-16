@@ -4,11 +4,11 @@
     :breakpoints="breakpoints"
     :autoplay="3000"
     :wrap-around="true"
-    class="mt-[20px]"
+    class="mb-[4%]"
   >
     <Slide v-for="(img, index) in imgs" :key="index">
       <div
-        class="carousel__item w-[300px] h-[400px] bg-[#EBEFF3] rounded"
+        class="carousel__item w-[250px] h-[400px] bg-[#EBEFF3] rounded"
         style="{ width: img.width, height: img.height }"
       >
         <div class="flex-col">
@@ -92,8 +92,8 @@ const breakpoints = {
     snapAlign: "center",
   },
   1024: {
-    itemsToShow: 5,
-    snapAlign: "start",
+    itemsToShow: 5.8,
+    snapAlign: "center",
   },
 };
 </script>

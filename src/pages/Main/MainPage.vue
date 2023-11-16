@@ -1,24 +1,36 @@
 <template>
-  <div>
-    <Banner />
-    <Brand />
-    <h1 class="text-[32px] color-[#000000] pl-[131px]">Most popular product</h1>
-    <Product />
-    <h1 class="text-[32px] color-[#000000] pl-[131px]">Most popular product</h1>
-    <Product />
-    <h1 class="text-[32px] color-[#000000] pl-[131px]">Most popular product</h1>
-    <Product />
-    <Category />
-    <Footer />
+  <Header />
+  <Banner />
+  <Brand />
+  <div class="flex items-center justify-center">
+    <div class="w-[1180px]">
+      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+    </div>
   </div>
+  <Product />
+   <div class="flex items-center justify-center">
+    <div class="w-[1180px]">
+      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+    </div>
+  </div>
+  <Product />
+   <div class="flex items-center justify-center">
+    <div class="w-[1180px]">
+      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+    </div>
+  </div>
+  <Product />
+  <Category />
+  <Footer />
 </template>
 
 <script setup>
 import Banner from "../../components/Carousel/MainCarousel.vue";
 import Brand from "../../components/Brand/Brand.vue";
 import Product from "../../components/Carousel/ProdCarousel.vue";
-import Footer from "../../components/footer/footer.vue"
+import Footer from "../../components/footer/footer.vue";
 import Category from "../../components/Category/Category.vue";
+import Header from "../../components/Header.vue";
 </script>
 
 <style lang="scss" scoped></style>

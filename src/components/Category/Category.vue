@@ -1,5 +1,7 @@
 <template>
-  <div class="main w-[100%] mt-[20px] flex relative items-center justify-center">
+  <div
+    class="main w-[100%] mt-[20px] flex relative items-center justify-center"
+  >
     <div class="flex flex-col">
       <div class="qator1 flex gap-[10px] mb-[10px]">
         <div class="noutbook">
@@ -18,7 +20,11 @@
           <button>
             <h1>Smartfonlar</h1>
           </button>
-          <img class="tel" src="../../assets/category_img/telefon.png" alt="telefon" />
+          <img
+            class="tel"
+            src="../../assets/category_img/telefon.png"
+            alt="telefon"
+          />
         </div>
       </div>
       <div class="qator1 flex gap-[10px]">
@@ -33,14 +39,14 @@
           <button><h1>Televizorlar</h1></button>
           <img src="../../assets/category_img/tv.png" alt="tv" />
         </div>
-        <div class="muzlatgich1">
+        <div class="muzlatgich1 relative">
           <img
-            class="absolute right-[550px]"
+            class="absolute right-[-62px]"
             src="../../assets/category_img/muz1.png"
             alt="muz1"
           />
           <button>
-            <h1 class="muzWord">Muzlatgichlar</h1>
+            <h1>Muzlatgichlar</h1>
           </button>
         </div>
       </div>
@@ -89,6 +95,7 @@
   align-items: flex-end;
   position: relative;
 }
+
 .telefon {
   width: 240px;
   height: 249px;
@@ -127,10 +134,9 @@
   background: var(--primary-p-1, #134e9b);
   color: white;
 }
-.koproq:hover{
+.koproq:hover {
   cursor: pointer;
-    background: var(--primary-p-1, #0c56b6);
-
+  background: var(--primary-p-1, #0c56b6);
 }
 .muzlatgich1 {
   width: 253px;
@@ -173,7 +179,7 @@ h1:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.315);
 }
-.tel{
+.tel {
   height: 240px;
   margin-top: -15px;
   margin-left: 5px;
