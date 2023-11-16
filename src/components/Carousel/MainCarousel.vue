@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-[#F3F0F0]">
-      <carousel :items-to-show="1" :autoplay="5000">
+      <carousel :items-to-show="1" :autoplay="5000" :wrap-around="true">
         <slide v-for="(img, index) in imgs" :key="index">
           <div class="flex justify-between items-center">
             <div class="flex flex-col items-start pl-[200px] gap-4">
