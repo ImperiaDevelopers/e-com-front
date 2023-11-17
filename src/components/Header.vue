@@ -16,7 +16,7 @@
     </div>
     <div class="second flex gap-8">
       <h1 class="raqam text-[#545D6A]">+998(71) 123-45-67</h1>
-      <select class="bg-[inherit] text-[#545D6A]" name="lan" id="lan">
+      <select class="bg-[inherit] text-[#545D6A] outline-none" name="lan" id="lan">
         <option class="" value="uzb">Uz</option>
         <option value="en">En</option>
         <option value="rus">Ru</option>
@@ -58,7 +58,7 @@
       <div class="buttons flex gap-5 items-center">
         <div>
           <i
-            class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5"
+            class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
           >
           </i>
           <p
@@ -69,7 +69,7 @@
         </div>
         <div>
           <i
-            class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5"
+            class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
           ></i>
           <p
             class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
@@ -80,7 +80,7 @@
 
         <div>
           <i
-            class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5"
+            class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
           >
           </i>
           <p
@@ -91,18 +91,18 @@
         </div>
 
         <i
-          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer"
+          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]" 
         ></i>
       </div>
     </div>
     <div class="flex justify-center gap-[52px]">
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Aksiyalar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Smartfonlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Noutbuklar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Konditsionerlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Televizorlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Muzlatgichlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto']"
+      <a href="#" class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]">Aksiyalar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Smartfonlar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Noutbuklar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Konditsionerlar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Televizorlar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Muzlatgichlar</a>
+      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
         >Kir yuvish mashinalari</a
       >
       <a href="#" class="text-[#545D6A] font-['Roboto']">Maishiy texnika</a>

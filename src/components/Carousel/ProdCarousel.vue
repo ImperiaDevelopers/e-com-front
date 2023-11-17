@@ -1,20 +1,40 @@
 <template>
   <Carousel
-    v-bind="settings"
+    :v-bind="settings"
     :breakpoints="breakpoints"
     :autoplay="3000"
+    :pauseAutoplayOnHover="true"
     :wrap-around="true"
     class="mb-[4%]"
   >
     <Slide v-for="(img, index) in imgs" :key="index">
-      <div
-        class="carousel__item w-[250px] h-[400px] bg-[#EBEFF3] rounded"
-        style="{ width: img.width, height: img.height }"
-      >
-        <div class="flex-col">
+      <div class="flex-col">
+        <div
+          class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center relative"
+          style="{ width: img.width, height: img.height }"
+        >
           <img class="m-auto" :src="img.content" alt="Slide Image" />
-          <h4 class="text-start mt-2">{{ img.text }}</h4>
-          <p class="text-2xl text-start pt-5">{{ img.price }}</p>
+        </div>
+        <button class="absolute top-[20px] left-[235px]">
+          <i class="fa-regular fa-heart text-[#545D6A] hover:text-[black]"></i>
+        </button>
+        <div class="flex-col w-[273px]">
+          <h4 class="text-start mt-2 text-[14px]">{{ img.text }}</h4>
+          <div class="flex justify-between">
+            <p class="text-[20px] font-[700] text-start mt-[28px]">
+              {{ img.price }}
+            </p>
+            <div class="flex gap-2">
+              <i
+                class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#dde2e6]"
+              >
+              </i>
+              <i
+                class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
+              >
+              </i>
+            </div>
+          </div>
         </div>
       </div>
     </Slide>
@@ -82,7 +102,7 @@ const imgs = ref([
 ]);
 
 const settings = {
-  itemsToShow: 1.2,
+  itemsToShow: 0.8,
   snapAlign: "center",
 };
 
@@ -92,7 +112,7 @@ const breakpoints = {
     snapAlign: "center",
   },
   1024: {
-    itemsToShow: 5.8,
+    itemsToShow: 5.2,
     snapAlign: "center",
   },
 };

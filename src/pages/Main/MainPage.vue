@@ -4,19 +4,19 @@
   <Brand />
   <div class="flex items-center justify-center">
     <div class="w-[1180px]">
-      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular product</h1>
     </div>
   </div>
   <Product />
    <div class="flex items-center justify-center">
     <div class="w-[1180px]">
-      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular product</h1>
     </div>
   </div>
   <Product />
    <div class="flex items-center justify-center">
     <div class="w-[1180px]">
-      <h1 class="text-[32px] mb-[1%]">Most popular product</h1>
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular product</h1>
     </div>
   </div>
   <Product />
