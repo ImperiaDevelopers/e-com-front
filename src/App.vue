@@ -1,5 +1,5 @@
 <template>
-  <MainCarouselVue></MainCarouselVue>
+  <!-- <MainCarouselVue></MainCarouselVue> -->
   <router-view></router-view>
 </template>
 
