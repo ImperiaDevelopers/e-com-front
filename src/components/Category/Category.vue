@@ -1,6 +1,6 @@
 <template>
   <div
-    class="main w-[100%] mt-[20px] flex relative items-center justify-center"
+    class="main w-[100%] mt-[20px] flex relative items-center justify-center mb-[4%]"
   >
     <div class="flex flex-col">
       <div class="qator1 flex gap-[10px] mb-[10px]">
