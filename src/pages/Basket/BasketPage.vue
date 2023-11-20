@@ -1,9 +1,9 @@
 <template>
   <Header />
-  <div class="grid gap-8 mb-40">
-    <h1 class="pl-[129px] text-[32px] font-[700] mb-[1.5%]">Savat</h1>
-    <div class="flex gap-8 justify-around">
-      <div class="grid gap-8">
+  <h1 class="pl-[129px] text-[32px] font-[700] mb-[1.5%]">Savat</h1>
+  <div class="flex gap-8 mb-40 justify-around">
+    <div class="grid gap-12">
+      <div class="grid gap-8 justify-between">
         <div
           class="pl-[129px] flex h-[170px]"
           v-for="(i, index) in basket"
@@ -51,23 +51,23 @@
           </div>
         </div>
       </div>
-      <div class="ebani-row w-1/5 bg-[#EBEFF3]">
-        <h1 class="text-[18px] font-bold pt-10">Sizning haridingiz</h1>
-        <div class="flex flex-row justify-between">
-          <h1>Yetkazib berish:</h1>
-          <h1 class="text-[18px] font-bold">Bepul</h1>
-        </div>
-        <div class="flex flex-row justify-between">
-          <h1>Jami summa:</h1>
-          <h1 class="text-[24px] font-bold">12 568 000 usz</h1>
-        </div>
-        <div
-          class="flex justify-center bg-[#134E9B] rounded-md w-3/5 h-1/5 mt-10 outline-none"
-        >
-          <button class="text-white p-[10px] ps-5 pe-5 font-['Roboto']">
-            Hoziroq sotib olish
-          </button>
-        </div>
+    </div>
+    <div class="ebani-row w-1/5 h-3/5 bg-[#EBEFF3]">
+      <h1 class="text-[18px] font-bold pt-10">Sizning haridingiz</h1>
+      <div class="flex flex-row justify-between">
+        <h1>Yetkazib berish:</h1>
+        <h1 class="text-[18px] font-bold">Bepul</h1>
+      </div>
+      <div class="flex flex-row justify-between">
+        <h1>Jami summa:</h1>
+        <h1 class="text-[24px] font-bold">12 568 000 usz</h1>
+      </div>
+      <div
+        class="flex justify-center bg-[#134E9B] rounded-md w-3/5 h-1/5 mt-10 outline-none"
+      >
+        <button class="text-white p-[10px] ps-5 pe-5 font-['Roboto']">
+          Hoziroq sotib olish
+        </button>
       </div>
     </div>
   </div>
@@ -85,6 +85,12 @@ import ProdCarousel from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/Footer/footer.vue";
 
 const basket = ref([
+  {
+    text: "Смартфон Xiaomi 12 Lite 8/128Gb ",
+    price: "6 999 999 usz ",
+    image: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
+    count: 1,
+  },
   {
     text: "Смартфон Xiaomi 12 Lite 8/128Gb ",
     price: "6 999 999 usz ",

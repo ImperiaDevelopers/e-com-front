@@ -9,7 +9,7 @@
       <div class="others flex gap-2">
         <a href="#">About us</a>
         <a href="#">Products</a>
-        <a href="#">Contacts</a>
+        <router-link to="feedback"> <a>Contacts</a></router-link>
       </div>
     </div>
     <div class="second flex gap-8">
@@ -73,28 +73,32 @@
             2
           </p>
         </div>
-        <div>
-          <i
-            class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
-          ></i>
-          <p
-            class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
-          >
-            11
-          </p>
-        </div>
+        <router-link to="/like">
+          <div>
+            <i
+              class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
+            ></i>
+            <p
+              class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
+            >
+              11
+            </p>
+          </div>
+        </router-link>
 
-        <div>
-          <i
-            class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
-          >
-          </i>
-          <p
-            class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
-          >
-            7
-          </p>
-        </div>
+        <router-link to="/basket">
+          <div>
+            <i
+              class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
+            >
+            </i>
+            <p
+              class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
+            >
+              7
+            </p>
+          </div></router-link
+        >
 
         <i
           class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
