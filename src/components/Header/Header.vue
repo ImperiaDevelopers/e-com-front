@@ -1,8 +1,6 @@
 <template>
   <!-- First layer -->
-  <div
-    class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-center gap-[600px]"
-  >
+  <div class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-around">
     <div class="first flex gap-8">
       <div class="location flex gap-3">
         <i class="fa-solid fa-location-dot mt-1"></i>
@@ -64,7 +62,7 @@
       </div>
 
       <div class="buttons flex gap-5 items-center">
-        <div>
+        <div @click="redirectToCompare">
           <i
             class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
           >
@@ -103,34 +101,59 @@
         ></i>
       </div>
     </div>
-    <div class="flex justify-center gap-[52px]">
-      <a href="#" class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Aksiyalar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Smartfonlar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Noutbuklar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Konditsionerlar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Televizorlar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Muzlatgichlar</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Kir yuvish mashinalari</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Maishiy texnika</a>
+    <div class="flex justify-center">
+      <div class="w-4/5">
+        <div class="flex justify-around">
+          <a
+            href="#"
+            class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Aksiyalar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Smartfonlar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Noutbuklar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Konditsionerlar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Televizorlar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Muzlatgichlar</a
+          >
+          <a
+            href="#"
+            class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+            >Kir yuvish mashinalari</a
+          >
+          <a href="#" class="text-[#545D6A] font-['Roboto']">Maishiy texnika</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const redirectToCompare = () => {
+  router.push("/compare");
+};
+</script>
 
 <style lang="scss" scoped>
 .location {
