@@ -1,14 +1,16 @@
 <template>
+  <div class="w-full flex flex-col  justify-center items-center">
+
   <!-- First layer -->
   <div
-    class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-center gap-[600px]"
+    class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-center gap-[600px] items-center"
   >
     <div class="first flex gap-8">
       <div class="location flex gap-3">
         <i class="fa-solid fa-location-dot mt-1"></i>
         <h3>Location</h3>
       </div>
-      <div class="others flex gap-2">
+      <div class="others flex gap-5">
         <a href="#">About us</a>
         <a href="#">Products</a>
         <a href="#">Contacts</a>
@@ -16,7 +18,11 @@
     </div>
     <div class="second flex gap-8">
       <h1 class="raqam text-[#545D6A]">+998(71) 123-45-67</h1>
-      <select class="bg-[inherit] text-[#545D6A] outline-none" name="lan" id="lan">
+      <select
+        class="bg-[inherit] text-[#545D6A] outline-none"
+        name="lan"
+        id="lan"
+      >
         <option class="" value="uzb">Uz</option>
         <option value="en">En</option>
         <option value="rus">Ru</option>
@@ -25,23 +31,28 @@
   </div>
 
   <!-- Second layer -->
-  <div class="bg bg-white w-full h-[140px] flex flex-col gap-5">
-    <div class="row1 flex flex-row gap-[50px] justify-center items-center mt-4">
+  <div class="bg bg-white h-[140px]  flex flex-col gap-5 items-centerm ">
+    <div class="row1 flex flex-row  justify-between items-center mt-4">
       <h1
-        class="flex flex-row items-center text-[#134E9B] font-['Roboto'] text-[36px] font-black"
+        class="flex flex-row  items-center text-[#134E9B] font-['Roboto'] text-[36px] font-black"
       >
-        <img src="../assets/images/logo.png" class="w-[48px]" alt="Logo" />
+      
+        <img
+          src="src/assets/images/logo.png"
+          class="w-[48px]"
+          alt="src/assets/images/logo.png"
+        />
         Ashyo
       </h1>
 
       <div class="flex gap-3">
-        <select
-          class="bg-[#134E9B] text-white p-[10px] ps-5 pe-5 rounded-md font-['Roboto'] outline-none"
-          name="lan"
+        <button
+          class="bg-[#134E9B] text-white  w-[130px] rounded-md font-['Roboto'] outline-none flex  items-center justify-around hover:bg-[#0c56b6]"
           id="lan"
         >
-          <option selected disabled hidden value="">Kategriya</option>
-        </select>
+        Kategoriya
+        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+        </button>
         <div>
           <input
             type="text"
@@ -49,7 +60,7 @@
             class="ps-5 pe-5 p-[12.3px] color-[#EBEFF3] bg-[#EBEFF3] text-[13px] w-[518px] rounded-md outline-none"
           />
           <i
-            class="fa-solid fa-magnifying-glass bg-[#134E9B] text-white p-[14px] rounded-md cursor-pointer"
+            class="fa-solid fa-magnifying-glass bg-[#134E9B] text-white p-[14px] rounded-md cursor-pointer hover:bg-[#0c56b6]"
             style="margin-left: -10px"
           ></i>
         </div>
@@ -91,26 +102,34 @@
         </div>
 
         <i
-          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]" 
+          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
         ></i>
       </div>
     </div>
-    <div class="flex justify-center gap-[52px]">
-      <a href="#" class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]">Aksiyalar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Smartfonlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Noutbuklar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Konditsionerlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Televizorlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Muzlatgichlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Kir yuvish mashinalari</a
+    <div class="w-[1180px] flex justify-between">
+      <a href="#" v-for="(item,index) in categories" :key="index" class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]"
+        >{{ item }}</a
       >
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Maishiy texnika</a>
     </div>
   </div>
+  </div>
+
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import {ref} from 'vue'
+const categories = ref([
+  'Aksiyalar',
+  "Televisions",
+  "Computers & Laptops",
+  "Cameras",
+  "Audio & Video",
+  "Gaming Consoles",
+  "Accessories",
+  "Kiryuvish mashinasi",
+  "Konditsionerlar",
+])
+</script>
 
 <style lang="scss" scoped>
 .location {

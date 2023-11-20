@@ -177,7 +177,7 @@ h1 {
 }
 h1:hover {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.315);
+  background-color: #00000050;
 }
 .tel {
   height: 240px;

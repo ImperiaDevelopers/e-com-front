@@ -9,13 +9,12 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
   />
-  <!-- <MainCarouselVue></MainCarouselVue> -->
   <router-view></router-view>
 </template>
 
 <script setup></script>
 
-<style lang="scss">
+<style>
 * {
   margin: 0;
   padding: 0;
