@@ -1,4 +1,6 @@
 <template>
+  <link rel="stylesheet" href="./mega-dropdown-master/css/reset.css" />
+  <link rel="stylesheet" href="./mega-dropdown-master/css/style.css" />
   <!-- First layer -->
   <div
     class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-center gap-[600px]"
@@ -16,7 +18,11 @@
     </div>
     <div class="second flex gap-8">
       <h1 class="raqam text-[#545D6A]">+998(71) 123-45-67</h1>
-      <select class="bg-[inherit] text-[#545D6A] outline-none" name="lan" id="lan">
+      <select
+        class="bg-[inherit] text-[#545D6A] outline-none"
+        name="lan"
+        id="lan"
+      >
         <option class="" value="uzb">Uz</option>
         <option value="en">En</option>
         <option value="rus">Ru</option>
@@ -30,7 +36,7 @@
       <h1
         class="flex flex-row items-center text-[#134E9B] font-['Roboto'] text-[36px] font-black"
       >
-        <img src="../assets/images/logo.png" class="w-[48px]" alt="Logo" />
+        <img src="../../assets/images/logo.png" class="w-[48px]" alt="Logo" />
         Ashyo
       </h1>
 
@@ -91,26 +97,58 @@
         </div>
 
         <i
-          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]" 
+          class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
         ></i>
       </div>
     </div>
     <div class="flex justify-center gap-[52px]">
-      <a href="#" class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]">Aksiyalar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Smartfonlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Noutbuklar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Konditsionerlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Televizorlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]">Muzlatgichlar</a>
-      <a href="#" class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
-        >Kir yuvish mashinalari</a
-      >
-      <a href="#" class="text-[#545D6A] font-['Roboto']">Maishiy texnika</a>
+      <a
+        href="#"
+        class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a
+        href="#"
+        class="text-[#545D6A] font-['Roboto'] hover:text-[#2a2b2c]"
+      ></a>
+      <a href="#" class="text-[#545D6A] font-['Roboto']"></a>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const cateogries = ref([
+  "Aksiyalar",
+  "Smartfonlar",
+  "Noutbuklar",
+  "Konditsionerlar",
+  "Televizorlar",
+  "Muzlatgichlar",
+  "Kir yuvish mashinalari",
+  "Maishiy texnika",
+]);
+</script>
 
 <style lang="scss" scoped>
 .location {

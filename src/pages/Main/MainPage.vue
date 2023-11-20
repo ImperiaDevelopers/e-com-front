@@ -31,9 +31,7 @@
   <Earphone />
   <div class="flex items-center justify-center">
     <div class="w-[1180px]">
-      <h1 class="text-[32px] font-[700] mb-[1.5%]">
-        Last viewed products
-      </h1>
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
   </div>
   <Product />
@@ -47,7 +45,7 @@ import Brand from "../../components/Brand/Brand.vue";
 import Product from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/footer/footer.vue";
 import Category from "../../components/Category/Category.vue";
-import Header from "../../components/Header.vue";
+import Header from "../../components/Header/Header.vue";
 import Earphone from "../../components/Earphone/Earphone.vue";
 </script>
 
