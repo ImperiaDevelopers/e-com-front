@@ -15,7 +15,7 @@
             <div class="flex flex-col items-start gap-4">
               <h1 class="text-[44px] font-[900]">{{ img.text }}</h1>
               <p
-                class="font-[600] w-[650px] text-[16px] text-start text-[#545D6A]"
+                class="font-[600] w-[650px] text-[16px] text-start text-[#3b3b3b]"
               >
                 {{ img.desc }}
               </p>
@@ -38,7 +38,7 @@
 
       <template #addons>
         <div
-          class="absolute bottom-[60px] w-[100%] flex items-center justify-center"
+          class="absolute bottom-[25px] w-[100%] flex items-center justify-center"
         >
           <div class="w-[1180px] flex items-start">
             <pagination />
@@ -62,7 +62,7 @@ const imgs = ref([
     text: "Siz kutgan Xiaomi 12 Mi Laite     ",
     desc: "Orginallik va qulay narxni o'zida jamlagan  Xiaomi 12 Mi Laite  siz uchun eng yaxshi arziydigan takliflarimizdan biridir!ii",
     content: "src/assets/images/product-imgs/image 1855.png",
-    bgColor: "#F3F0F0",
+    bgColor: "#e6e6e6",
   },
   {
     text: "iPhone 15 Pro",
@@ -87,4 +87,32 @@ const imgs = ref([
 
 ]);
 </script>
-<style scoped></style>
+<style>
+.carousel__pagination{
+  display: flex;
+  align-items: center;
+
+}
+.carousel__pagination-button::after{
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  border-radius: 50%;
+}
+.carousel__pagination-button--active::after {
+  width: 48px;
+  height: 48px;
+  background-color: #95bef3;
+  border: 15px solid white;
+  border-radius: 50%;
+  position: relative;
+}
+.carousel__pagination-button:hover::after{
+    background-color: #95bef3;
+  border-radius: 50%;
+  color: #e6e6e6;
+
+}
+
+
+</style>

@@ -50,34 +50,14 @@
     </template>
   </Carousel>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+const props = defineProps({
+  imgs:Array
+})
 
-const imgs = ref([
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
-  },
-  {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
-  },
-
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
-  },
-  {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi ",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
-  },
-]);
 
 const settings = {
   itemsToShow: 0.8,
