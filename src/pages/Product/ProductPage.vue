@@ -15,7 +15,6 @@ import Product from "../../components/Product/Products.vue";
 import Footer from "../../components/Footer/footer.vue";
 import Header from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
-
 </script>
 
 <style lang="scss" scoped></style>
