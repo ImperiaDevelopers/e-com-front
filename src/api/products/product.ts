@@ -12,12 +12,12 @@ const productApi: ProductApi = {
     return axiosClient.get(url);
   },
   getProductId(id) {
-    const url = `product/get/${id}`;
+    const url = `product/${id}`;
     return axiosClient.get(url);
   },
   updateProduct(payload, id) {
-    const url = `product/update/${id}`;
-    return axiosClient.put(url, payload);
+    const url = `product/${id}`;
+    return axiosClient.patch(url, payload);
   },
 };
 

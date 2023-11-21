@@ -7,11 +7,11 @@ interface BrendApi {
 
 const brendApi: BrendApi = {
   getBrend() {
-    const url = `brend/get`;
+    const url = `product_brend`;
     return axiosClient.get(url);
   },
   getBrendId(id) {
-    const url = `brend/get/${id}`;
+    const url = `product_brend/${id}`;
     return axiosClient.get(url);
   },
 };

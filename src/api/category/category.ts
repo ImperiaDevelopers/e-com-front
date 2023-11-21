@@ -7,11 +7,11 @@ interface CategoryApi {
 
 const categoryApi: CategoryApi = {
   getCategory() {
-    const url = `category/get`;
+    const url = `category/all`;
     return axiosClient.get(url);
   },
   getCategoryId(id) {
-    const url = `category/get/${id}`;
+    const url = `category/${id}`;
     return axiosClient.get(url);
   },
 };
