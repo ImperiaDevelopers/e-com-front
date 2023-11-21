@@ -24,9 +24,9 @@
         <img class="flex m-10 " src="src/assets/payment_images/image 1834.png" alt="">
         <h1 class="flex ml-[-40px] font-semibold">MasterCard orqali to’lov qilish</h1>
     </div>
-   <div class="flex w-[400px] h-[120px] rounded-[6px] bg-[#EBEFF3] gap-[20px] items-center hover:bg-[#e5effa]">
+   <div class="flex w-full h-[120px] rounded-[6px] bg-[#EBEFF3] gap-[20px] items-center hover:bg-[#e5effa] pl-[195px]">
         <img class="flex m-10 " src="src/assets/payment_images/image-removebg-preview (8) 1.png" alt="">
-        <h1 class="flex ml-[-40px] font-semibold">Naqd orqali to’lov qilish</h1>
+        <h1 class="flex ml-[-40px] font-semibold ">Naqd orqali to’lov qilish</h1>
     </div>
 </div>
 

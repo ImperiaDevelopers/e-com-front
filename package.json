@@ -10,19 +10,16 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2",
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-brands-svg-icons": "^6.4.2",
-    "@fortawesome/free-regular-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@jamescoyle/vue-icon": "^0.1.2",
+    "@mdi/js": "^7.3.67",
     "element-plus": "^2.4.2",
-    "oh-vue-icons": "^1.0.0-rc3",
+    "esbuild": "^0.19.5",
     "pinia": "^2.1.7",
     "swiper": "^8.4.7",
     "vue": "^3.3.4",
     "vue-awesome-swiper": "^5.0.1",
     "vue-router": "^4.2.5",
+    "vue-slider-component": "^3.2.24",
     "vue3-carousel": "^0.3.1",
     "vue3-openlayers": "^3.1.0"
   },
