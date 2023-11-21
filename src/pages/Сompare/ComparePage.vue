@@ -71,7 +71,7 @@
   <Products />
   <FooterVue />
 </template>
-x
+
 <script setup>
 import { ref } from "vue";
 import FooterVue from "../../components/Footer/footer.vue";

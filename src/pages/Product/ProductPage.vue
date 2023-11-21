@@ -15,7 +15,7 @@ import Product from "../../components/Product/Products.vue";
 import Footer from "../../components/Footer/footer.vue";
 import Header from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const imgs = ref([
   {
@@ -40,6 +40,9 @@ const imgs = ref([
     content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
   },
 ]);
+onMounted(() => {
+  
+})
 </script>
 
 <style lang="scss" scoped></style>
