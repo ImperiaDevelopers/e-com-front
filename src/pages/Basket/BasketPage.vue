@@ -82,7 +82,7 @@
 import { ref } from "vue";
 import Header from "../../components/Header/Header.vue";
 import ProdCarousel from "../../components/Carousel/ProdCarousel.vue";
-import Footer from "../../components/Footer/footer.vue";
+import Footer from "../../components/Footer/Footer.vue";
 
 const basket = ref([
   {

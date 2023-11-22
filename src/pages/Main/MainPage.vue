@@ -45,7 +45,7 @@ import Brand from "../../components/Brand/Brand.vue";
 import Product from "../../components/Carousel/ProdCarousel.vue";
 import Category from "../../components/Category/Category.vue";
 import Earphone from "../../components/Earphone/Earphone.vue";
-import Footer from "../../components/Footer/footer.vue";
+import Footer from "../../components/Footer/Footer.vue";
 import Header from "../../components/Header/Header.vue";
 </script>
 

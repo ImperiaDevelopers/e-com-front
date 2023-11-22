@@ -23,7 +23,8 @@ const productApi: ProductApi = {
   getImage(product_id) {
     const url = `image/products/${product_id}`
     return axiosClient.get(url);
-  }
+  },
+
 };
 
 export default productApi;

@@ -158,7 +158,7 @@
   
   <script setup lang="ts">
   import { ref } from "vue";
-  import Footer from "../../components/Footer/footer.vue";
+  import Footer from "../../components/Footer/Footer.vue";
   import Header from "../../components/Header/Header.vue";
   import Payment from "../../components/Payments/payment.vue" 
   import SvgIcon from '@jamescoyle/vue-icon';

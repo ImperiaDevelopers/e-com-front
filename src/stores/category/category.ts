@@ -2,19 +2,19 @@ import { defineStore } from "pinia";
 import categoryApi from "../../api/category/category";
 
 interface CategoryState {
-  categorys: any[];
+  categories: any[];
 }
 
 export const useCategoryStore = defineStore({
   id: "category",
   state: (): CategoryState => ({
-    categorys: [],
+    categories: [],
   }),
   actions: {
-    async getCategorys() {
+    async getCategories() {
       try {
         const res = await categoryApi.getCategory();
-        this.categorys = res.categorys;
+        this.categories = res;
       } catch (err) {
         console.error(err);
       }

@@ -51,7 +51,7 @@
     </div>
     <div>
       <h1
-        class="w-[300px] h-[36px] m-10 mt-[80px] font-bold text-4xl text-[#06172D] font-bold"
+        class="w-[300px] h-[36px] m-10 mt-[80px]  text-4xl text-[#06172D] font-bold"
       >
         Ashyo haqida
       </h1>
@@ -84,14 +84,12 @@
     </div>
   </div>
   </div>
-  <Footer />
+  <Footer/>
 </template>
 
 <script setup lang="ts">
-import Footer from "../../components/Footer/footer.vue";
+import Footer from "../../components/Footer/Footer.vue";
 import Header from "../../components/Header/Header.vue";
-import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiPrinter, mdiShareVariant } from "@mdi/js";
 </script>
 
 <style scoped></style>

@@ -72,9 +72,9 @@
   <FooterVue />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
-import FooterVue from "../../components/Footer/footer.vue";
+import FooterVue from "../../components/Footer/Footer.vue";
 import HeaderVue from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
 

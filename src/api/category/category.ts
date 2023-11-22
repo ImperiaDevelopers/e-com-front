@@ -7,7 +7,7 @@ interface CategoryApi {
 
 const categoryApi: CategoryApi = {
   getCategory() {
-    const url = `category/all`;
+    const url = `category/parcat`;
     return axiosClient.get(url);
   },
   getCategoryId(id) {

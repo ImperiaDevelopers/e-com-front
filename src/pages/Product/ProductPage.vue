@@ -11,14 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import Product from "../../components/Product/Products.vue";
-import Footer from "../../components/Footer/footer.vue";
+import Footer from "../../components/Footer/Footer.vue";
 import Header from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
 import { onMounted, ref } from "vue";
 import { useProductStore } from "../../stores/products/product";
 const store = useProductStore();
-
 
 const params = {
   page: 1,

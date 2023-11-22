@@ -7,7 +7,7 @@
     :wrap-around="true"
     class="mb-[4%]"
   >
-    <Slide v-for="(img, index) in imgs" :key="index">
+    <Slide v-for="(item, index) in imgs" :key="index">
       <div class="flex-col relative h-[422px]">
         <div
           class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex  justify-center items-center relative"
@@ -16,7 +16,7 @@
 
           <img
             class="m-auto object-cover"
-            :src="img.image[0]?.image"
+            :src="item?.image[0]?.image"
             alt="Slide Image"
           />
         </div>
@@ -26,11 +26,11 @@
         </button>
         <div class="flex-col w-[273px]">
           <div class="h-[56px]">
-            <h4 class="text-start mt-2 text-[14px]">{{ img.name }}</h4>
+            <h4 class="text-start mt-2 text-[14px]">{{ item?.name }}</h4>
           </div>
           <div class="flex justify-between">
             <p class="text-[20px] font-[700] text-start mt-[28px]">
-              {{ img.price }}
+              {{ item?.price }}
             </p>
             <div class="flex gap-2">
               <i
@@ -59,7 +59,6 @@ import "vue3-carousel/dist/carousel.css";
 const props = defineProps({
   imgs: Array,
 });
-console.log(props.imgs);
 
 const settings = {
   itemsToShow: 0.8,
