@@ -118,14 +118,14 @@
           :total="1000"
           prev-text="Back"
           next-text="Next"
-          style=": #134e9b"
+          style=":#134e9b "
         />
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 
 const imgs = ref([
@@ -172,6 +172,8 @@ const imgs = ref([
     content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
   },
 ]);
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -190,5 +192,4 @@ span {
   margin-top: 10px;
   font-size: 1.2em;
 }
-
 </style>

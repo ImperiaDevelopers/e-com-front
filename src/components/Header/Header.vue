@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col justify-center items-center" >
+  <div class="w-full flex flex-col justify-center items-center">
     <!-- First layer -->
     <div
       class="bg-[#EBEFF3] w-full h-[40px] flex pt-2 justify-center gap-[600px] items-center"
@@ -71,11 +71,10 @@
                 </a>
               </div>
             </div>
-              <div
-                v-if="opener1"
-                class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
-              >
-              </div>
+            <div
+              v-if="opener1"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            ></div>
           </div>
 
           <div>
@@ -187,7 +186,6 @@ const categories = ref([
     icon: "icon",
     name: "Muzlatgichlar",
   },
-  
 ]);
 
 const opener = ref(false);
@@ -196,7 +194,6 @@ const change = () => {
   opener.value = !opener.value;
   opener1.value = false;
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -253,13 +250,8 @@ const change = () => {
 }
 .category {
   z-index: 1;
-  box-shadow: 
-  2px 5px 7px rgba(0,0,0,.1),
-  -2px -5px 7px rgba(0,0,0,.1);
+  box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1), -2px -5px 7px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 .cat::before {
   content: "";
