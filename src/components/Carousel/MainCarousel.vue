@@ -61,21 +61,30 @@ const imgs = ref([
   {
     text: "Siz kutgan Xiaomi 12 Mi Laite     ",
     desc: "Orginallik va qulay narxni o'zida jamlagan  Xiaomi 12 Mi Laite  siz uchun eng yaxshi arziydigan takliflarimizdan biridir!ii",
-    content: "src/assets/images/image 1855.png",
+    content: "src/assets/images/product-imgs/image 1855.png",
     bgColor: "#F3F0F0",
   },
   {
-    text: "Siz kutgan Xiaomi 12 Mi Laite     ",
-    desc: "Orginallik va qulay narxni o'zida jamlagan  Xiaomi 12 Mi Laite  siz uchun eng yaxshi arziydigan takliflarimizdan biridir!ii",
-    content: "src/assets/images/Apple-iPhone-15-transformed.png",
+    text: "iPhone 15 Pro",
+    desc: "iPhone 15 Pro: Katta o‘nlayn muhit, kuchli kamera va tez ishlovchi kuchli texnologiyalar bilan yaratilgan.",
+    content: "src/assets/images/product-imgs/Apple-iPhone-15-transformed.png",
     bgColor: "#DBBE6E",
   },
   {
-    text: "Siz kutgan Xiaomi 12 Mi Laite     ",
-    desc: "Orginallik va qulay narxni o'zida jamlagan  Xiaomi 12 Mi Laite  siz uchun eng yaxshi arziydigan takliflarimizdan biridir!ii",
-    content: "src/assets/images/Remove-bg.ai_1700024262698.png",
-    bgColor: "#f7edff",
+    text: "Samsung S21 plus",
+    desc: "Galaxy S21 Plus: Yorqin ekran, kuchli kamera to'plami va tez ishlovchi hisoblanadi, dizayn va kuchli xususiyatlar bilan ajralgan.",
+    content: "src/assets/images/product-imgs/Remove-bg.ai_1700109929119.png",
+    bgColor: "#A7C9C4",
   },
+  {
+    text: "Samsung Galaxy Z Fold4",
+    desc: "Galaxy Z Fold: Yuqori tekislikli jamlanadigan, keng ekranli, tez ishlovchi qurilmadir, moddiy dizayn.",
+    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110541839.png",
+    bgColor: "#D9CBCA",
+  },
+  
+
+
 ]);
 </script>
 <style scoped></style>

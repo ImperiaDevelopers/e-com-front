@@ -1,5 +1,7 @@
 <template>
-  <div class="w-[100%] flex items-center justify-center mt-[50px] pb-[80px] mb-[4%]">
+  <div
+    class="w-[100%] flex items-center justify-center mt-[50px] pb-[80px] mb-[4%]"
+  >
     <div class="main flex flex-row justify-evenly relative">
       <img class="ear" src="../../assets/Ear_img/ear.png" alt="EarPhone" />
       <Soya class="soya absolute" />

@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Main from "../pages/Main/MainPage.vue";
+import product from "./product";
+import main from "./main";
+import basket from "./basket";
+import filter from "./filter";
+import compare from "./compare";
+import feedback from "./feedback";
+import like from "./like";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: Main,
-    },
-  ],
+  routes: [main, basket, filter, compare, feedback, like, product],
 });
 
 export default router;

@@ -8,18 +8,24 @@
     class="mb-[4%]"
   >
     <Slide v-for="(img, index) in imgs" :key="index">
-      <div class="flex-col">
+      <div class="flex-col relative h-[422px]">
         <div
           class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center relative"
           style="{ width: img.width, height: img.height }"
         >
-          <img class="m-auto" :src="img.content" alt="Slide Image" />
+          <img
+            class="m-auto object-cover"
+            :src="img.content"
+            alt="Slide Image"
+          />
         </div>
         <button class="absolute top-[20px] left-[235px]">
           <i class="fa-regular fa-heart text-[#545D6A] hover:text-[black]"></i>
         </button>
         <div class="flex-col w-[273px]">
-          <h4 class="text-start mt-2 text-[14px]">{{ img.text }}</h4>
+          <div class="h-[56px]">
+            <h4 class="text-start mt-2 text-[14px]">{{ img.text }}</h4>
+          </div>
           <div class="flex justify-between">
             <p class="text-[20px] font-[700] text-start mt-[28px]">
               {{ img.price }}
@@ -53,51 +59,23 @@ const imgs = ref([
   {
     text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
     price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "50px",
-    height: "30px",
+    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
   },
+  {
+    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi",
+    price: "6 999 999 usz ",
+    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
+  },
+
   {
     text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
     price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
+    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
   },
   {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
+    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi ",
     price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
-  },
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
-  },
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
-  },
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
-  },
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/image-removebg-preview (37) 1.png",
-    width: "30px",
-    height: "20px",
+    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
   },
 ]);
 
