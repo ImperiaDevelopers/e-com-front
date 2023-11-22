@@ -11,7 +11,7 @@
         <h3>Location</h3>
       </div>
       <div class="others flex gap-5">
-        <a href="#">About us</a>
+        <router-link to="about"> <a>About us</a></router-link>
         <a href="#">Products</a>
         <router-link to="feedback"> <a>Contacts</a></router-link>
       </div>
