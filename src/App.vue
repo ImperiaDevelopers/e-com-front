@@ -5,14 +5,16 @@
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet"
   />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
   <router-view></router-view>
 </template>
 
-<script setup>
-import MainCarouselVue from "./components/Carousel/MainCarousel.vue";
-</script>
+<script setup></script>
 
-<style lang="scss">
+<style>
 * {
   margin: 0;
   padding: 0;

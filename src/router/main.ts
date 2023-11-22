@@ -1,5 +1,5 @@
 export default {
   path: "/",
-  name: "Mian",
+  name: "main",
   component: () => import("../pages/Main/MainPage.vue"),
 };
