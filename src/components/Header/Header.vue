@@ -11,8 +11,8 @@
         </div>
         <div class="others flex gap-5">
           <a href="#">About us</a>
-          <a href="#">Products</a>
-          <router-link to="feedback"> <a>Contacts</a></router-link>
+          <router-link to="/products">Products</router-link>
+          <router-link to="feedback">Contacts</router-link>
         </div>
       </div>
       <div class="second flex gap-8">
@@ -32,25 +32,50 @@
     <!-- Second layer -->
     <div class="bg bg-white h-[140px] flex flex-col gap-5 items-centerm">
       <div class="row1 flex flex-row justify-between items-center mt-4">
-        <h1
-          class="flex flex-row items-center text-[#134E9B] font-['Roboto'] text-[36px] font-black"
-        >
-          <img
-            src="src/assets/images/logo.png"
-            class="w-[48px]"
-            alt="src/assets/images/logo.png"
-          />
-          Ashyo
-        </h1>
+        <router-link to="/">
+          <h1
+            class="flex flex-row items-center text-[#134E9B] font-['Roboto'] text-[36px] font-black"
+          >
+            <img
+              src="src/assets/images/logo.png"
+              class="w-[48px]"
+              alt="src/assets/images/logo.png"
+            />
+            Ashyo
+          </h1>
+        </router-link>
 
         <div class="flex gap-3">
-          <button
-            class="bg-[#134E9B] text-white w-[130px] rounded-md font-['Roboto'] outline-none flex items-center justify-around hover:bg-[#0c56b6]"
-            id="lan"
-          >
-            Kategoriya
-            <i class="fa-solid fa-chevron-down text-[10px]"></i>
-          </button>
+          <div class="relative h-[42px] flex">
+            <button
+              class="bg-[#134E9B] text-white w-[130px] rounded-md font-['Roboto'] outline-none flex items-center justify-around hover:bg-[#0c56b6]"
+              id="lan"
+              @click="change"
+            >
+              Kategoriya
+              <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </button>
+            <div
+              v-if="opener"
+              class="w-[380px] category bg-[#EBEFF3] absolute top-16 right-[-45px] px-[45px] py-[20px] h-[540px]"
+            >
+              <div class="flex flex-col gap-[25px] justify-center p-[40px]">
+                <a
+                  href="#"
+                  v-for="(item, index) in categories"
+                  :key="index"
+                  class="text-[#535c6a] text-[16px] flex gap-4"
+                  @mousemove="opener1 = true"
+                  >{{ item.icon }} <span>{{ item.name }}</span>
+                </a>
+              </div>
+            </div>
+            <div
+              v-if="opener1"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            ></div>
+          </div>
+
           <div>
             <input
               type="text"
@@ -113,8 +138,8 @@
           href="#"
           v-for="(item, index) in categories"
           :key="index"
-          class="text-[#535c6a] font-['Roboto'] hover:text-[#2a2b2c] cat"
-          >{{ item }}</a
+          class="text-[#535c6a] font-['Roboto'] hover:text-[#272727] cat"
+          >{{ item.name }}</a
         >
       </div>
     </div>
@@ -124,16 +149,50 @@
 <script setup lang="ts">
 import { ref } from "vue";
 const categories = ref([
-  "Aksiyalar",
-  "Televisions",
-  "Computers & Laptops",
-  "Cameras",
-  "Audio & Video",
-  "Gaming Consoles",
-  "Accessories",
-  "Kiryuvish mashinasi",
-  "Konditsionerlar",
+  {
+    icon: "icon",
+    name: "Aksiyalar",
+  },
+  {
+    icon: "icon",
+    name: "Kiryuvish mashinasi",
+  },
+  {
+    icon: "icon",
+    name: "Accessories",
+  },
+  {
+    icon: "icon",
+    name: "Gaming Consoles",
+  },
+  {
+    icon: "icon",
+    name: "Cameras",
+  },
+  {
+    icon: "icon",
+    name: "Audio & Video",
+  },
+  {
+    icon: "icon",
+    name: "Computers & Laptops",
+  },
+  {
+    icon: "icon",
+    name: "Televisions",
+  },
+  {
+    icon: "icon",
+    name: "Muzlatgichlar",
+  },
 ]);
+
+const opener = ref(false);
+const opener1 = ref(false);
+const change = () => {
+  opener.value = !opener.value;
+  opener1.value = false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -152,6 +211,24 @@ const categories = ref([
     font-family: Roboto;
     font-weight: 400;
     color: #545d6a;
+    position: relative;
+  }
+  a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px; /* Adjust the thickness of the underline */
+    background-color: black; /* Adjust the color of the underline */
+    transition: width 0.3s ease; /* Adjust the animation duration and timing function */
+  }
+
+  a:hover::before {
+    width: 100%;
+  }
+  a:hover {
+    color: black;
   }
 }
 .second {
@@ -168,6 +245,11 @@ const categories = ref([
 }
 .cat {
   position: relative;
+  z-index: 0;
+}
+.category {
+  z-index: 1;
+  box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1), -2px -5px 7px rgba(0, 0, 0, 0.1);
 }
 
 .cat::before {
