@@ -1,12 +1,12 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {  } from "axios";
 
-interface AxiosClientConfig extends AxiosRequestConfig {
-  headers?: {
-    Authorization?: string;
-  };
-}
+// interface AxiosClientConfig extends AxiosRequestConfig {
+//   headers?: {
+//     Authorization?: string;
+//   };
+// }
 
-const axiosClient: AxiosInstance = axios.create({
+const axiosClient=axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL,
 });
 
@@ -20,14 +20,14 @@ axiosClient.interceptors.request.use(
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
-  },
+  }, 
   function (err) {
     return Promise.reject(err);
   }
 );
 
 axiosClient.interceptors.response.use(
-  (res: AxiosResponse) => {
+  (res) => {
     return res.data;
   },
   function (err) {
