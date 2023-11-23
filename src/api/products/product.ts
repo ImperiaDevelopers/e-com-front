@@ -6,6 +6,7 @@ interface ProductApi {
   getProductId(id: string): Promise<any>;
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
+  getFilter(params?: any): Promise<any>;
 }
 
 const productApi: ProductApi = {
@@ -23,11 +24,15 @@ const productApi: ProductApi = {
   },
   updateProduct(payload, id) {
     const url = `product/${id}`;
-    return axiosClient.patch(url, payload);
+    return axiosClient.put(url, payload);
   },
   getImage(product_id) {
     const url = `image/products/${product_id}`;
     return axiosClient.get(url);
+  },
+  getFilter(params) {
+    const url = `product/filter`;
+    return axiosClient.post(url, params);
   },
 };
 

@@ -52,7 +52,14 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
+    async getFilter(payload: any) {
+      try {
+        await productApi.getFilter(payload);
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
 });
 
-export { productApi }; // экспортируем интерфейс, если он используется в других местах
+export { productApi };
