@@ -4,7 +4,7 @@
       <div class="flex justify-between">
         <div class="flex-col flex gap-4">
           <h1 class="text-[32px] font-[700]">
-           {{ store.product.name }}
+            {{ store.product.name }}
           </h1>
           <div class="w-[600px]">
             <Carousel
@@ -38,17 +38,14 @@
               v-model="currentSlide"
               ref="carousel"
               :transition="400"
-
-        
             >
               <Slide
                 v-for="slide in store.images"
                 :key="slide"
-                class="h-[80px] "
+                class="h-[80px]"
               >
                 <div
                   class="carousel__item flex items-center justify-center h-full w-[96%] rounded-[5%] bg-[#EBEFF3]"
-                  
                 >
                   <img :src="slide.image" alt="" class="h-[60px]" />
                 </div>
@@ -59,46 +56,14 @@
                 </div>
               </template>
             </Carousel>
-            <!-- <div class="flex-col flex gap-3">
-              <div
-                v-for="(img, index) in store.images"
-                :key="index"
-                class="w-[120px] h-[100px] bg-[#EBEFF3] flex items-center justify-center"
-              >
-                <img :src="img.image" class="w-[54px] h-[54px]" />
-              </div>
-            </div> -->
-            <!-- <div
-              class="w-[530px] bg-[#EBEFF3] flex items-center justify-center relative"
-            >
-              <img :src="product.content" alt="" />
-              <div
-                class="flex gap-4 absolute top-6 right-8 text-[18px] text-[#233C5FB2]"
-              >
-                <i class="fa-solid fa-scale-unbalanced-flip hover:text-[#000000af]"> </i>
-                <i class="fa-regular fa-heart hover:text-[#000000]"></i>
-              </div>
-              <div class="flex w-[95%] absolute justify-between items-center">
-                <button
-                  class="rounded-full bg-white w-[50px] h-[50px] flex items-center justify-center hover:bg-[#cce2fd]"
-                >
-                  <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button
-                  class="rounded-full bg-white w-[50px] h-[50px] flex items-center justify-center hover:bg-[#cce2fd]"
-                >
-                  <i class="fa-solid fa-chevron-right"></i>
-                </button>
-              </div>
-            </div> -->
           </div>
         </div>
         <div class="flex-col flex justify-center gap-[70px]">
           <h1 class="text-[#515D6C] text-[16px]">
             Narxi
-            <span class="ml-[20px] text-[32px] text-[#06172D]">{{
-             store.product.price
-            }}   uzs</span>
+            <span class="ml-[20px] text-[32px] text-[#06172D]"
+              >{{ parseFormattedNumber(store.product?.price) }} uzs</span
+            >
           </h1>
           <div class="flex gap-5">
             <button
@@ -143,16 +108,20 @@ import "vue3-carousel/dist/carousel.css";
 import { onMounted, ref } from "vue";
 import { useProductStore } from "../../stores/products/product";
 import { useRoute } from "vue-router";
-const route=useRoute()
+const route = useRoute();
 const store = useProductStore();
 
 const currentSlide = ref(0);
 
-console.log(route.params.id)
+const parseFormattedNumber = (number: any) => {
+  let numberString = number+'';
+  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return numberString;
+};
 
 onMounted(() => {
   store.getProductImage(`${route.params.id}`);
-  store.getProductId(`${route.params.id}`)
+  store.getProductId(`${route.params.id}`);
 });
 </script>
 

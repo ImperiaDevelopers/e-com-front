@@ -60,18 +60,18 @@
             </div>
           </div>
         </div>
-        <div class="ebani-row w-[340px] h-[325px] bg-[#EBEFF3]">
+        <div class="ebani-row w-[340px]  h-[325px] rounded-md bg-[#EBEFF3]">
           <h1 class="text-[18px] font-[600] pt-10">Sizning haridingiz</h1>
-          <div class="flex flex-row justify-between items-center">
+          <div class="flex items-center justify-between w-[80%]">
             <h1 class="text-[12px] font-sans-[Roboto]">Yetkazib berish:</h1>
             <h1 class="text-[18px] font-bold">Bepul</h1>
           </div>
-          <div class="flex flex-row justify-between items-center">
-            <h1>Jami summa:</h1>
+          <div class="flex w-[80%] justify-between items-center">
+            <h1 class="text-[12px]">Jami summa:</h1>
             <h1 class="text-[24px] font-bold">12 568 000 usz</h1>
           </div>
           <div
-            class="flex justify-center bg-[#134E9B] rounded-md w-3/5 h-1/5 mt-10 outline-none"
+            class="flex justify-center bg-[#134E9B] rounded-md w-[80%] h-[18%] mt-5 mb-5 outline-none"
           >
             <button
               class="text-white p-[10px] text-[17px] ps-5 pe-5 font-['Roboto']"

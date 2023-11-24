@@ -63,7 +63,7 @@
                 <div class="w-[180px]">
                   <img
                     class="m-auto object-cover"
-                    :src="item.image[item.image.length-1]?.image"
+                    :src="item.image[item.image.length - 1]?.image"
                     alt="Slide Image"
                   />
                 </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="flex justify-between">
                   <p class="text-[20px] font-[700] text-start mt-[28px]">
-                    {{ item.price }}
+                    {{ parseFormattedNumber(item.price) }} uzs
                   </p>
 
                   <div class="flex gap-2">
@@ -176,8 +176,12 @@ const filter = ref([
     ],
   },
 ]);
-const payload = ref({from: 0, to: 10000000000000000000000000000000});
-
+const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
+const parseFormattedNumber = (number: any) => {
+  let numberString = number.toString();
+  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return numberString;
+};
 
 onMounted(() => {
   watch(value, (value) => {
