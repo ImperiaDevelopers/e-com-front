@@ -102,9 +102,9 @@
               Sizning buyurtmalaringiz
             </h1>
             <div class="flex justify-between items-center mt-[5%]">
-              <h1 class="text-[14px]">{{ order.length }} ta mahsulot</h1>
+              <h1 class="text-[14px]">{{ countPro() }} ta mahsulot</h1>
               <p class="font-bold text-[18px] text-black">
-                {{ parseFormattedNumber(totalPrice) }} uzs
+                {{ parseFormattedNumber(calculateAllSumm()) }} uzs
               </p>
             </div>
             <div class="flex justify-between items-start">
@@ -114,7 +114,7 @@
             <div class="flex justify-between items-center">
               <h1 class="text-[14px]">Jammi summa:</h1>
               <p class="font-bold text-[20px] text-black">
-                {{ parseFormattedNumber(totalPrice) }} uzs
+                {{ parseFormattedNumber(calculateAllSumm()) }} uzs
               </p>
             </div>
             <button
@@ -223,6 +223,21 @@ const order = ref([
     count: 1,
   },
 ]);
+const calculateAllSumm = () => {
+  let sum = ref(0);
+  order.value.forEach((i) => {
+    sum.value += i.price * i.count;
+  });
+  return sum.value;
+};
+const countPro = () => {
+  let count = ref(0);
+  order.value.forEach((i) => {
+    count.value += i.count;
+  });
+  return count.value;
+};
+
 const totalPrice = ref(
   order.value.reduce(
     (total, item) => total + Number(item.price) * item.count,

@@ -100,6 +100,7 @@
               >
               </i>
               <p
+                v-if="0"
                 class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
               >
                 2
@@ -111,7 +112,8 @@
               <i
                 class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
               ></i>
-              <p v-if="0"
+              <p
+                v-if="0"
                 class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
               >
                 11
@@ -126,9 +128,10 @@
               >
               </i>
               <p
+                v-if="basketNumber?.length"
                 class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
               >
-                7
+                {{ basketNumber?.length }}
               </p>
             </div></router-link
           >
@@ -155,7 +158,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useCategoryStore } from "../../stores/category/category";
+import { useBasketStore } from "../../stores/basket/basket";
 const store = useCategoryStore();
+const store1 = useBasketStore();
 
 const opener = ref(false);
 const opener1 = ref(false);
@@ -163,7 +168,9 @@ const change = () => {
   opener.value = !opener.value;
   opener1.value = false;
 };
-onMounted(() => {
+let basketNumber = ref();
+onMounted(async () => {
+  basketNumber.value = await store1.getClientBaskets(1);
   store.getCategories();
 });
 </script>
