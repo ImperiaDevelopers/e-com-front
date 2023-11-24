@@ -29,7 +29,7 @@
               v-model="value"
               range
               :show-tooltip="false"
-              :max="2000000"
+              :max="20000000"
             />
           </div>
         </div>
@@ -54,7 +54,7 @@
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <div v-for="(item, index) in store.products" :key="index">
+          <div v-for="(item, index) in store.filter_products" :key="index">
             <div class="flex-col relative">
               <div
                 class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
@@ -96,6 +96,7 @@
           </div>
         </div>
         <el-pagination
+          v-if="store.filter_products.length"
           background
           layout="prev, pager, next"
           class="mt-[6%]"
@@ -110,10 +111,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
 
-const value = ref([200000, 1800000]);
+const value = ref([200000, 18000000]);
+const brend = ref();
 
 const store = useProductStore();
 const filter = ref([
@@ -153,10 +155,14 @@ const filter = ref([
     ],
   },
 ]);
+const payload = ref();
 
-
+watch(value, (value) => {
+  payload.value = { from: value[0], to: value[1] };
+  store.getFilter(payload.value);
+});
 onMounted(() => {
-  store.getProducts();
+  store.getFilter(payload.value);
 });
 </script>
 

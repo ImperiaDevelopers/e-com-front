@@ -4,6 +4,7 @@ import productApi from "../../api/products/product";
 interface ProductState {
   products: any[];
   images: any[];
+  filter_products: any[];
 }
 
 export const useProductStore = defineStore({
@@ -11,6 +12,7 @@ export const useProductStore = defineStore({
   state: (): ProductState => ({
     products: [],
     images: [],
+    filter_products: [],
   }),
   actions: {
     async getProducts(params: any) {
@@ -54,7 +56,8 @@ export const useProductStore = defineStore({
     },
     async getFilter(payload: any) {
       try {
-        await productApi.getFilter(payload);
+        const res = await productApi.getFilter(payload);
+        this.filter_products = res;
       } catch (err) {
         console.error(err);
       }
