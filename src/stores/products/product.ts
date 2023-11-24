@@ -8,6 +8,7 @@ interface ProductState {
   pro_per_group: any[];
   performanse: any[];
   per_info: any[];
+  product: any[];
 }
 
 export const useProductStore = defineStore({
@@ -19,6 +20,7 @@ export const useProductStore = defineStore({
     pro_per_group: [],
     performanse: [],
     per_info: [],
+    product:[]
   }),
   actions: {
     async getProducts(params: any) {
@@ -48,7 +50,8 @@ export const useProductStore = defineStore({
     },
     async getProductId(productId: string) {
       try {
-        await productApi.getProductId(productId);
+        const res = await productApi.getProductId(productId);
+        this.product = res;
       } catch (err) {
         console.error(err);
       }

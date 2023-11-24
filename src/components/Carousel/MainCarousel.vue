@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { computed, ref } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
