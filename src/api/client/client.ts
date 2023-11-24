@@ -1,28 +1,28 @@
 import axiosClient from "../apiClient";
 
 interface ClientApi {
-  getClient(params?: { page?: number; limit?: number }): Promise<any>;
-  getClientId(id: string): Promise<any>;
+  otpClient(otp?: any): Promise<any>;
+  verifyClient(verify?: any): Promise<any>;
   updateClient(payload: any, id: string): Promise<any>;
-  getImage(client_id: any): Promise<any>;
+  deleteClient(id: string): Promise<any>;
 }
 
 const clientApi: ClientApi = {
-  getClient(params) {
-    const url = `client/all/q?page=${params?.page}&limit=${params?.limit}`;
-    return axiosClient.get(url);
+  otpClient(otp) {
+    const url = `client/send-otp`;
+    return axiosClient.post(url, otp);
   },
-  getClientId(id) {
-    const url = `client/${id}`;
-    return axiosClient.get(url);
+  verifyClient(verify) {
+    const url = `client/verify-otp`;
+    return axiosClient.get(url, verify);
   },
   updateClient(payload, id) {
     const url = `client/${id}`;
-    return axiosClient.patch(url, payload);
+    return axiosClient.put(url, payload);
   },
-  getImage(client_id) {
-    const url = `image/clients/${client_id}`;
-    return axiosClient.get(url);
+  deleteClient(id) {
+    const url = `client/${id}`;
+    return axiosClient.delete(url);
   },
 };
 

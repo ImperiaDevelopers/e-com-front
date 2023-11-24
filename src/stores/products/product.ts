@@ -4,7 +4,15 @@ import productApi from "../../api/products/product";
 interface ProductState {
   products: any[];
   images: any[];
+<<<<<<< HEAD
   allImages: any[];
+=======
+  filter_products: any[];
+  pro_per_group: any[];
+  performanse: any[];
+  per_info: any[];
+  product: any[];
+>>>>>>> b80535dc2a523dcdfecd97c0fa92f686be7cd274
 }
 
 export const useProductStore = defineStore({
@@ -12,18 +20,39 @@ export const useProductStore = defineStore({
   state: (): ProductState => ({
     products: [],
     images: [],
+<<<<<<< HEAD
     allImages: [],
+=======
+    filter_products: [],
+    pro_per_group: [],
+    performanse: [],
+    per_info: [],
+    product:[]
+>>>>>>> b80535dc2a523dcdfecd97c0fa92f686be7cd274
   }),
   actions: {
-    async getProducts() {
+    async getProducts(params: any) {
       try {
-        const res = await productApi.getProduct();
+        const res = await productApi.getProduct(params);
         this.products = res;
+        params.last_page = Math.ceil(res.count / params.limit);
       } catch (err) {
         console.error(err);
       }
     },
+<<<<<<< HEAD
     async getProductImage(product_id: number) {
+=======
+    async getProductSearch(params: any) {
+      try {
+        const res = await productApi.getProductSearch(params);
+        this.products = res.products;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProductImage(product_id: string) {
+>>>>>>> b80535dc2a523dcdfecd97c0fa92f686be7cd274
       try {
         const res = await productApi.getImage(product_id);
         this.images = res;
@@ -52,7 +81,8 @@ export const useProductStore = defineStore({
     },
     async getProductId(productId: string) {
       try {
-        await productApi.getProductId(productId);
+        const res = await productApi.getProductId(productId);
+        this.product = res;
       } catch (err) {
         console.error(err);
       }
@@ -64,7 +94,60 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
+    async getFilter(payload: any) {
+      try {
+        const res = await productApi.getFilter(payload);
+        this.filter_products = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProPerGroup(params: any) {
+      try {
+        const res = await productApi.getProPerGroup(params);
+        this.pro_per_group = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProPerGroupId(groupId: string) {
+      try {
+        await productApi.getProPerGroupId(groupId);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getPerformance(params: any) {
+      try {
+        const res = await productApi.getPerfomance(params);
+        this.performanse = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getPerformanceId(perforID: string) {
+      try {
+        await productApi.getPerfomanceID(perforID);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getPerInfo(params: any) {
+      try {
+        const res = await productApi.getProInfo(params);
+        this.per_info = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getInfoId(infoId: any) {
+      try {
+        await productApi.getProInfoID(infoId);
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
 });
 
-export { productApi }; // экспортируем интерфейс, если он используется в других местах
+export { productApi };

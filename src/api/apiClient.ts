@@ -11,13 +11,14 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(
-  (config: AxiosClientConfig) => {
+  (config: AxiosRequestConfig) => {
+    // Изменено на AxiosRequestConfig
     let token = localStorage.getItem("token");
     if (token) {
       if (!config.headers) {
         config.headers = {};
       }
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -25,7 +26,6 @@ axiosClient.interceptors.request.use(
     return Promise.reject(err);
   }
 );
-
 axiosClient.interceptors.response.use(
   (res) => {
     return res.data;

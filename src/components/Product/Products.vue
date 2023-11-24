@@ -29,7 +29,7 @@
               v-model="value"
               range
               :show-tooltip="false"
-              :max="2000000"
+              :max="20000000"
             />
           </div>
         </div>
@@ -54,15 +54,16 @@
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <div v-for="(item, index) in store.products" :key="index">
+          <div v-for="(item, index) in store.filter_products" :key="index">
             <div class="flex-col relative">
               <div
                 class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
+                @click="otish(item.id)"
               >
                 <div class="w-[180px]">
                   <img
                     class="m-auto object-cover"
-                    :src="item.image[0]?.image"
+                    :src="item.image[item.image.length-1]?.image"
                     alt="Slide Image"
                   />
                 </div>
@@ -80,6 +81,7 @@
                   <p class="text-[20px] font-[700] text-start mt-[28px]">
                     {{ item.price }}
                   </p>
+
                   <div class="flex gap-2">
                     <i
                       class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#dde2e6]"
@@ -96,6 +98,7 @@
           </div>
         </div>
         <el-pagination
+          v-if="store.filter_products.length"
           background
           layout="prev, pager, next"
           class="mt-[6%]"
@@ -110,10 +113,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
-const value = ref([200000, 1800000]);
+const value = ref([200000, 18000000]);
+const brend = ref();
+
+const otish = (id: any) => {
+  router.push(`/product/${id}`);
+};
 
 const store = useProductStore();
 const filter = ref([
@@ -152,11 +162,29 @@ const filter = ref([
       "10000 mAh",
     ],
   },
+  {
+    name: "display",
+    values: [
+      "3000 mAh",
+      "4000 mAh",
+      "5000 mAh",
+      "6000 mAh",
+      "7000 mAh",
+      "8000 mAh",
+      "9000 mAh",
+      "10000 mAh",
+    ],
+  },
 ]);
+const payload = ref({from: 0, to: 10000000000000000000000000000000});
 
 
 onMounted(() => {
-  store.getProducts();
+  watch(value, (value) => {
+    payload.value = { from: value[0], to: value[1] };
+    store.getFilter(payload.value);
+  });
+  store.getFilter(payload.value);
 });
 </script>
 

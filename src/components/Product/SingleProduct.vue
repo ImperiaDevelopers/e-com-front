@@ -1,22 +1,74 @@
 <template>
   <div class="w-[100%] flex justify-center mt-[4%]">
     <div class="w-[1180px] flex flex-col gap-[60px]">
-      <div class="flex gap-5">
+      <div class="flex justify-between">
         <div class="flex-col flex gap-4">
           <h1 class="text-[32px] font-[700]">
-            Смартфон Xiaomi 12 Lite 8/128Gb
+           {{ store.product.name }}
           </h1>
-          <div class="flex gap-5 h-[430px]">
-            <div class="flex-col flex gap-3">
+          <div class="w-[600px]">
+            <Carousel
+              id="gallery"
+              :items-to-show="1"
+              :wrap-around="true"
+              v-model="currentSlide"
+              :transition="800"
+            >
+              <Slide
+                v-for="slide in store.images"
+                :key="slide"
+                class="h-[430px] w-[500px] bg-[#EBEFF3] flex items-center justify-center rounded-[10px]"
+              >
+                <div class="carousel__item flex items-center justify-center">
+                  <img :src="slide.image" alt="" class="h-[350px]" />
+                </div>
+              </Slide>
+              <template #addons>
+                <div class="flex">
+                  <navigation />
+                </div>
+              </template>
+            </Carousel>
+
+            <Carousel
+              class="mt-3"
+              id="thumbnails"
+              :items-to-show="4"
+              :wrap-around="true"
+              v-model="currentSlide"
+              ref="carousel"
+              :transition="400"
+
+        
+            >
+              <Slide
+                v-for="slide in store.images"
+                :key="slide"
+                class="h-[80px] "
+              >
+                <div
+                  class="carousel__item flex items-center justify-center h-full w-[96%] rounded-[5%] bg-[#EBEFF3]"
+                  
+                >
+                  <img :src="slide.image" alt="" class="h-[60px]" />
+                </div>
+              </Slide>
+              <template #addons>
+                <div class="flex">
+                  <navigation />
+                </div>
+              </template>
+            </Carousel>
+            <!-- <div class="flex-col flex gap-3">
               <div
-                v-for="(img, index) in imgs"
+                v-for="(img, index) in store.images"
                 :key="index"
                 class="w-[120px] h-[100px] bg-[#EBEFF3] flex items-center justify-center"
               >
-                <img :src="product.content" class="w-[54px] h-[54px]" />
+                <img :src="img.image" class="w-[54px] h-[54px]" />
               </div>
-            </div>
-            <div
+            </div> -->
+            <!-- <div
               class="w-[530px] bg-[#EBEFF3] flex items-center justify-center relative"
             >
               <img :src="product.content" alt="" />
@@ -38,15 +90,15 @@
                   <i class="fa-solid fa-chevron-right"></i>
                 </button>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="flex-col flex justify-center gap-[70px]">
           <h1 class="text-[#515D6C] text-[16px]">
             Narxi
             <span class="ml-[20px] text-[32px] text-[#06172D]">{{
-              product.price
-            }}</span>
+             store.product.price
+            }}   uzs</span>
           </h1>
           <div class="flex gap-5">
             <button
@@ -85,14 +137,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const imgs = ref([{}, {}, {}, {}]);
-const product = ref({
-  text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-  price: "6 999 999 usz ",
-  content: "src/assets/images/product-imgs/single.png",
-});
+import { Carousel, Slide, Navigation } from "vue3-carousel";
 
+import "vue3-carousel/dist/carousel.css";
+import { onMounted, ref } from "vue";
+import { useProductStore } from "../../stores/products/product";
+import { useRoute } from "vue-router";
+const route=useRoute()
+const store = useProductStore();
+
+const currentSlide = ref(0);
+
+console.log(route.params.id)
+
+onMounted(() => {
+  store.getProductImage(`${route.params.id}`);
+  store.getProductId(`${route.params.id}`)
+});
 </script>
 
 <style lang="scss" scoped></style>
