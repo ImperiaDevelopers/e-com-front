@@ -1,87 +1,71 @@
 <template>
-  <div class="w-[100%] flex justify-center mt-[4%]">
+  <div class="w-[100%] flex justify-center mt-[2%]">
     <div class="w-[1180px] flex gap-4">
       <div
-        class="w-[280px] h-[905px] bg-[#EBEFF3] pt-[18px] pr-[19px] pl-[29px]"
+        class="w-[280px] h-[900px] bg-[#EBEFF3] flex flex-col items-center py-[15px] rounded-md"
       >
-        <h2 class="text-16 font-normal">Narxi[so'm]</h2>
-        <div class="w-[220px] h-[100px] bg-[#000]"></div>
-        <h2 class="text-16 font-normal mt-[24px]">Brendi</h2>
-        <div
-          class="w-[234px] h-[98px] flex flex-wrap items-start gap-4 mt-[18px]"
-        >
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Vivo</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">
-            Samsung
-          </button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Apple</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Tecno</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Nokia</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Oppo</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Xiomi</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Redmi</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">Huawei</button>
+        <div class="w-[240px] flex flex-col gap-4">
+          <h2 class="text-[16px] font-[500]">Narxi[so'm]</h2>
+          <div class="flex gap-2">
+            <div>
+              <label for="" class="text-[#00000062] text-[12px]">...dan</label>
+              <input
+                type="number"
+                class="w-[120px] h-[48px] text-center rounded-md outline-none text-[14px]"
+                v-model="value[0]"
+              />
+            </div>
+            <div>
+              <label for="" class="text-[#00000062] text-[12px]">..gacha</label>
+              <input
+                type="number"
+                class="w-[120px] h-[48px] text-center rounded-md outline-none text-[14px]"
+                v-model="value[1]"
+              />
+            </div>
+          </div>
+          <div class="slider-demo-block">
+            <el-slider
+              v-model="value"
+              range
+              :show-tooltip="false"
+              :max="2000000"
+            />
+          </div>
         </div>
-        <h2 class="text-16 font-normal mt-[33px]">Tezkor xotira RAM</h2>
-        <div
-          class="w-[234px] h-[98px] flex flex-wrap items-start gap-4 mt-[18px]"
-        >
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">2GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">3GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">4GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">6GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">8GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">12GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">16GB</button>
-        </div>
-        <h2 class="text-16 font-normal mt-[33px]">Doimiy xotira ROM</h2>
-        <div
-          class="w-[234px] h-[98px] flex flex-wrap items-start gap-1 mt-[18px]"
-        >
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">32GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">64GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">128GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">256GB</button>
-          <button class="w-[66px] h-[25px] rounded-xl bg-[#fff]">512GB</button>
-        </div>
-        <h2 class="text-16 font-normal mt-[33px]">Akumlyator hajmi</h2>
-        <div
-          class="w-[234px] h-[98px] flex flex-wrap items-start gap-3 mt-[18px]"
-        >
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            3000mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            3200mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            3600mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            4000mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            4500mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            5000mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            6000mAh
-          </button>
-          <button class="w-[80px] h-[25px] rounded-xl bg-[#fff]">
-            7000mAh
-          </button>
+        <div class="overflow-y-auto h-[700px] scroll-container">
+          <div
+            class="w-[240px] flex flex-col flex-wrap gap-3 mt-[24px]"
+            v-for="(item, index) in filter"
+            :key="index"
+          >
+            <h2 class="text-[16px] font-[500]">{{ item.name }}</h2>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="(it, index) in item.values"
+                :key="index"
+                class="py-[7px] px-[18px] rounded-[25px] bg-[#fff] text-[12px] hover:bg-[#e5effa] hover:scale-110"
+              >
+                {{ it }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <div v-for="(img, index) in imgs" :key="index">
+          <div v-for="(item, index) in store.products" :key="index">
             <div class="flex-col relative">
               <div
-                class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center"
+                class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
               >
-                <img class="m-auto" :src="img.content" alt="Slide Image" />
+                <div class="w-[180px]">
+                  <img
+                    class="m-auto object-cover"
+                    :src="item.image[0]?.image"
+                    alt="Slide Image"
+                  />
+                </div>
               </div>
               <button class="absolute top-[20px] left-[235px]">
                 <i
@@ -90,11 +74,11 @@
               </button>
               <div class="flex-col w-[273px]">
                 <div class="h-[56px]">
-                  <h4 class="text-start mt-2 text-[14px]">{{ img.text }}</h4>
+                  <h4 class="text-start mt-2 text-[14px]">{{ item.name }}</h4>
                 </div>
                 <div class="flex justify-between">
                   <p class="text-[20px] font-[700] text-start mt-[28px]">
-                    {{ img.price }}
+                    {{ item.price }}
                   </p>
                   <div class="flex gap-2">
                     <i
@@ -126,60 +110,98 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useProductStore } from "../../stores/products/product";
 
-const imgs = ref([
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
-  },
-  {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
-  },
+const value = ref([200000, 1800000]);
 
+const store = useProductStore();
+const filter = ref([
   {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
+    name: "Brendi",
+    values: [
+      "Vivo",
+      "Samsung",
+      "Apple",
+      "Tecno",
+      "Oppo",
+      "Nokia",
+      "Xiomi",
+      "Realmi",
+      "Huawei",
+    ],
   },
   {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi ",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
+    name: "Tezkor xotira RAM",
+    values: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"],
   },
   {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
+    name: "Doimiy xotira ROM",
+    values: ["32GB", "64GB", "128GB", "256GB", "512GB"],
   },
   {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
-  },
-
-  {
-    text: "Смартфон Xiaomi 12 Lite 8/128Gb Қора kamera 48/68 px",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/image-removebg-preview (37) 1.png",
-  },
-  {
-    text: "AirPods Pro: Ergonomik dizayn, yuqori sifat, shumni o‘chirish va maslahatlar beradi ",
-    price: "6 999 999 usz ",
-    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110810501.png",
+    name: "Akkumulyator hajmi",
+    values: [
+      "3000 mAh",
+      "4000 mAh",
+      "5000 mAh",
+      "6000 mAh",
+      "7000 mAh",
+      "8000 mAh",
+      "9000 mAh",
+      "10000 mAh",
+    ],
   },
 ]);
 
-import { useBrendStore } from "../../stores/brend/brend.ts";
-const store = useBrendStore();
-let brands = await store.getBrends();
-console.log(brands);
+
+onMounted(() => {
+  store.getProducts();
+});
 </script>
 
 <style lang="scss" scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar width */
+}
+
+/* Optional: You can add additional styling to the track and thumb if needed */
+.scroll-container::-webkit-scrollbar-track {
+  background-color: transparent; /* Change to your desired color */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Change to your desired color */
+}
+.slider-demo-block {
+  display: flex;
+  align-items: center;
+}
+.slider-demo-block .el-slider {
+  margin-top: 0;
+  margin-left: 12px;
+}
+.el-pagination {
+  --el-color-primary: #134e9b;
+}
+.btn-prev .is-first {
+  background-color: #134e9b;
+}
+.el-slider {
+  --el-slider-main-bg-color: #134e9b;
+  --el-border-color-light: #4d4d4d22;
+}
 #app {
   text-align: center;
   margin-top: 50px;

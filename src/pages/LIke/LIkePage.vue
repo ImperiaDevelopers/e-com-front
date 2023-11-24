@@ -10,7 +10,7 @@
 <script setup>
 import Header from "../../components/Header/Header.vue";
 import ProdCarusel from "../../components/Carousel/ProdCarousel.vue";
-import Footer from "../../components/Footer/footer.vue";
+import Footer from "../../components/Footer/Footer.vue";
 </script>
 
 <style lang="scss" scoped></style>

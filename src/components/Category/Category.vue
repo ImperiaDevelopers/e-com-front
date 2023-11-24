@@ -62,7 +62,13 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+// import useCategoryStore from "../../stores/category/category.ts";
+
+// const store = useCategoryStore();
+
+// console.log(store);
+</script>
 
 <style lang="scss" scoped>
 .main {

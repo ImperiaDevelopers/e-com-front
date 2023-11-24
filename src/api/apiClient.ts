@@ -1,15 +1,13 @@
-import type { AxiosInstance, AxiosRequestConfig } from "axios";
-import type { AxiosResponse } from "axios"; // Обновленный импорт для AxiosResponse
 import axios from "axios";
 
-interface AxiosClientConfig extends AxiosRequestConfig {
-  headers?: {
-    Authorization?: string;
-  };
-}
+// interface AxiosClientConfig extends AxiosRequestConfig {
+//   headers?: {
+//     Authorization?: string;
+//   };
+// }
 
-const axiosClient: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL as string,
+const axiosClient = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_URL,
 });
 
 axiosClient.interceptors.request.use(
@@ -29,7 +27,7 @@ axiosClient.interceptors.request.use(
   }
 );
 axiosClient.interceptors.response.use(
-  (res: AxiosResponse) => {
+  (res) => {
     return res.data;
   },
   function (err) {

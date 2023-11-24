@@ -10,7 +10,7 @@
           <h3>Location</h3>
         </div>
         <div class="others flex gap-5">
-          <a href="#">About us</a>
+          <router-link to="/about">About us</router-link>
           <router-link to="/products">Products</router-link>
           <router-link to="feedback">Contacts</router-link>
         </div>
@@ -57,16 +57,17 @@
             </button>
             <div
               v-if="opener"
-              class="w-[380px] category bg-[#EBEFF3] absolute top-16 right-[-45px] px-[45px] py-[20px] h-[540px]"
+              class="w-[380px] category bg-[#EBEFF3] absolute top-16 right-[-45px] px-[35px] py-[10px] h-[540px]"
             >
               <div class="flex flex-col gap-[25px] justify-center p-[40px]">
                 <a
                   href="#"
-                  v-for="(item, index) in categories"
+                  v-for="(item, index) in store.categories"
                   :key="index"
-                  class="text-[#535c6a] text-[16px] flex gap-4"
+                  class="text-[#535c6a] text-[15px] flex gap-4 items-center"
                   @mousemove="opener1 = true"
-                  >{{ item.icon }} <span>{{ item.name }}</span>
+                  ><img :src="item.icon" alt="" class="w-[30px]" />
+                  <span>{{ item.category_name }}</span>
                 </a>
               </div>
             </div>
@@ -91,22 +92,24 @@
 
         <div class="buttons flex gap-5 items-center">
           <router-link to="/compare">
-            <i
-              class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
-            >
-            </i>
-            <p
-              class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
-            >
-              2
-            </p>
+            <div class="h-[35px]">
+              <i
+                class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
+              >
+              </i>
+              <p
+                class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
+              >
+                2
+              </p>
+            </div>
           </router-link>
           <router-link to="/like">
-            <div>
+            <div class="h-[35px]">
               <i
-                class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
+                class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
               ></i>
-              <p
+              <p v-if="0"
                 class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
               >
                 11
@@ -115,9 +118,9 @@
           </router-link>
 
           <router-link to="/basket">
-            <div>
+            <div class="h-[35px]">
               <i
-                class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#d2d6da]"
+                class="fa-solid fa-cart-shopping p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
               >
               </i>
               <p
@@ -127,19 +130,20 @@
               </p>
             </div></router-link
           >
-
-          <i
-            class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
-          ></i>
+          <div class="h-[35px]">
+            <i
+              class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
+            ></i>
+          </div>
         </div>
       </div>
       <div class="w-[1180px] flex justify-between">
         <a
           href="#"
-          v-for="(item, index) in categories"
+          v-for="(item, index) in store.categories"
           :key="index"
           class="text-[#535c6a] font-['Roboto'] hover:text-[#272727] cat"
-          >{{ item.name }}</a
+          >{{ item.category_name }}</a
         >
       </div>
     </div>
@@ -147,45 +151,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const categories = ref([
-  {
-    icon: "icon",
-    name: "Aksiyalar",
-  },
-  {
-    icon: "icon",
-    name: "Kiryuvish mashinasi",
-  },
-  {
-    icon: "icon",
-    name: "Accessories",
-  },
-  {
-    icon: "icon",
-    name: "Gaming Consoles",
-  },
-  {
-    icon: "icon",
-    name: "Cameras",
-  },
-  {
-    icon: "icon",
-    name: "Audio & Video",
-  },
-  {
-    icon: "icon",
-    name: "Computers & Laptops",
-  },
-  {
-    icon: "icon",
-    name: "Televisions",
-  },
-  {
-    icon: "icon",
-    name: "Muzlatgichlar",
-  },
-]);
+import { onMounted, ref } from "vue";
+import { useCategoryStore } from "../../stores/category/category";
+const store = useCategoryStore();
 
 const opener = ref(false);
 const opener1 = ref(false);
@@ -193,6 +161,9 @@ const change = () => {
   opener.value = !opener.value;
   opener1.value = false;
 };
+onMounted(() => {
+  store.getCategories();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -248,7 +219,7 @@ const change = () => {
   z-index: 0;
 }
 .category {
-  z-index: 1;
+  z-index: 10000000000;
   box-shadow: 2px 5px 7px rgba(0, 0, 0, 0.1), -2px -5px 7px rgba(0, 0, 0, 0.1);
 }
 

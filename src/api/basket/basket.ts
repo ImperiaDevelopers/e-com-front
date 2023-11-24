@@ -1,8 +1,7 @@
 import axiosClient from "../apiClient";
 
 interface CategoryApi {
-  getCategory(): Promise<any>;
-  getCategoryId(id: string): Promise<any>;
+  getClientCard(id: string): Promise<any>;
 }
 
 const categoryApi: CategoryApi = {
