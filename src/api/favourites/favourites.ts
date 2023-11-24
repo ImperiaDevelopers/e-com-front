@@ -10,7 +10,7 @@ interface FavouritiesApi {
 
 const favouritiesApi: FavouritiesApi = {
   createFavourities(params) {
-    const url = `favourities/`;
+    const url = `favourities`;
     return axiosClient.post(url, params);
   },
   getFavourities(params) {
