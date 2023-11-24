@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import productApi from "../../api/products/product";
 
 interface ProductState {
-  products: any[]; // Замените any на реальный тип продукта, если возможноimages
+  products: any[];
   images: any[];
+  allImages: any[];
 }
 
 export const useProductStore = defineStore({
@@ -11,6 +12,7 @@ export const useProductStore = defineStore({
   state: (): ProductState => ({
     products: [],
     images: [],
+    allImages: [],
   }),
   actions: {
     async getProducts() {
@@ -21,10 +23,29 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
-    async getProductImage(product_id: string) {
+    async getProductImage(product_id: number) {
       try {
         const res = await productApi.getImage(product_id);
         this.images = res;
+        return res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getAllImages() {
+      try {
+        const res = await productApi.getAllImages();
+        const uniqueProductIds = {};
+        const uniqueProducts = [];
+        for (const product of res) {
+          const productId = product.product_id;
+          if (!uniqueProductIds[productId]) {
+            uniqueProductIds[productId] = true;
+            uniqueProducts.push(product);
+          }
+        }
+        this.allImages = uniqueProducts;
+        return uniqueProducts;
       } catch (err) {
         console.error(err);
       }

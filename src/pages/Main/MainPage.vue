@@ -1,6 +1,5 @@
 <template>
   <Header />
-
   <Banner />
   <Brand />
   <div class="flex items-center justify-center">

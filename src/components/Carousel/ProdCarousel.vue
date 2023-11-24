@@ -10,16 +10,15 @@
     <Slide v-for="(item, index) in imgs" :key="index">
       <div class="flex-col relative h-[422px]">
         <div
-          class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex  justify-center items-center relative"
+          class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex justify-center items-center relative"
         >
-        <div class="w-[180px]">
-
-          <img
-            class="m-auto object-cover"
-            :src="item?.image[0]?.image"
-            alt="Slide Image"
-          />
-        </div>
+          <div class="w-[180px]">
+            <img
+              class="m-auto object-cover"
+              :src="item?.image[0]?.image"
+              alt="Slide Image"
+            />
+          </div>
         </div>
         <button class="absolute top-[20px] left-[235px]">
           <i class="fa-regular fa-heart text-[#545D6A] hover:text-[black]"></i>
