@@ -60,10 +60,10 @@
                 class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
                 @click="otish(item.id)"
               >
-                <div class="w-[180px]">
+                <div class="w-[180px] img-ust">
                   <img
                     class="m-auto object-cover"
-                    :src="item.image[item.image.length-1]?.image"
+                    :src="item.image[item.image.length - 1]?.image"
                     alt="Slide Image"
                   />
                 </div>
@@ -88,6 +88,7 @@
                     >
                     </i>
                     <i
+                      @click="addProductToCard(item)"
                       class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
                     >
                     </i>
@@ -116,11 +117,20 @@
 import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
 import { useRouter } from "vue-router";
+import Notification from "../../plugins/Notification";
 const router = useRouter();
 
 const value = ref([200000, 18000000]);
-const brend = ref();
-
+const addProductToCard = async (item: any) => {
+  const payload = {
+    product_id: item.id,
+    client_id: 1,
+    price: item.price,
+    quantity: 1,
+  };
+  await store.addProductToCard(payload);
+  Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
+};
 const otish = (id: any) => {
   router.push(`/product/${id}`);
 };
@@ -176,8 +186,7 @@ const filter = ref([
     ],
   },
 ]);
-const payload = ref({from: 0, to: 10000000000000000000000000000000});
-
+const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
 
 onMounted(() => {
   watch(value, (value) => {
@@ -244,5 +253,11 @@ span {
   display: inline-block;
   margin-top: 10px;
   font-size: 1.2em;
+}
+
+.img-ust:hover {
+  cursor: pointer;
+  scale: 1.05;
+  transition: all 0.4s;
 }
 </style>

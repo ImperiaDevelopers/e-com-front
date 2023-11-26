@@ -14,6 +14,7 @@ interface ProductApi {
   getPerfomanceID(id: string): Promise<any>;
   getProInfo(params?: any): Promise<any>;
   getProInfoID(id: string): Promise<any>;
+  addProductToUserCard(payload: any): Promise<any>;
 }
 
 const productApi: ProductApi = {
@@ -42,6 +43,7 @@ const productApi: ProductApi = {
   },
   getAllImages() {
     const url = `image/all`;
+  },
   // ---------- Pro Filter -------- //
   getFilter(params) {
     const url = `product/filter`;
@@ -73,6 +75,10 @@ const productApi: ProductApi = {
   getProInfoID(id) {
     const url = `pro-info/${id}`;
     return axiosClient.get(url);
+  },
+  addProductToUserCard(payload) {
+    const url = `card/add`;
+    return axiosClient.post(url, payload);
   },
 };
 

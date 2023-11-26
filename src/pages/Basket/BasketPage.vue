@@ -21,7 +21,7 @@
                 <div class="flex justify-between items-start">
                   <h1 class="text-[18px]">{{ i.product?.name }}</h1>
                   <h1 class="text-[24x] font-[700] mb-[1.5%]">
-                    {{ i.product?.price }} so'm
+                    {{ i.product?.price }} usz
                   </h1>
                 </div>
                 <div class="flex justify-between">
@@ -29,10 +29,11 @@
                     <div
                       class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
                     >
+                      <!-- <i class="fa-solid fa-heart"></i> -->
                       <i class="fa-regular fa-heart"></i>
                     </div>
                     <div
-                      @click="deleteProduct(index)"
+                      @click="deleteProduct(index, i.id)"
                       class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
                     >
                       <i
@@ -43,7 +44,7 @@
                   </div>
                   <div class="flex">
                     <div
-                      @click="decrease_quantity(index)"
+                      @click="decrease_quantity(index, i.id)"
                       class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
                     >
                       <i class="fa-solid fa-minus" style="color: #575757"></i>
@@ -52,7 +53,7 @@
                       {{ i.quantity }}
                     </h1>
                     <div
-                      @click="increase_quantity(index)"
+                      @click="increase_quantity(index, i.id)"
                       class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
                     >
                       <i class="fa-solid fa-plus" style="color: #5c5c5c"></i>
@@ -89,16 +90,19 @@
       </div>
     </div>
   </div>
-  <ProdCarousel />
+  <Products :imgs="store1.products" />
   <Footer />
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import Header from "../../components/Header/Header.vue";
-import ProdCarousel from "../../components/Carousel/ProdCarousel.vue";
+import Products from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/Footer/Footer.vue";
 import { useBasketStore } from "../../stores/basket/basket";
+import { useProductStore } from "../../stores/products/product";
+import Notification from "../../plugins/Notification";
+const store1 = useProductStore();
 const store = useBasketStore();
 
 const calculateAllSumm = () => {
@@ -109,20 +113,30 @@ const calculateAllSumm = () => {
   return sum.value;
 };
 
-const increase_quantity = (index: number) => {
+const increase_quantity = async (index: number, id: number) => {
   store.baskets[index].quantity += 1;
+  const payload = {
+    quantity: store.baskets[index].quantity,
+  };
+  await store.updateClientCard(id, payload);
 };
 
-const decrease_quantity = (index: number) => {
-  if (store.baskets[index].quantity > 0) store.baskets[index].quantity -= 1;
+const decrease_quantity = async (index: number, id: number) => {
+  if (store.baskets[index].quantity > 1) store.baskets[index].quantity -= 1;
+  const payload = {
+    quantity: store.baskets[index].quantity,
+  };
+  await store.updateClientCard(id, payload);
 };
 
-const deleteProduct = (index: number) => {
+const deleteProduct = async (index: number, id: number) => {
   store.baskets.splice(index, 1);
+  await store.deleteClientCard(id);
 };
 
 onMounted(async () => {
   await store.getClientBaskets(1); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
+  await store1.getProducts();
 });
 </script>
 

@@ -12,7 +12,7 @@
         <div
           class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex justify-center items-center relative"
         >
-          <div class="w-[180px]">
+          <div class="w-[180px] img-ust">
             <img
               class="m-auto object-cover"
               :src="item?.image[0]?.image"
@@ -37,6 +37,7 @@
               >
               </i>
               <i
+                @click="addProductToCard(item)"
                 class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
               >
               </i>
@@ -52,9 +53,27 @@
   </Carousel>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { Carousel, Navigation, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import { useBasketStore } from "../../stores/basket/basket";
+import { useProductStore } from "../../stores/products/product";
+import Notification from "../../plugins/Notification";
+
+const store = useBasketStore();
+const store1 = useProductStore();
+
+const addProductToCard = async (item: any) => {
+  const payload = {
+    product_id: item.id,
+    client_id: 1,
+    price: item.price,
+    quantity: 1,
+  };
+  await store1.addProductToCard(payload);
+  Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
+};
+
 const props = defineProps({
   imgs: Array,
 });
@@ -74,4 +93,16 @@ const breakpoints = {
     snapAlign: "center",
   },
 };
+
+onMounted(async () => {
+  // store.addProductToBasket()
+});
 </script>
+
+<style lang="scss" scoped>
+.img-ust:hover {
+  cursor: pointer;
+  scale: 1.05;
+  transition: all 0.4s;
+}
+</style>
