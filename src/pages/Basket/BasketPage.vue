@@ -3,83 +3,70 @@
   <div class="flex justify-center w-screen">
     <div class="w-[1180px] justify-center">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Savat</h1>
-      <div class="flex gap-8 mb-40 justify-between">
-        <div class="grid gap-12">
-          <div class="grid gap-8 justify-between text-[#00000099]">
+      <div class="flex justify-between mb-[20%]">
+        <div class="grid gap-8 w-[800px] mb-40">
+          <div
+            class="flex h-[170px]"
+            v-for="(i, index) in store.baskets"
+            :key="index"
+            style="gap: 31px"
+          >
             <div
-              class="flex h-[170px]"
-              v-for="(i, index) in store.baskets"
-              :key="index"
-              style="gap: 31px"
+              class="w-[200px] h-[170px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
             >
-              <img
-                class="w-[160px] p-[20px] bg-[#EBEFF3] rounded"
-                :src="i.product.image[0].image"
-                alt=""
-              />
-              <div class="flex flex-col w-[761px] h-[145px] justify-between">
-                <div class="flex justify-between items-start">
-                  <h1 class="text-[18px]">{{ i.product?.name }}</h1>
-                  <h1 class="text-[24x] font-[700] mb-[1.5%]">
-                    {{ i.product?.price }} usz
-                  </h1>
+              <img class="w-[120px]" :src="i.product.image[0].image" alt="" />
+            </div>
+            <div class="flex-col w-[560px] h-[170px] flex justify-around">
+              <div class="flex items-start justify-between">
+                <h1 class="text-xl w-[288px]">{{ i.product?.name }}</h1>
+                <h1 class="text-[24px] text-black">
+                  {{ parseFormattedNumber(i.product?.price) }} uzs
+                </h1>
+              </div>
+              <div class="flex justify-between">
+                <div class="flex gap-5">
+                  <i
+                    class="fa-regular fa-heart w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
+                  ></i>
+                  <i
+                    @click="deleteProduct(index, i.id)"
+                    class="fa-regular fa-trash-can w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
+                  ></i>
                 </div>
-                <div class="flex justify-between">
-                  <div class="flex" style="gap: 10px">
-                    <div
-                      class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
-                    >
-                      <!-- <i class="fa-solid fa-heart"></i> -->
-                      <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <div
-                      @click="deleteProduct(index, i.id)"
-                      class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
-                    >
-                      <i
-                        class="fa-solid fa-trash-can"
-                        style="color: #5c5c5c"
-                      ></i>
-                    </div>
-                  </div>
-                  <div class="flex">
-                    <div
-                      @click="decrease_quantity(index, i.id)"
-                      class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
-                    >
-                      <i class="fa-solid fa-minus" style="color: #575757"></i>
-                    </div>
-                    <h1 class="text-[28px] font-[400] mx-3 text-[#697B92]">
-                      {{ i.quantity }}
-                    </h1>
-                    <div
-                      @click="increase_quantity(index, i.id)"
-                      class="w-[52px] h-[40px] bg-[#EBEFF3] rounded justify-center flex items-center cursor-pointer"
-                    >
-                      <i class="fa-solid fa-plus" style="color: #5c5c5c"></i>
-                    </div>
-                  </div>
+                <div class="flex items-center">
+                  <i
+                    v-bind:class="{ 'pointer-events-none': i.count === 1 }"
+                    @click="decrease_quantity(index, i.id)"
+                    class="fa-solid fa-minus cursor-pointer w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md hover:text-black"
+                  ></i>
+                  <h1 class="text-[24px] text-black w-[60px] text-center">
+                    {{ i.quantity }}
+                  </h1>
+                  <i
+                    @click="increase_quantity(index, i.id)"
+                    class="fa-solid fa-plus w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] cursor-pointer text-center py-[6%] rounded-md hover:text-black"
+                  ></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="w-[365px] h-[350px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
+          class="w-[365px] h-[330px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
         >
-          <div class="flex flex-col w-[300px] h-[290px] gap-5">
+          <div class="flex flex-col w-[300px] h-[300px] gap-5 justify-center">
             <h1 class="text-[18px] font-bold text-center text-black">
-              Sizning haridingiz
+              Sizning buyurtmalaringiz
             </h1>
 
-            <div class="flex justify-between items-center mt-[15%]">
+            <div class="flex justify-between items-start">
               <h1 class="text-[14px]">Yetkazib berish</h1>
               <p class="font-bold text-[18px] text-black">Bepul</p>
             </div>
             <div class="flex justify-between items-center">
               <h1 class="text-[14px]">Jammi summa:</h1>
               <p class="font-bold text-[20px] text-black">
-                {{ calculateAllSumm() }} uzs
+                {{ parseFormattedNumber(calculateAllSumm()) }} uzs
               </p>
             </div>
             <button
@@ -150,9 +137,14 @@ function getCookie(name: string) {
 
   return "";
 }
+const parseFormattedNumber = (number: any) => {
+  let numberString = number.toString();
+  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return numberString;
+};
 
 onMounted(async () => {
-  await store.getClientBaskets(1); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
+  await store.getClientBaskets(+getCookie("clientId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
   await store1.getProducts();
 });
 </script>

@@ -221,7 +221,10 @@ let basketNumber = ref();
 let clientFav = ref();
 const otish = async(id: any) => {
   await router.push(`/products/${id}`);
-  location.reload()
+  setTimeout(() => {
+    
+    location.reload()
+  }, 200);
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));

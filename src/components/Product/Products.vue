@@ -58,7 +58,6 @@
             v-for="(item, index) in store.filter_products"
             :data="item"
             :key="index"
-            :client_fav="storeFav.client_fav"
             :otish="otish"
           />
         </div>
