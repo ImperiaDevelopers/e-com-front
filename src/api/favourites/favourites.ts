@@ -2,7 +2,7 @@ import axiosClient from "../apiClient";
 
 interface FavouritiesApi {
   createFavourities(params?: any): Promise<any>;
-  getFavourities(params?: { page?: number; limit?: number }): Promise<any>;
+  getClientFavourities(payload): Promise<any>;
   getFavouritiesId(id: string): Promise<any>;
   updateFavourities(payload: any, id: string): Promise<any>;
   deleteFavourities(id: string): Promise<any>;
@@ -10,11 +10,11 @@ interface FavouritiesApi {
 
 const favouritiesApi: FavouritiesApi = {
   createFavourities(params) {
-    const url = `favourities`;
+    const url = `favourities/add`;
     return axiosClient.post(url, params);
   },
-  getFavourities(params) {
-    const url = `favourities/q?page=${params?.page}&limit=${params?.limit}`;
+  getClientFavourities(payload) {
+    const url = `favourities/clientliked/${payload.client_id}`;
     return axiosClient.get(url);
   },
   getFavouritiesId(id) {

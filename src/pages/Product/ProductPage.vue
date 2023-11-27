@@ -24,6 +24,7 @@ const params = {
   last_page: null,
   count: null,
 };
+
 onMounted(() => {
   store.getProducts();
 });

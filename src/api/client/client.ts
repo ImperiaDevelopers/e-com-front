@@ -5,9 +5,14 @@ interface ClientApi {
   verifyClient(verify?: any): Promise<any>;
   updateClient(payload: any, id: string): Promise<any>;
   deleteClient(id: string): Promise<any>;
+  createClient(payload: any): Promise<any>;
 }
 
 const clientApi: ClientApi = {
+  createClient(payload) {
+    const url = `client/create_client`;
+    return axiosClient.post(url, payload);
+  },
   otpClient(otp) {
     const url = `client/send-otp`;
     return axiosClient.post(url, otp);

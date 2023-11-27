@@ -97,6 +97,14 @@
               </div>
             </div>
           </div>
+          <Card
+            v-for="(item, index) in store.filter_products"
+            :data="item"
+            :key="index"
+            :favourities="favourities"
+            :heart="heart"
+            :otish="otish"
+          />
         </div>
         <el-pagination
           v-if="store.filter_products.length"
@@ -116,9 +124,14 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
-import { useRouter } from "vue-router";
 import Notification from "../../plugins/Notification";
+import { useRouter, useRoute } from "vue-router";
+import { useBasketStore } from "../../stores/basket/basket";
+import { useFavouritesStore } from "../../stores/favourites/favourites";
+import Card from "./Card.vue";
+
 const router = useRouter();
+const route = useRoute();
 
 const value = ref([200000, 18000000]);
 const addProductToCard = async (item: any) => {
@@ -131,11 +144,15 @@ const addProductToCard = async (item: any) => {
   await store.addProductToCard(payload);
   Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
 };
+const brend = ref();
+
 const otish = (id: any) => {
   router.push(`/product/${id}`);
 };
 
 const store = useProductStore();
+const storeBasket = useBasketStore();
+const storeFav = useFavouritesStore();
 const filter = ref([
   {
     name: "Brendi",
@@ -186,6 +203,7 @@ const filter = ref([
     ],
   },
 ]);
+
 const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
 
 onMounted(() => {

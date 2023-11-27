@@ -4,6 +4,7 @@ import productApi from "../../api/products/product";
 interface ProductState {
   products: any[];
   images: any[];
+  allImages: any[];
   filter_products: any[];
   pro_per_group: any[];
   performanse: any[];
@@ -16,6 +17,7 @@ export const useProductStore = defineStore({
   state: (): ProductState => ({
     products: [],
     images: [],
+    allImages: [],
     filter_products: [],
     pro_per_group: [],
     performanse: [],
