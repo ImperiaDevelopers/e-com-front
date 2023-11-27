@@ -203,11 +203,25 @@ const filter = ref([
   },
 ]);
 
-const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
+const payload = ref({
+  price: {
+    from: 0,
+    to: 10000000000000000000000000000000,
+  },
+  category: Number(route.params.id),
+  attributes: [],
+});
 
 onMounted(() => {
   watch(value, (value) => {
-    payload.value = { from: value[0], to: value[1] };
+    payload.value = {
+      price: {
+        from: value[0],
+        to: value[1],
+      },
+      category: Number(route.params.id),
+      attributes: [],
+    };
     store.getFilter(payload.value);
   });
   store.getFilter(payload.value);
@@ -230,6 +244,7 @@ function getCookie(name: string) {
 }
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
+  console.log(store.filter_products)
 });
 </script>
 

@@ -7,7 +7,7 @@
       <div class="w-[180px]">
         <img
           class="m-auto object-cover"
-          :src="props.data.image[props.data.image.length - 1]?.image"
+          :src="props.data.image[0]?.image"
           alt="Slide Image"
         />
       </div>
