@@ -7,10 +7,31 @@ import feedback from "./feedback";
 import like from "./like";
 import payment from "./payment";
 import aboutAshyo from "./aboutAshyo";
+import login from "./login";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [main, basket, compare, feedback, like, product,payment,aboutAshyo],
+  routes: [
+    main,
+    basket,
+    compare,
+    feedback,
+    like,
+    login,
+    product,
+    payment,
+    aboutAshyo,
+    {
+      path: "/otp-",
+      name: "otp",
+      component: () => import("../pages/LogIn/OtpPage.Vue"),
+    },
+    {
+      path: "/map",
+      name: "map",
+      component: () => import("../components/Map/Map.vue"),
+    },
+  ],
 });
 
 export default router;

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <ol-map
     :loadTilesWhileAnimating="true"
     :loadTilesWhileInteracting="true"
@@ -53,4 +53,47 @@ const geoLocChange = (event: ObjectEvent) => {
   position.value = event.target.getPosition();
   view.value?.setCenter(event.target?.getPosition());
 };
+</script> -->
+<template>
+  <div>
+    <div class="map-title"></div>
+    <div id="map" style="height: 400px; width: 100%"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "MapView",
+  props: {
+    latitude: { type: Number, default: 0 },
+    longitude: { type: Number, default: 0 },
+  },
+  mounted() {
+    this.initMap();
+  },
+  methods: {
+    initMap() {
+      const myLatLng = { lat: this.latitude, lng: this.longitude };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: myLatLng,
+        zoom: 20,
+      });
+
+      new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: "Hello World!",
+      });
+    },
+  },
+};
 </script>
+
+<style>
+.map-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+</style>

@@ -12,7 +12,7 @@
         <div class="others flex gap-5">
           <router-link to="/about">About us</router-link>
           <router-link to="/products">Products</router-link>
-          <router-link to="feedback">Contacts</router-link>
+          <router-link to="/feedback">Contacts</router-link>
         </div>
       </div>
       <div class="second flex gap-8">
@@ -109,7 +109,8 @@
               <i
                 class="fa-regular fa-heart p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
               ></i>
-              <p v-if="0"
+              <p
+                v-if="0"
                 class="count font['Roboto'] text-[10px] w-[20px] h-[20px] flex justify-center items-center bg-red-500 text-white rounded-full"
               >
                 11
@@ -130,11 +131,12 @@
               </p>
             </div></router-link
           >
-          <div class="h-[35px]">
-            <i
-              class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
-            ></i>
-          </div>
+          <router-link to="/login">
+            <div class="h-[35px]">
+              <i
+                class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
+              ></i></div
+          ></router-link>
         </div>
       </div>
       <div class="w-[1180px] flex justify-between">

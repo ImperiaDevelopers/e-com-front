@@ -25,7 +25,7 @@
 
       <div class="flex flex-row gap-[20px]">
         <div>
-          <h1>Ism</h1>
+          <h1 class="pl-4">Ism</h1>
           <input
             type="text"
             class="w-[330px] h-[56px] rounded-md bg-[#EBEFF3] outline-none p-4"
@@ -33,7 +33,7 @@
         </div>
 
         <div>
-          <h1>Familya</h1>
+          <h1 class="pl-4">Familya</h1>
           <input
             type="text"
             class="w-[330px] h-[56px] rounded-md bg-[#EBEFF3] outline-none p-4"

@@ -71,13 +71,9 @@
             <h1 class="text-[24px] font-bold">12 568 000 usz</h1>
           </div>
           <div
-            class="flex justify-center bg-[#134E9B] rounded-md w-3/5 h-1/5 mt-10 outline-none"
+            class="flex justify-center bg-[#134E9B] rounded-md cursor-pointer hover:bg-[#0c56b6ec] w-3/5 h-1/5 mt-10 outline-none"
           >
-            <button
-              class="text-white p-[10px] text-[17px] ps-5 pe-5 font-['Roboto']"
-            >
-              Hoziroq sotib olish
-            </button>
+            <button class="text-white text-[17px]">Hoziroq sotib olish</button>
           </div>
         </div>
       </div>
