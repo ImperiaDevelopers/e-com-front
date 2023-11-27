@@ -54,48 +54,14 @@
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <div v-for="(item, index) in store.filter_products" :key="index">
-            <div class="flex-col relative">
-              <div
-                class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
-                @click="otish(item.id)"
-              >
-                <div class="w-[180px]">
-                  <img
-                    class="m-auto object-cover"
-                    :src="item.image[item.image.length - 1]?.image"
-                    alt="Slide Image"
-                  />
-                </div>
-              </div>
-              <button class="absolute top-[20px] left-[235px]">
-                <i
-                  class="fa-regular fa-heart text-[#545D6A] hover:text-[black]"
-                ></i>
-              </button>
-              <div class="flex-col w-[273px]">
-                <div class="h-[56px]">
-                  <h4 class="text-start mt-2 text-[14px]">{{ item.name }}</h4>
-                </div>
-                <div class="flex justify-between">
-                  <p class="text-[20px] font-[700] text-start mt-[28px]">
-                    {{ parseFormattedNumber(item.price) }} uzs
-                  </p>
-
-                  <div class="flex gap-2">
-                    <i
-                      class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#dde2e6]"
-                    >
-                    </i>
-                    <i
-                      class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
-                    >
-                    </i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Card
+            v-for="(item, index) in store.filter_products"
+            :data="item"
+            :key="index"
+            :favourities="favourities"
+            :heart="heart"
+            :otish="otish"
+          />
         </div>
         <el-pagination
           v-if="store.filter_products.length"
@@ -115,17 +81,25 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { useBasketStore } from "../../stores/basket/basket";
+import { useFavouritesStore } from "../../stores/favourites/favourites";
+import Card from "./Card.vue";
+
 const router = useRouter();
+const route = useRoute();
 
 const value = ref([200000, 18000000]);
 const brend = ref();
+
 
 const otish = (id: any) => {
   router.push(`/product/${id}`);
 };
 
 const store = useProductStore();
+const storeBasket = useBasketStore();
+const storeFav = useFavouritesStore();
 const filter = ref([
   {
     name: "Brendi",
@@ -176,12 +150,8 @@ const filter = ref([
     ],
   },
 ]);
+
 const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
-const parseFormattedNumber = (number: any) => {
-  let numberString = number.toString();
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return numberString;
-};
 
 onMounted(() => {
   watch(value, (value) => {

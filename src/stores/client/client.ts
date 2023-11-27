@@ -14,7 +14,14 @@ export const useClientStore = defineStore({
     async otpClient(payload: any) {
       try {
         const res = await clientApi.otpClient(payload);
-        this.client = res.client;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async createClient(payload: any) {
+      try {
+        const res = await clientApi.createClient(payload);
+        this.client = res;
       } catch (err) {
         console.error(err);
       }
@@ -23,7 +30,6 @@ export const useClientStore = defineStore({
     async verifyClient(params: any) {
       try {
         const res = await clientApi.verifyClient(params);
-        this.client = res;
       } catch (err) {
         console.error(err);
       }

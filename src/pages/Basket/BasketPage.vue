@@ -111,8 +111,24 @@ const deleteProduct = (index: number) => {
   store.baskets.splice(index, 1);
 };
 
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return cookieValue;
+    }
+  }
+
+  return '';
+}
+
 onMounted(async () => {
-  await store.getClientBaskets(1); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
+  await store.getClientBaskets(+getCookie('clinetId')); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
 });
 </script>
 
