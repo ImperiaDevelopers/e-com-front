@@ -27,7 +27,7 @@ export const useFavouritesStore = defineStore({
       try {
         const res = await favouritesApi.getClientFavourities(payload); // Corrected method name
         this.client_fav = res;
-         return res;
+        return res;
       } catch (err) {
         console.error(err);
       }

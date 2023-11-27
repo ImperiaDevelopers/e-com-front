@@ -101,8 +101,7 @@
             v-for="(item, index) in store.filter_products"
             :data="item"
             :key="index"
-            :favourities="favourities"
-            :heart="heart"
+            :client_fav="storeFav.client_fav"
             :otish="otish"
           />
         </div>
@@ -212,6 +211,25 @@ onMounted(() => {
     store.getFilter(payload.value);
   });
   store.getFilter(payload.value);
+});
+const clientId = getCookie("clientId");
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return Number(cookieValue);
+    }
+  }
+
+  return null;
+}
+onMounted(async () => {
+  await storeFav.getClientFavourites({ client_id: clientId });
 });
 </script>
 
