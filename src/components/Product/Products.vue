@@ -54,49 +54,6 @@
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <div v-for="(item, index) in store.filter_products" :key="index">
-            <div class="flex-col relative">
-              <div
-                class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
-                @click="otish(item.id)"
-              >
-                <div class="w-[180px] img-ust">
-                  <img
-                    class="m-auto object-cover"
-                    :src="item.image[item.image.length - 1]?.image"
-                    alt="Slide Image"
-                  />
-                </div>
-              </div>
-              <button class="absolute top-[20px] left-[235px]">
-                <i
-                  class="fa-regular fa-heart text-[#545D6A] hover:text-[black]"
-                ></i>
-              </button>
-              <div class="flex-col w-[273px]">
-                <div class="h-[56px]">
-                  <h4 class="text-start mt-2 text-[14px]">{{ item.name }}</h4>
-                </div>
-                <div class="flex justify-between">
-                  <p class="text-[20px] font-[700] text-start mt-[28px]">
-                    {{ item.price }}
-                  </p>
-
-                  <div class="flex gap-2">
-                    <i
-                      class="fa-solid fa-scale-unbalanced-flip p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer mt-5 hover:bg-[#dde2e6]"
-                    >
-                    </i>
-                    <i
-                      @click="addProductToCard(item)"
-                      class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
-                    >
-                    </i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <Card
             v-for="(item, index) in store.filter_products"
             :data="item"
@@ -123,7 +80,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useProductStore } from "../../stores/products/product";
-import Notification from "../../plugins/Notification";
 import { useRouter, useRoute } from "vue-router";
 import { useBasketStore } from "../../stores/basket/basket";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
@@ -133,16 +89,6 @@ const router = useRouter();
 const route = useRoute();
 
 const value = ref([200000, 18000000]);
-const addProductToCard = async (item: any) => {
-  const payload = {
-    product_id: item.id,
-    client_id: 1,
-    price: item.price,
-    quantity: 1,
-  };
-  await store.addProductToCard(payload);
-  Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
-};
 const brend = ref();
 
 const otish = (id: any) => {
@@ -244,7 +190,7 @@ function getCookie(name: string) {
 }
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
-  console.log(store.filter_products)
+  console.log(store.filter_products);
 });
 </script>
 
@@ -304,11 +250,5 @@ span {
   display: inline-block;
   margin-top: 10px;
   font-size: 1.2em;
-}
-
-.img-ust:hover {
-  cursor: pointer;
-  scale: 1.05;
-  transition: all 0.4s;
 }
 </style>

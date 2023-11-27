@@ -40,6 +40,7 @@
           >
           </i>
           <i
+            @click="addProductToCard(props.data)"
             class="fa-solid fa-cart-shopping p-3 bg-[#134E9B] text-white rounded-md cursor-pointer mt-5 hover:bg-[#0c56b6ec]"
           >
           </i>
@@ -52,6 +53,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
+import { useProductStore } from "../../stores/products/product";
+import Notification from "../../plugins/Notification";
+
+const store = useProductStore();
 
 const props = defineProps({
   otish: Function,
@@ -95,6 +100,17 @@ const favourities = async (id: any) => {
     heart.value = true;
     storeFav.deleteFavourites(data.value.id);
   }
+};
+
+const addProductToCard = async (item: any) => {
+  const payload = {
+    product_id: item.id,
+    client_id: 1,
+    price: item.price,
+    quantity: 1,
+  };
+  await store.addProductToCard(payload);
+  Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
 };
 </script>
 
