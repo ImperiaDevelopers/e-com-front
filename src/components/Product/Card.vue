@@ -50,12 +50,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
 
 const props = defineProps({
   otish: Function,
-
+  client_fav: Array,
   data: Object,
   heart: Boolean,
 });
@@ -83,14 +83,14 @@ function getCookie(name: string) {
 
   return null;
 }
-const favourities = async(id: any) => {
+const favourities = async (id: any) => {
   if (heart.value === true) {
     heart.value = false;
     data.value = await storeFav.createFavourites({
       client_id: clientId,
       product_id: id,
     });
-    console.log(data.value)
+    console.log(data.value);
   } else {
     heart.value = true;
     storeFav.deleteFavourites(data.value.id);

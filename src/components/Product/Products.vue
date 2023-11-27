@@ -58,8 +58,7 @@
             v-for="(item, index) in store.filter_products"
             :data="item"
             :key="index"
-            :favourities="favourities"
-            :heart="heart"
+            :client_fav="storeFav.client_fav"
             :otish="otish"
           />
         </div>
@@ -91,7 +90,6 @@ const route = useRoute();
 
 const value = ref([200000, 18000000]);
 const brend = ref();
-
 
 const otish = (id: any) => {
   router.push(`/product/${id}`);
@@ -159,6 +157,25 @@ onMounted(() => {
     store.getFilter(payload.value);
   });
   store.getFilter(payload.value);
+});
+const clientId = getCookie("clientId");
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return Number(cookieValue);
+    }
+  }
+
+  return null;
+}
+onMounted(async () => {
+  await storeFav.getClientFavourites({ client_id: clientId });
 });
 </script>
 
