@@ -58,9 +58,6 @@
             v-for="(item, index) in store.filter_products"
             :data="item"
             :key="index"
-            :favourities="favourities"
-            :heart="heart"
-            :otish="otish"
           />
         </div>
         <el-pagination
@@ -91,11 +88,6 @@ const route = useRoute();
 
 const value = ref([200000, 18000000]);
 const brend = ref();
-
-
-const otish = (id: any) => {
-  router.push(`/product/${id}`);
-};
 
 const store = useProductStore();
 const storeBasket = useBasketStore();
@@ -151,14 +143,48 @@ const filter = ref([
   },
 ]);
 
-const payload = ref({ from: 0, to: 10000000000000000000000000000000 });
+const payload = ref({
+  price: {
+    from: 0,
+    to: 10000000000000000000000000000000,
+  },
+  category: Number(route.params.id),
+  attributes: [],
+});
 
 onMounted(() => {
   watch(value, (value) => {
-    payload.value = { from: value[0], to: value[1] };
+    payload.value = {
+      price: {
+        from: value[0],
+        to: value[1],
+      },
+      category: Number(route.params.id),
+      attributes: [],
+    };
     store.getFilter(payload.value);
   });
   store.getFilter(payload.value);
+});
+const clientId = getCookie("clientId");
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return Number(cookieValue);
+    }
+  }
+
+  return null;
+}
+onMounted(async () => {
+  await storeFav.getClientFavourites({ client_id: clientId });
+  console.log(store.filter_products);
 });
 </script>
 

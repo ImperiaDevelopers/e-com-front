@@ -166,13 +166,13 @@
         </div>
       </div>
       <div class="w-[1180px] flex justify-between">
-        <a
+        <h1
           href="#"
           v-for="(item, index) in store.categories"
           :key="index"
-          class="text-[#535c6a] font-['Roboto'] hover:text-[#272727] cat"
+          class="text-[#535c6a] font-['Roboto'] hover:text-[#272727] cursor-pointer cat"
           @click="otish(item.id)"
-          >{{ item.category_name }}</a
+          >{{ item.category_name }}</h1
         >
       </div>
     </div>
@@ -220,15 +220,18 @@ const change = () => {
 };
 let basketNumber = ref();
 let clientFav = ref();
-const otish = (id: any) => {
-  router.push(`/products/${id}`);
+const otish = async (id: any) => {
+  await router.push(`/products/${id}`);
+  location.reload();
+//   setTimeout(() => {
+//   }, 1000);
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));
   clientFav.value = await store2.getClientFavourites({
     client_id: +getCookie("clientId"),
   });
-  store.getCategories();
+  await store.getCategories();
 });
 </script>
 

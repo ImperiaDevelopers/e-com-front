@@ -3,64 +3,63 @@
   <div class="flex justify-center w-screen">
     <div class="w-[1180px] justify-center">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Savat</h1>
-      <div class="flex gap-8 mb-40 justify-between">
-        <div class="grid gap-12">
-          <div class="grid gap-8 justify-between text-[#00000099]">
+      <div class="flex justify-between mb-[20%]">
+        <div class="grid gap-8 w-[800px] mb-40">
+          <div
+            class="flex h-[170px]"
+            v-for="(i, index) in store.baskets"
+            :key="index"
+            style="gap: 31px"
+          >
             <div
-              class="flex h-[170px]"
-              v-for="(i, index) in store.baskets"
-              :key="index"
-              style="gap: 31px"
+              class="w-[200px] h-[170px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
             >
-              <div
-                class="w-[200px] h-[170px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
-              >
-                <img class="w-[120px]" :src="i.product.image[0].image" alt="" />
+              <img class="w-[120px]" :src="i.product.image[0].image" alt="" />
+            </div>
+            <div class="flex-col w-[560px] h-[170px] flex justify-around">
+              <div class="flex items-start justify-between">
+                <h1 class="text-xl w-[288px]">{{ i.product?.name }}</h1>
+                <h1 class="text-[24px] text-black">
+                  {{ parseFormattedNumber(i.product?.price) }} uzs
+                </h1>
               </div>
-              <div class="flex-col w-[560px] h-[170px] flex justify-around">
-                <div class="flex items-start justify-between">
-                  <h1 class="text-xl w-[288px]">{{ i.product.name }}</h1>
-                  <h1 class="text-[24px] text-black">
-                    {{ parseFormattedNumber(i.product.price) }} uzs
-                  </h1>
+              <div class="flex justify-between">
+                <div class="flex gap-5">
+                  <i
+                    class="fa-regular fa-heart w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
+                  ></i>
+                  <i
+                    @click="deleteProduct(index, i.id)"
+                    class="fa-regular fa-trash-can w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
+                  ></i>
                 </div>
-                <div class="flex justify-between">
-                  <div class="flex gap-5">
-                    <i
-                      class="fa-regular fa-heart w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
-                    ></i>
-                    <i
-                      class="fa-regular fa-trash-can w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
-                    ></i>
-                  </div>
-                  <div class="flex items-center">
-                    <i
-                      @click="i.quantity = i.quantity + 1"
-                      class="fa-solid fa-plus w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] cursor-pointer text-center py-[6%] rounded-md hover:text-black"
-                    ></i>
-                    <h1 class="text-[24px] text-black w-[60px] text-center">
-                      {{ i.quantity }}
-                    </h1>
-                    <i
-                      v-bind:class="{ 'pointer-events-none': i.quantity === 1 }"
-                      @click="i.quantity = i.quantity - 1"
-                      class="fa-solid fa-minus cursor-pointer w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md hover:text-black"
-                    ></i>
-                  </div>
+                <div class="flex items-center">
+                  <i
+                    v-bind:class="{ 'pointer-events-none': i.count === 1 }"
+                    @click="decrease_quantity(index, i.id)"
+                    class="fa-solid fa-minus cursor-pointer w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md hover:text-black"
+                  ></i>
+                  <h1 class="text-[24px] text-black w-[60px] text-center">
+                    {{ i.quantity }}
+                  </h1>
+                  <i
+                    @click="increase_quantity(index, i.id)"
+                    class="fa-solid fa-plus w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] cursor-pointer text-center py-[6%] rounded-md hover:text-black"
+                  ></i>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="w-[365px] h-[350px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
+          class="w-[365px] h-[330px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
         >
-          <div class="flex flex-col w-[300px] h-[290px] gap-5">
+          <div class="flex flex-col w-[300px] h-[300px] gap-5 justify-center">
             <h1 class="text-[18px] font-bold text-center text-black">
-              Sizning haridingiz
+              Sizning buyurtmalaringiz
             </h1>
 
-            <div class="flex justify-between items-center mt-[15%]">
+            <div class="flex justify-between items-start">
               <h1 class="text-[14px]">Yetkazib berish</h1>
               <p class="font-bold text-[18px] text-black">Bepul</p>
             </div>
@@ -80,18 +79,24 @@
       </div>
     </div>
   </div>
-  <ProdCarousel />
+  <Products :imgs="store1.products" />
   <Footer />
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import Header from "../../components/Header/Header.vue";
-import ProdCarousel from "../../components/Carousel/ProdCarousel.vue";
+import Products from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/Footer/Footer.vue";
 import { useBasketStore } from "../../stores/basket/basket";
+<<<<<<< HEAD
 import { ca } from "element-plus/es/locale/index.mjs";
 import Loading from "../../components/Loader/Loading.vue";
+=======
+import { useProductStore } from "../../stores/products/product";
+import Notification from "../../plugins/Notification";
+const store1 = useProductStore();
+>>>>>>> a5971e563457764dfd0c4ed5e0e1bd21d2c49f3e
 const store = useBasketStore();
 
 const calculateAllSumm = () => {
@@ -102,14 +107,25 @@ const calculateAllSumm = () => {
   return sum.value;
 };
 
-const parseFormattedNumber = (number: any) => {
-  let numberString = number.toString();
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return numberString;
+const increase_quantity = async (index: number, id: number) => {
+  store.baskets[index].quantity += 1;
+  const payload = {
+    quantity: store.baskets[index].quantity,
+  };
+  await store.updateClientCard(id, payload);
 };
 
-const deleteProduct = (index: number) => {
+const decrease_quantity = async (index: number, id: number) => {
+  if (store.baskets[index].quantity > 1) store.baskets[index].quantity -= 1;
+  const payload = {
+    quantity: store.baskets[index].quantity,
+  };
+  await store.updateClientCard(id, payload);
+};
+
+const deleteProduct = async (index: number, id: number) => {
   store.baskets.splice(index, 1);
+  await store.deleteClientCard(id);
 };
 
 function getCookie(name: string) {
@@ -126,9 +142,19 @@ function getCookie(name: string) {
 
   return "";
 }
+const parseFormattedNumber = (number: any) => {
+  let numberString = number.toString();
+  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return numberString;
+};
 
 onMounted(async () => {
+<<<<<<< HEAD
   await store.getClientBaskets(+getCookie("clinetId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
+=======
+  await store.getClientBaskets(+getCookie("clientId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
+  await store1.getProducts();
+>>>>>>> a5971e563457764dfd0c4ed5e0e1bd21d2c49f3e
 });
 </script>
 

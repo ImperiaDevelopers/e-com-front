@@ -32,7 +32,7 @@ export const useProductStore = defineStore({
         this.loading = true;
         const res = await productApi.getProduct(params);
         this.products = res;
-        params.last_page = Math.ceil(res.count / params.limit);
+        params.last_page = Math.ceil(res.count / params?.limit);
       } catch (err) {
         console.error(err);
       } finally {
@@ -52,24 +52,6 @@ export const useProductStore = defineStore({
         const res = await productApi.getImage(product_id);
         this.images = res;
         return res;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    async getAllImages() {
-      try {
-        const res = await productApi.getAllImages();
-        const uniqueProductIds = {};
-        const uniqueProducts = [];
-        for (const product of res) {
-          const productId = product.product_id;
-          if (!uniqueProductIds[productId]) {
-            uniqueProductIds[productId] = true;
-            uniqueProducts.push(product);
-          }
-        }
-        this.allImages = uniqueProducts;
-        return uniqueProducts;
       } catch (err) {
         console.error(err);
       }
@@ -144,6 +126,13 @@ export const useProductStore = defineStore({
         await productApi.getProInfoID(infoId);
       } catch (err) {
         console.error(err);
+      }
+    },
+    async addProductToCard(payload: any) {
+      try {
+        await productApi.addProductToUserCard(payload);
+      } catch (err) {
+        console.log(err);
       }
     },
   },

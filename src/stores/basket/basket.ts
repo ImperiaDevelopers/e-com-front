@@ -31,6 +31,34 @@ export const useBasketStore = defineStore({
         console.error(err);
       }
     },
+    async getClientLikes(client_id: number) {
+      try {
+        return await basketApi.getClientLikes(client_id);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async addProductToBasket(payload: any) {
+      try {
+        await basketApi.addProductToBasket(payload);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async updateClientCard(id: number, payload: any) {
+      try {
+        await basketApi.updateClientCard(id, payload);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async deleteClientCard(id: number) {
+      try {
+        await basketApi.deleteClientCard(id);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 });
 

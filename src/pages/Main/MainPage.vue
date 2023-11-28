@@ -62,7 +62,7 @@ onMounted(() => {
         userLocation.value = { latitude, longitude };
         getCityFromCoordinates(latitude, longitude);
 
-        console.log("User Location:", userLocation.value);
+        // console.log("User Location:", userLocation.value);
       },
       (error) => {
         console.error("Error getting user location:", error.message);
@@ -99,7 +99,7 @@ const getUniqueUserId = async () => {
   if (!userId) {
     userId = generateUniqueId();
     await store.createClient({ first_name: `${userId}` });
-    console.log(store.client);
+    // console.log(store.client);
     setCookie("clientId", store.client.id, 365);
     setCookie("userId", userId, 365);
   }

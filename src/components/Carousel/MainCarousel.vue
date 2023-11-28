@@ -82,6 +82,12 @@ const imgs = ref([
     content: "src/assets/images/product-imgs/Remove-bg.ai_1700110541839.png",
     bgColor: "#D9CBCA",
   },
+  {
+    text: "Samsung Galaxy Z Fold4",
+    desc: "Galaxy Z Fold: Yuqori tekislikli jamlanadigan, keng ekranli, tez ishlovchi qurilmadir, moddiy dizayn.",
+    content: "src/assets/images/product-imgs/Remove-bg.ai_1700110541839.png",
+    bgColor: "#D9CBCA",
+  },
 ]);
 </script>
 <style>
