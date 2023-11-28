@@ -120,6 +120,7 @@ const favourities = async (id: any) => {
     storeFav.deleteFavourites(storedId);
     localStorage.setItem(localStorageKey, JSON.stringify(true));
   }
+  location.reload()
 };
 
 const addProductToCard = async (item: any) => {
