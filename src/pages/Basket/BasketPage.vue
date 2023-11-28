@@ -89,14 +89,9 @@ import Header from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/Footer/Footer.vue";
 import { useBasketStore } from "../../stores/basket/basket";
-<<<<<<< HEAD
-import { ca } from "element-plus/es/locale/index.mjs";
-import Loading from "../../components/Loader/Loading.vue";
-=======
 import { useProductStore } from "../../stores/products/product";
 import Notification from "../../plugins/Notification";
 const store1 = useProductStore();
->>>>>>> a5971e563457764dfd0c4ed5e0e1bd21d2c49f3e
 const store = useBasketStore();
 
 const calculateAllSumm = () => {
@@ -149,12 +144,8 @@ const parseFormattedNumber = (number: any) => {
 };
 
 onMounted(async () => {
-<<<<<<< HEAD
-  await store.getClientBaskets(+getCookie("clinetId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
-=======
   await store.getClientBaskets(+getCookie("clientId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
   await store1.getProducts();
->>>>>>> a5971e563457764dfd0c4ed5e0e1bd21d2c49f3e
 });
 </script>
 
