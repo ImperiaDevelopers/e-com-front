@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { computed, ref } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
@@ -82,18 +82,14 @@ const imgs = ref([
     content: "src/assets/images/product-imgs/Remove-bg.ai_1700110541839.png",
     bgColor: "#D9CBCA",
   },
-  
-
-
 ]);
 </script>
 <style>
-.carousel__pagination{
+.carousel__pagination {
   display: flex;
   align-items: center;
-
 }
-.carousel__pagination-button::after{
+.carousel__pagination-button::after {
   width: 18px;
   height: 18px;
   background-color: white;
@@ -107,12 +103,9 @@ const imgs = ref([
   border-radius: 50%;
   position: relative;
 }
-.carousel__pagination-button:hover::after{
-    background-color: #95bef3;
+.carousel__pagination-button:hover::after {
+  background-color: #95bef3;
   border-radius: 50%;
   color: #e6e6e6;
-
 }
-
-
 </style>

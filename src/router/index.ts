@@ -29,7 +29,7 @@ const router = createRouter({
     {
       path: "/map",
       name: "map",
-      component: () => import("../components/Map/Map.vue"),
+      component: () => import("../components/Loader/Loading.vue"),
     },
   ],
 });

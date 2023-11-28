@@ -8,8 +8,9 @@
           <p v-if="error" class="error-message">{{ error }}</p>
           <br />
           <input type="text" placeholder="+998-91-234-56-78" v-model="phone" />
-          <button type="submit" id="login-button">Login</button>
-          <a href="/otp-">31231</a>
+          <router-link to="/otp-">
+            <button type="submit" id="login-button">Login</button>
+          </router-link>
         </form>
       </div>
     </div>

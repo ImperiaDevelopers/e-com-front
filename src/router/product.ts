@@ -9,14 +9,14 @@ export default {
       component: () => import("../components/Product/SingleProduct.vue"),
       children: [
         {
-          path: "/product",
+          path: "/product/:id",
           name: "product",
           component: () => import("../components/Product/Performance.vue"),
         },
       ],
     },
     {
-      path: "/products",
+      path: "/products/:id",
       name: "products",
       component: () => import("../components/Product/Products.vue"),
     },

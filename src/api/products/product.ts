@@ -6,6 +6,7 @@ interface ProductApi {
   getProductId(id: string): Promise<any>;
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
+  getAllImages(): Promise<any>;
   getFilter(params?: any): Promise<any>;
   getProPerGroup(params?: any): Promise<any>;
   getProPerGroupId(id: string): Promise<any>;
@@ -38,6 +39,9 @@ const productApi: ProductApi = {
   getImage(product_id) {
     const url = `image/products/${product_id}`;
     return axiosClient.get(url);
+  },
+  getAllImages() {
+    const url = `image/all`;
   },
   // ---------- Pro Filter -------- //
   getFilter(params) {

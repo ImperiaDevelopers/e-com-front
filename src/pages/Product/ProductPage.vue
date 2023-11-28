@@ -1,5 +1,7 @@
 <template>
   <Header />
+  <!-- <Loading v-if="store.loading"></Loading> -->
+  <!-- <div v-else> -->
   <router-view></router-view>
   <div class="flex items-center justify-center mt-[4%]">
     <div class="w-[1180px]">
@@ -8,6 +10,7 @@
   </div>
   <Products :imgs="store.products" />
   <Footer />
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
@@ -16,6 +19,8 @@ import Header from "../../components/Header/Header.vue";
 import Products from "../../components/Carousel/ProdCarousel.vue";
 import { onMounted, ref } from "vue";
 import { useProductStore } from "../../stores/products/product";
+import Loading from "../../components/Loader/Loading.vue";
+
 const store = useProductStore();
 
 const params = {
@@ -24,8 +29,9 @@ const params = {
   last_page: null,
   count: null,
 };
+
 onMounted(() => {
-  store.getProducts();
+  store.getProducts(params);
 });
 </script>
 

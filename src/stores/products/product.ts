@@ -2,32 +2,41 @@ import { defineStore } from "pinia";
 import productApi from "../../api/products/product";
 
 interface ProductState {
+  loading: boolean;
   products: any[];
   images: any[];
+  allImages: any[];
   filter_products: any[];
   pro_per_group: any[];
   performanse: any[];
   per_info: any[];
+  product: any[];
 }
 
 export const useProductStore = defineStore({
   id: "product",
   state: (): ProductState => ({
     products: [],
+    loading: false,
     images: [],
+    allImages: [],
     filter_products: [],
     pro_per_group: [],
     performanse: [],
     per_info: [],
+    product: [],
   }),
   actions: {
     async getProducts(params: any) {
       try {
+        this.loading = true;
         const res = await productApi.getProduct(params);
         this.products = res;
         params.last_page = Math.ceil(res.count / params.limit);
       } catch (err) {
         console.error(err);
+      } finally {
+        this.loading = false;
       }
     },
     async getProductSearch(params: any) {
@@ -42,13 +51,33 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getImage(product_id);
         this.images = res;
+        return res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getAllImages() {
+      try {
+        const res = await productApi.getAllImages();
+        const uniqueProductIds = {};
+        const uniqueProducts = [];
+        for (const product of res) {
+          const productId = product.product_id;
+          if (!uniqueProductIds[productId]) {
+            uniqueProductIds[productId] = true;
+            uniqueProducts.push(product);
+          }
+        }
+        this.allImages = uniqueProducts;
+        return uniqueProducts;
       } catch (err) {
         console.error(err);
       }
     },
     async getProductId(productId: string) {
       try {
-        await productApi.getProductId(productId);
+        const res = await productApi.getProductId(productId);
+        this.product = res;
       } catch (err) {
         console.error(err);
       }
@@ -85,10 +114,14 @@ export const useProductStore = defineStore({
     },
     async getPerformance(params: any) {
       try {
+        this.loading = true;
+
         const res = await productApi.getPerfomance(params);
         this.performanse = res;
       } catch (err) {
         console.error(err);
+      } finally {
+        this.loading = false;
       }
     },
     async getPerformanceId(perforID: string) {

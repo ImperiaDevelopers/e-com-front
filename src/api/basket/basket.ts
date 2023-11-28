@@ -1,7 +1,24 @@
 import axiosClient from "../apiClient";
 
+interface BasketApi {
+  getClientBaskets(client_id: number): Promise<any>;
+  getBasketId(id: number): Promise<any>;
+}
+
+const basketApi: BasketApi = {
+  getClientBaskets(client_id) {
+    const url = `card/client/${client_id}`;
+    return axiosClient.get(url);
+  },
+  getBasketId(id) {
+    const url = `card/${id}`;
+    return axiosClient.get(url);
+  },
+};
+
 interface CategoryApi {
-  getClientCard(id: string): Promise<any>;
+  getCategoryId(id: number): Promise<any>;
+  getCategory(id: number): Promise<any>;
 }
 
 const categoryApi: CategoryApi = {
@@ -15,4 +32,4 @@ const categoryApi: CategoryApi = {
   },
 };
 
-export default categoryApi;
+export default basketApi;
