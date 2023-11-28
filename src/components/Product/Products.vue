@@ -58,7 +58,6 @@
             v-for="(item, index) in store.filter_products"
             :data="item"
             :key="index"
-            :otish="otish"
           />
         </div>
         <el-pagination
@@ -90,9 +89,7 @@ const route = useRoute();
 const value = ref([200000, 18000000]);
 const brend = ref();
 
-const otish = (id: any) => {
-  router.push(`/product/${id}`);
-};
+
 
 const store = useProductStore();
 const storeBasket = useBasketStore();
