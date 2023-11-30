@@ -51,11 +51,13 @@
 import { onMounted, ref } from "vue";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
 import { useProductStore } from "../../stores/products/product";
+import { useViewsStore } from "../../stores/last-views/views";
 import Notification from "../../plugins/Notification";
 import { useRouter } from "vue-router";
-const router=useRouter()
+const router = useRouter();
 
 const store = useProductStore();
+const storeView = useViewsStore();
 
 const props = defineProps({
   data: Object,
@@ -85,9 +87,10 @@ function getCookie(name: string) {
 
   return null;
 }
-const otish = async(id: any) => {
- await router.push(`/product/${id}`);
-  location.reload()
+const otish = async (id: any) => {
+  await storeView.addViews({ client_id: clientId, product_id: id });
+  await router.push(`/product/${id}`);
+  location.reload();
 };
 
 const heart = ref(true);
@@ -117,10 +120,10 @@ const favourities = async (id: any) => {
   } else {
     heart.value = true;
     const storedId = localStorage.getItem(localSK);
-    storeFav.deleteFavourites(storedId);
+    await storeFav.deleteFavourites(storedId);
     localStorage.setItem(localStorageKey, JSON.stringify(true));
   }
-  location.reload()
+  location.reload();
 };
 
 const addProductToCard = async (item: any) => {

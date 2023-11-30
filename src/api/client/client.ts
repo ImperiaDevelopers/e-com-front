@@ -19,7 +19,7 @@ const clientApi: ClientApi = {
   },
   verifyClient(verify) {
     const url = `client/verify-otp`;
-    return axiosClient.get(url, verify);
+    return axiosClient.post(url, verify);
   },
   updateClient(payload, id) {
     const url = `client/${id}`;

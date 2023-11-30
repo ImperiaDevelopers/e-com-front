@@ -2,7 +2,7 @@
   <div class="w-[100%] flex justify-center mt-[2%]">
     <div class="w-[1180px] flex gap-4">
       <div
-        class="w-[280px] h-[900px] bg-[#EBEFF3] flex flex-col items-center py-[15px] rounded-md"
+        class="w-[280px] h-[900px] bg-[#EBEFF3] flex flex-col items-center py-[18px] px-[18px] rounded-md"
       >
         <div class="w-[240px] flex flex-col gap-4">
           <h2 class="text-[16px] font-[500]">Narxi[so'm]</h2>
@@ -60,19 +60,23 @@
             :key="index"
           />
         </div>
-        <el-pagination
-          v-if="store.filter_products.length"
-          background
-          layout="prev, pager, next"
-          class="mt-[6%]"
-          :total="1000"
-          prev-text="Back"
-          next-text="Next"
-          style=":#134e9b "
-        />
       </div>
     </div>
   </div>
+  <div class="w-full mt-[10%] flex justify-center">
+
+  <el-pagination
+    v-if="store.filter_products.length"
+    background
+    layout="prev, pager, next"
+    class=" w-[1180px] flex  justify-center"
+    :total="1000"
+    prev-text="Back"
+    next-text="Next"
+    style=":#134e9b "
+  />
+  </div>
+
 </template>
 
 <script setup lang="ts">
@@ -88,8 +92,6 @@ const route = useRoute();
 
 const value = ref([200000, 18000000]);
 const brend = ref();
-
-
 
 const store = useProductStore();
 const storeBasket = useBasketStore();
@@ -186,7 +188,7 @@ function getCookie(name: string) {
 }
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
-  console.log(store.filter_products);
+  // console.log(store.filter_products);
 });
 </script>
 
