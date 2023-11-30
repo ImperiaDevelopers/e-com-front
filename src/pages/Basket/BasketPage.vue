@@ -24,27 +24,26 @@
                 </h1>
               </div>
               <div class="flex justify-between">
-                <div class="flex gap-5">
-                  <i
-                    class="fa-regular fa-heart w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
-                  ></i>
+                <div
+                  class="flex w-[50px] h-[40px] bg-[#EBEFF3] rounded-md cursor-pointer items-center justify-center"
+                >
                   <i
                     @click="deleteProduct(index, i.id)"
-                    class="fa-regular fa-trash-can w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md cursor-pointer hover:text-black"
+                    class="fa-regular fa-trash-can text-[24px] text-[#00000099] hover:text-black"
                   ></i>
                 </div>
                 <div class="flex items-center">
                   <i
                     v-bind:class="{ 'pointer-events-none': i.count === 1 }"
                     @click="decrease_quantity(index, i.id)"
-                    class="fa-solid fa-minus cursor-pointer w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-center py-[6%] rounded-md hover:text-black"
+                    class="fa-solid fa-minus cursor-pointer w-[50px] h-[40px] text-[24px] text-[#00000099] bg-[#EBEFF3] text-center py-[6%] rounded-md hover:text-black"
                   ></i>
                   <h1 class="text-[24px] text-black w-[60px] text-center">
                     {{ i.quantity }}
                   </h1>
                   <i
                     @click="increase_quantity(index, i.id)"
-                    class="fa-solid fa-plus w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] cursor-pointer text-center py-[6%] rounded-md hover:text-black"
+                    class="fa-solid fa-plus w-[50px] h-[40px] text-[24px] bg-[#EBEFF3] text-[#00000099] cursor-pointer text-center py-[6%] rounded-md hover:text-black"
                   ></i>
                 </div>
               </div>
