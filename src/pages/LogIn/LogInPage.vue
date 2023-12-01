@@ -68,6 +68,7 @@ const router = useRouter();
 const save = async () => {
   if (isValidPhoneNumber.value) {
     if (phoneNumber.value) {
+      
       await store.otpClient({ phone_number: `+998${phoneNumber.value}` });
       await router.push(`/otp/+998${phoneNumber.value}`);
     } else {

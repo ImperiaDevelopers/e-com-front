@@ -6,6 +6,7 @@ interface ClientApi {
   updateClient(payload: any, id: string): Promise<any>;
   deleteClient(id: string): Promise<any>;
   createClient(payload: any): Promise<any>;
+  getClientById(id: any): Promise<any>;
 }
 
 const clientApi: ClientApi = {
@@ -28,6 +29,10 @@ const clientApi: ClientApi = {
   deleteClient(id) {
     const url = `client/${id}`;
     return axiosClient.delete(url);
+  },
+  getClientById(id) {
+    const url = `client/${id}`;
+    return axiosClient.get(url);
   },
 };
 
