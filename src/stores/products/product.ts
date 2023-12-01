@@ -75,6 +75,7 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getFilter(payload);
         this.filter_products = res;
+        payload.last_page = Math.ceil(res.count / payload?.limit);
       } catch (err) {
         console.error(err);
       }

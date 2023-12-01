@@ -148,7 +148,7 @@ const filter = ref([
 const payload = ref({
   price: {
     from: 0,
-    to: 10000000000000000000000000000000,
+    to: 1000000000000000000000.00001,
   },
   category: Number(route.params.id),
   attributes: [],

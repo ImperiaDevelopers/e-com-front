@@ -27,6 +27,14 @@ export const useClientStore = defineStore({
         console.error(err);
       }
     },
+    async getClientById(id: any) {
+      try {
+        const res = await clientApi.getClientById(id);
+        return res.phone_number;
+      } catch (err) {
+        console.log(err);
+      }
+    },
 
     async verifyClient(params: any) {
       try {
@@ -36,6 +44,9 @@ export const useClientStore = defineStore({
           expires.setDate(expires.getDate() + days);
           document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`;
         }
+        const changeCookieValue = (name: string, newValue: string) => {
+          document.cookie = `${name}=${encodeURIComponent(newValue)};path=/`;
+        };
         function getCookie(name: string) {
           const cookieString = document.cookie;
           const cookies = cookieString.split("; ");
@@ -53,7 +64,16 @@ export const useClientStore = defineStore({
         if (!getCookie("refresh_token")) {
           setCookie("refresh_token", res.tokens.refresh_token, 365);
         }
-        console.log(res)
+        let old_id = getCookie("clientId");
+        changeCookieValue("userId", res.client.first_name);
+        changeCookieValue("clientId", res.client.id);
+        if (old_id == null) {
+          old_id = "";
+        }
+        if (!(await this.getClientById(old_id))) {
+          this.deleteClient(old_id);
+        }
+        console.log(res);
       } catch (err) {
         console.error(err);
       }

@@ -7,7 +7,7 @@ interface ProductApi {
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
   getAllImages(): Promise<any>;
-  getFilter(params?: any): Promise<any>;
+  getFilter(params?: { page?: number; limit?: number }): Promise<any>;
   getProPerGroup(params?: any): Promise<any>;
   getProPerGroupId(id: string): Promise<any>;
   getPerfomance(params?: any): Promise<any>;
@@ -48,7 +48,7 @@ const productApi: ProductApi = {
 
   // ---------- Pro Filter -------- //
   getFilter(params) {
-    const url = `product/filter/:q`;
+    const url = `product/filter/q?page=${params?.page}&limit=${params?.limit}`;
     return axiosClient.post(url, params);
   },
 
