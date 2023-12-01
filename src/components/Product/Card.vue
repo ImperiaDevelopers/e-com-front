@@ -4,7 +4,7 @@
       class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
       @click="otish(props?.data?.id)"
     >
-      <div class="w-[180px]">
+      <div class="w-[180px] cursor-pointer">
         <img
           class="m-auto object-cover"
           :src="props?.data?.image[0]?.image"

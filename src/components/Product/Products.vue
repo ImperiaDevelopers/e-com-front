@@ -64,19 +64,17 @@
     </div>
   </div>
   <div class="w-full mt-[10%] flex justify-center">
-
-  <el-pagination
-    v-if="store.filter_products.length"
-    background
-    layout="prev, pager, next"
-    class=" w-[1180px] flex  justify-center"
-    :total="1000"
-    prev-text="Back"
-    next-text="Next"
-    style=":#134e9b "
-  />
+    <el-pagination
+      v-if="store.filter_products.length"
+      background
+      layout="prev, pager, next"
+      class="w-[1180px] flex justify-center"
+      :total="1000"
+      prev-text="Back"
+      next-text="Next"
+      style=":#134e9b "
+    />
   </div>
-
 </template>
 
 <script setup lang="ts">

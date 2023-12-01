@@ -41,14 +41,17 @@ const productApi: ProductApi = {
     const url = `image/products/${product_id}`;
     return axiosClient.get(url);
   },
-  getAllImages() {
-    const url = `image/all`;
-  },
+
+  // getAllImages() {
+  //   const url = `image/all`;
+  // },
+
   // ---------- Pro Filter -------- //
   getFilter(params) {
-    const url = `product/filter`;
+    const url = `product/filter/:q`;
     return axiosClient.post(url, params);
   },
+
   // --------- Pro Per Group ----- //
   getProPerGroup(params) {
     const url = `pro_perfomance_group`;

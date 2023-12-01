@@ -53,6 +53,7 @@ export const useClientStore = defineStore({
         if (!getCookie("refresh_token")) {
           setCookie("refresh_token", res.tokens.refresh_token, 365);
         }
+        console.log(res)
       } catch (err) {
         console.error(err);
       }
