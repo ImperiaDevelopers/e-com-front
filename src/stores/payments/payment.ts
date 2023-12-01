@@ -16,7 +16,7 @@ export const usePaymentStore = defineStore({
     async getPayments(payload: any) {
       try {
         const res = await paymentApi.getPayment(payload);
-        this.payments = res;
+        this.payment = res;
         return res;
       } catch (err) {
         console.error(err);
