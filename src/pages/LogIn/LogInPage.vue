@@ -1,166 +1,93 @@
 <template>
-  <body>
-    <section>
-      <form @submit.prevent="login">
-        <h1>Login</h1>
-        <div class="inputbox">
+  <div
+    class="w-full h-[100vh] flex items-center justify-center bg-gradient-to-b from-white to-[#134E9B]"
+  >
+    <div
+      class="w-[650px] h-[500px] bg-white rounded-[2%] flex items-center justify-center flex-col gap-8 shadow-2xl"
+    >
+      <div class="text-center mb-5">
+        <h1 class="text-[35px] text-[#134E9B] pb-2 text">Welcome</h1>
+        <h6 class="text-[#585858]">
+          A verification code will be sent to your phone number
+        </h6>
+      </div>
+      <div class="flex flex-col h-[100px]">
+        <div class="flex gap-2">
+          <label
+            class="bg-[#fff] border-2 border-[#134E9B] py-[18px] text-[#134E9B] rounded-s-md px-[20px]"
+            >+998</label
+          >
           <input
-            type="text"
-            placeholder="+998-91-234-56-78"
+            name="phoneNumber"
+            :class="{ valid: isValidPhoneNumber, invalid: !isValidPhoneNumber }"
             v-model="phoneNumber"
+            type="text"
+            class="bg-[#fff] border-2 py-[18px] text-[#134E9B] tracking-[5px] px-[25px] rounded-e-md outline-none"
+            @keyup="validatePhoneNumber"
+            placeholder="901234567"
           />
-          <label for="">Phone number</label>
         </div>
-        <p v-if="error" style="color: red; text-align: center">{{ error }}</p>
-        <button type="submit" @click="login">Log in</button>
-      </form>
-    </section>
-  </body>
+        <div class="invalid-warning" v-if="!isValidPhoneNumber">
+          Invalid phone number!
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="bg-[#134E9B] py-[18px] tracking-widest text-white px-[120px] rounded-md"
+        id="login-button"
+        @click="save"
+        :disabled="!isValidPhoneNumber"
+      >
+        Login
+      </button>
+      <router-link to="/" class="text-[#134E9B] cursor-pointer"
+        >Go Home</router-link
+      >
+    </div>
+  </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useClientStore } from "../../stores/client/client";
+
+const store = useClientStore();
 
 const phoneNumber = ref("");
-const error = ref("");
+const isValidPhoneNumber = ref(true);
+
+const validatePhoneNumber = () => {
+  const validationRegex = /^\d{9}$/;
+  isValidPhoneNumber.value =
+    phoneNumber.value.length > 0 &&
+    phoneNumber.value.match(validationRegex) !== null;
+};
+
 const router = useRouter();
-
-const login = () => {
-  if (!phoneNumber.value) {
-    error.value = "Phone number is required!"; // Устанавливаем сообщение об ошибке, если номер не введен
-  } else {
-    error.value = ""; // Очищаем сообщение об ошибке, если номер введен
-    console.log("Phone number:", phoneNumber.value);
-    // Здесь можно добавить дополнительную логику для обработки номера телефона, например, отправку на сервер и т.д.
-
-    // Если логика входа успешна, переходим на другую страницу
-    router.push("/otp-");
+const save = async () => {
+  if (isValidPhoneNumber.value) {
+    if (phoneNumber.value) {
+      await store.otpClient({ phone_number: `+998${phoneNumber.value}` });
+      await router.push(`/otp/+998${phoneNumber.value}`);
+    } else {
+      isValidPhoneNumber.value = false;
+    }
   }
 };
 </script>
+
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "poppins", sans-serif;
+.invalid {
+  border: 2px solid red;
 }
 
-body {
-  // position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
-  // background-repeat: no-repeat;
-  // background-position: center;
-  // background-size: cover;
+.valid {
+  border: 2px solid #134e9b;
 }
 
-section {
-  position: fixed;
-  max-width: 400px;
-  background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  backdrop-filter: blur(55px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 3rem;
-}
-
-h1 {
-  font-size: 2rem;
-  color: #fff;
-  text-align: center;
-}
-
-.inputbox {
-  position: relative;
-  margin: 30px 0;
-  max-width: 310px;
-  border-bottom: 2px solid #fff;
-}
-
-.inputbox label {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: all 0.5s ease-in-out;
-}
-
-input:focus ~ label,
-input:valid ~ label {
-  top: -5px;
-}
-
-.inputbox input {
-  width: 100%;
-  height: 60px;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0 35px 0 5px;
-  color: #fff;
-}
-
-.inputbox ion-icon {
-  position: absolute;
-  right: 8px;
-  color: #fff;
-  font-size: 1.2rem;
-  top: 20px;
-}
-
-.forget {
-  margin: 35px 0;
-  font-size: 0.85rem;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-.forget label {
-  display: flex;
-  align-items: center;
-}
-
-.forget label input {
-  margin-right: 3px;
-}
-
-.forget a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.forget a:hover {
-  text-decoration: underline;
-}
-
-button {
-  width: 100%;
-  height: 40px;
-  border-radius: 40px;
-  background-color: rgb(255, 255, 255, 1);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.4s ease;
-}
-
-button:hover {
-  background-color: rgb(255, 255, 255, 0.5);
+.invalid-warning {
+  margin: 10px auto;
+  color: red;
 }
 </style>

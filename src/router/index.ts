@@ -8,6 +8,8 @@ import like from "./like";
 import payment from "./payment";
 import aboutAshyo from "./aboutAshyo";
 import login from "./login";
+import user from "./user";
+import otp from "./otp";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,11 +23,8 @@ const router = createRouter({
     product,
     payment,
     aboutAshyo,
-    {
-      path: "/otp-",
-      name: "otp",
-      component: () => import("../pages/LogIn/OtpPage.Vue"),
-    },
+    user,
+    otp,
     {
       path: "/map",
       name: "map",

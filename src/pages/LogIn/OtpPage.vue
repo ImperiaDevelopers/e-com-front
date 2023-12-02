@@ -1,158 +1,145 @@
 <template>
-  <body>
-    <section>
-      <form @submit.prevent="login">
-        <h1>Login</h1>
-        <div class="inputbox">
-          <form class="form">
-            <br />
-            <input
-              type="text"
-              placeholder="* * * *"
-              style="text-align: center"
-              v-model="otp"
-            />
-          </form>
-        </div>
-        <button @click="login">Log in</button>
-      </form>
-    </section>
-  </body>
+  <div
+    class="w-full h-[100vh] flex items-center justify-center bg-gradient-to-b from-white to-[#134E9B]"
+  >
+    <div
+      class="w-[650px] h-[500px] bg-white rounded-[2%] flex items-center justify-center flex-col gap-8 shadow-2xl"
+    >
+      <img
+        src="https://icons.veryicon.com/png/o/miscellaneous/simple-line-icon/authentication-16.png"
+        class="w-[80px]"
+        alt=""
+      />
+      <h1 class="text-[25px] text-[#134E9B] pb-5 text">
+        Please enter the one time password
+      </h1>
+      <div class="otp-container pb-5">
+        <input
+          v-for="(value, index) in otpValues"
+          :key="index"
+          type="text"
+          maxlength="1"
+          class="otp-input"
+          :value="value"
+          @input="handleInput(index, $event.target.value)"
+          @keydown.backspace="handleBackspace(index)"
+          :ref="createRef(index)"
+        />
+      </div>
+      <button
+        @click="verify"
+        class="bg-[#134E9B] py-[18px] tracking-widest text-white px-[120px] rounded-md"
+      >
+        Verify OTP
+      </button>
+      <h1 class="text-[#7c7c7c]">
+        Didn't recieve code?
+        <router-link to="/login" class="text-[#134E9B] cursor-pointer"
+          >Resend</router-link
+        >
+      </h1>
+    </div>
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import { useClientStore } from "../../stores/client/client";
+import { useRoute, useRouter } from "vue-router";
 
-const otp = ref("");
+const route = useRoute();
+const router = useRouter();
 
-const login = () => {
-  console.log("Otp number:", otp.value);
-  // Здесь можно добавить дополнительную логику для обработки номера телефона, например, отправку на сервер и т.д.
+const store = useClientStore();
+
+const otpValues = ref(["", "", "", ""]);
+
+const refs = Array.from({ length: 4 }, (_, i) => ref(null));
+
+const handleInput = (index, value) => {
+  // Allow only numeric input
+  const numericValue = value.replace(/\D/g, "");
+
+  if (numericValue.length > 1) {
+    return;
+  }
+
+  otpValues.value[index] = numericValue;
+
+  if (numericValue.length === 1 && index < otpValues.value.length - 1) {
+    refs[index + 1].value.focus();
+  }
+};
+
+const handleBackspace = (index) => {
+  if (otpValues.value[index] !== "") {
+    otpValues.value[index] = "";
+  } else if (index > 0) {
+    refs[index - 1].value.focus();
+  }
+};
+
+const createRef = (index) => (el) => {
+  refs[index].value = el;
+};
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return cookieValue;
+    }
+  }
+
+  return "";
+}
+const verify = async () => {
+  const clientId = getCookie("userId");
+  const verification = localStorage.getItem("details");
+  await store.verifyClient({
+    phone_number: route.params.phone,
+    verification_key: verification,
+    otp: `${otpValues.value.join("")}`,
+    userId: `${clientId}`,
+  });
+  if (getCookie("refresh_token")) {
+    router.push("/user");
+  }
 };
 </script>
 
-<style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "poppins", sans-serif;
-}
-
-body {
-  // position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-image: url(https://user-images.githubusercontent.com/13468728/233847739-219cb494-c265-4554-820a-bd3424c59065.jpg);
-  // background-repeat: no-repeat;
-  // background-position: center;
-  // background-size: cover;
-}
-
-section {
-  position: fixed;
-  max-width: 400px;
-  background-color: transparent;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  backdrop-filter: blur(55px);
+<style scoped>
+.otp-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem 3rem;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #fff;
-  text-align: center;
-}
-
-.inputbox {
-  position: relative;
-  margin: 30px 0;
-  max-width: 310px;
-  border-bottom: 2px solid #fff;
-}
-
-.inputbox label {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  color: #fff;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: all 0.5s ease-in-out;
-}
-
-input:focus ~ label,
-input:valid ~ label {
-  top: -5px;
-}
-
-.inputbox input {
-  width: 100%;
+.otp-input {
+  width: 60px;
   height: 60px;
-  background: transparent;
+  text-align: center;
+  font-size: 34px;
+  margin: 0 10px;
   border: none;
+  border: 2px solid #a8a8a8;
+  box-shadow: none;
+  background-color: transparent;
+  color: #134e9b;
+  transition: all 0.3s ease-in-out;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 20%;
+}
+
+.otp-input:focus {
   outline: none;
-  font-size: 1rem;
-  padding: 0 35px 0 5px;
-  color: #fff;
-}
-
-.inputbox ion-icon {
-  position: absolute;
-  right: 8px;
-  color: #fff;
-  font-size: 1.2rem;
-  top: 20px;
-}
-
-.forget {
-  margin: 35px 0;
-  font-size: 0.85rem;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-.forget label {
-  display: flex;
-  align-items: center;
-}
-
-.forget label input {
-  margin-right: 3px;
-}
-
-.forget a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.forget a:hover {
-  text-decoration: underline;
-}
-
-button {
-  width: 100%;
-  height: 40px;
-  border-radius: 40px;
-  background-color: rgb(255, 255, 255, 1);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.4s ease;
-}
-
-button:hover {
-  background-color: rgb(255, 255, 255, 0.5);
+  border-color: #134e9b;
+  font-size: 40px;
+  background-color: #a5c8f51e;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
 }
 </style>

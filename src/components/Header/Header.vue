@@ -157,12 +157,20 @@
               </p>
             </div></router-link
           >
-          <router-link to="/login">
+          <router-link v-if="isLoggedIn()" to="/user">
             <div class="h-[35px]">
               <i
                 class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
-              ></i></div
-          ></router-link>
+              ></i>
+            </div>
+          </router-link>
+          <router-link v-else to="/login">
+            <div class="h-[35px]">
+              <i
+                class="fa-solid fa-user p-3 bg-[#EBEFF3] rounded-md text-[#545D6A] cursor-pointer hover:bg-[#d2d6da]"
+              ></i>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="w-[1180px] flex justify-between">
@@ -172,8 +180,9 @@
           :key="index"
           class="text-[#535c6a] font-['Roboto'] hover:text-[#272727] cursor-pointer cat"
           @click="otish(item.id)"
-          >{{ item.category_name }}</h1
         >
+          {{ item.category_name }}
+        </h1>
       </div>
     </div>
   </div>
@@ -211,6 +220,13 @@ function getCookie(name: string) {
 
   return "";
 }
+const isLoggedIn = () => {
+  if (getCookie("refresh_token").length>1) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const opener = ref(false);
 const opener1 = ref(false);
@@ -223,8 +239,8 @@ let clientFav = ref();
 const otish = async (id: any) => {
   await router.push(`/products/${id}`);
   location.reload();
-//   setTimeout(() => {
-//   }, 1000);
+  //   setTimeout(() => {
+  //   }, 1000);
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));

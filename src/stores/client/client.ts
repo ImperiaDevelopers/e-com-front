@@ -14,6 +14,7 @@ export const useClientStore = defineStore({
     async otpClient(payload: any) {
       try {
         const res = await clientApi.otpClient(payload);
+        localStorage.setItem("details", res.details);
       } catch (err) {
         console.error(err);
       }
@@ -30,6 +31,28 @@ export const useClientStore = defineStore({
     async verifyClient(params: any) {
       try {
         const res = await clientApi.verifyClient(params);
+        function setCookie(name: any, value: any, days: any) {
+          const expires = new Date();
+          expires.setDate(expires.getDate() + days);
+          document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/`;
+        }
+        function getCookie(name: string) {
+          const cookieString = document.cookie;
+          const cookies = cookieString.split("; ");
+
+          for (const cookie of cookies) {
+            const [cookieName, cookieValue] = cookie.split("=");
+
+            if (cookieName === name) {
+              return cookieValue;
+            }
+          }
+
+          return null;
+        }
+        if (!getCookie("refresh_token")) {
+          setCookie("refresh_token", res.tokens.refresh_token, 365);
+        }
       } catch (err) {
         console.error(err);
       }
