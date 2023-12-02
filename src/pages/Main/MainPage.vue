@@ -29,12 +29,12 @@
   <Product />
 
   <Earphone />
-  <div class="flex items-center justify-center">
+  <div v-if="products.length > 5" class="flex items-center justify-center">
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
   </div>
-  <Product />
+  <Product v-if="products.length > 5" :imgs="products" />
   <Footer />
 </template>
 
@@ -49,7 +49,9 @@ import Header from "../../components/Header/Header.vue";
 
 import { ref, onMounted } from "vue";
 import { useClientStore } from "../../stores/client/client";
+import { useViewsStore } from "../../stores/last-views/views";
 const store = useClientStore();
+const storeView = useViewsStore();
 
 const userLocation = ref({});
 const city = ref(null);
@@ -122,6 +124,16 @@ function generateUniqueId() {
   return "user_" + Math.random().toString(36).substr(2, 9);
 }
 getUniqueUserId();
+
+const products = ref([]);
+
+const id = getCookie("clientId");
+onMounted(async () => {
+  await storeView.getClientViews(id);
+  storeView.views.forEach((item) => {
+    products.value.push(item.product);
+  });
+});
 </script>
 
 <style lang="scss" scoped></style>

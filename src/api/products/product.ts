@@ -50,7 +50,7 @@ const productApi: ProductApi = {
   },
   // ---------- Pro Filter -------- //
   getFilter(params) {
-    const url = `product/filter`;
+    const url = `product/filter/q?page=${params?.page}&limit=${params?.limit}`;
     return axiosClient.post(url, params);
   },
   // --------- Pro Per Group ----- //
