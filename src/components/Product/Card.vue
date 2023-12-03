@@ -28,7 +28,7 @@
       </div>
       <div class="flex justify-between">
         <p class="text-[20px] font-[700] text-start mt-[28px]">
-          {{ parseFormattedNumber(props?.data?.price) }} uzs
+          {{ formatPrice(props?.data?.price) }} uzs
         </p>
 
         <div class="flex gap-2">
@@ -56,6 +56,13 @@ import Notification from "../../plugins/Notification";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
+};
+
 const store = useProductStore();
 const storeView = useViewsStore();
 
@@ -63,13 +70,6 @@ const props = defineProps({
   data: Object,
   heart: Boolean,
 });
-
-const parseFormattedNumber = (number: any) => {
-  number=Number(number)
-  let numberString = number.toString();
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return numberString;
-};
 
 const storeFav = useFavouritesStore();
 const clientId = getCookie("clientId");
@@ -131,7 +131,7 @@ const addProductToCard = async (item: any) => {
   const payload = {
     product_id: item.id,
     client_id: getCookie("clientId"),
-    price: item.price,
+    price: formatPrice(item.price),
     quantity: 1,
   };
   await store.addProductToCard(payload);

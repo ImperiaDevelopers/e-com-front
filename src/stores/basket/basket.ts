@@ -19,7 +19,6 @@ export const useBasketStore = defineStore({
         const res = await basketApi.getClientBaskets(client_id);
         this.baskets = res;
         return res;
-        this.loading = false;
       } catch (err) {
         console.error(err);
       }

@@ -20,7 +20,7 @@
               <div class="flex items-start justify-between">
                 <h1 class="text-xl w-[288px]">{{ i.product?.name }}</h1>
                 <h1 class="text-[24px] text-black">
-                  {{ parseFormattedNumber(i.product?.price) }} uzs
+                  {{ formatPrice(i.product?.price) }} uzs
                 </h1>
               </div>
               <div class="flex justify-between">
@@ -65,17 +65,26 @@
             <div class="flex justify-between items-center">
               <h1 class="text-[14px]">Jammi summa:</h1>
               <p class="font-bold text-[20px] text-black">
-                {{ parseFormattedNumber(calculateAllSumm()) }} uzs
+                {{ formatPrice(calculateAllSumm()) }} uzs
               </p>
             </div>
             <button
               class="h-[20%] mt-[5%] rounded-md bg-[#134E9B] text-[white]"
+              @click="otish()"
             >
-              Hoziroq sotib olish
+              Rasmiylashtirishga o'tish
             </button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div
+    v-if="store1.products.length >= 5"
+    class="flex items-center justify-center mt-[4%]"
+  >
+    <div class="w-[1180px]">
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
   </div>
   <Products :imgs="store1.products" />
@@ -89,7 +98,9 @@ import Products from "../../components/Carousel/ProdCarousel.vue";
 import Footer from "../../components/Footer/Footer.vue";
 import { useBasketStore } from "../../stores/basket/basket";
 import { useProductStore } from "../../stores/products/product";
-import Notification from "../../plugins/Notification";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 const store1 = useProductStore();
 const store = useBasketStore();
 
@@ -99,6 +110,13 @@ const calculateAllSumm = () => {
     sum.value += i.product.price * i.quantity;
   });
   return sum.value;
+};
+
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
 };
 
 const increase_quantity = async (index: number, id: number) => {
@@ -136,12 +154,11 @@ function getCookie(name: string) {
 
   return "";
 }
-const parseFormattedNumber = (number: any) => {
-  let numberString = number.toString();
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return numberString;
-};
 
+const otish = async () => {
+  await router.push("/payment");
+  location.reload();
+};
 onMounted(async () => {
   await store.getClientBaskets(+getCookie("clientId")); //BU yerda client_id qo'lda yozilgan aslida backenddan olingan bo'lishi kerak
   await store1.getProducts();

@@ -19,6 +19,13 @@ export const useClientStore = defineStore({
         console.error(err);
       }
     },
+    async messageOrderClient(payload: any) {
+      try {
+        await clientApi.messageorderClient(payload);
+      } catch (err) {
+        console.error(err);
+      }
+    },
     async createClient(payload: any) {
       try {
         const res = await clientApi.createClient(payload);

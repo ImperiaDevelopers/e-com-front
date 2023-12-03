@@ -7,6 +7,7 @@ interface ClientApi {
   deleteClient(id: string): Promise<any>;
   createClient(payload: any): Promise<any>;
   getClientById(id: any): Promise<any>;
+  messageorderClient(otp: any): Promise<any>;
 }
 
 const clientApi: ClientApi = {
@@ -16,6 +17,10 @@ const clientApi: ClientApi = {
   },
   otpClient(otp) {
     const url = `client/send-otp`;
+    return axiosClient.post(url, otp);
+  },
+  messageorderClient(otp) {
+    const url = `client/send-order`;
     return axiosClient.post(url, otp);
   },
   verifyClient(verify) {
