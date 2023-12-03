@@ -56,6 +56,14 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
+    async getProductSearch(search: string) {
+      try {
+        const res = await productApi.getProductSearch(search);
+        this.products = res.products;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async getProductId(productId: string) {
       try {
         const res = await productApi.getProductId(productId);
