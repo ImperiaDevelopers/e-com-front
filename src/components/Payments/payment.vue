@@ -8,7 +8,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1831.png"
+        src="../../assets/payment_images/image1831.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Payme orqali to’lov qilish</h1>
@@ -20,7 +20,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1831.png"
+        src="../../assets/payment_images/image1831.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Payme orqali to’lov qilish</h1>
@@ -34,7 +34,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1832@2x (1).png"
+        src="../../assets/payment_images/image1832@2x.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Click orqali to’lov qilish</h1>
@@ -46,7 +46,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1832@2x (1).png"
+        src="../../assets/payment_images/image1832@2x.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Click orqali to’lov qilish</h1>
@@ -60,7 +60,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (6) 1.png"
+        src="../../assets/payment_images/image-removebg-preview6.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Uzcard orqali to’lov qilish</h1>
@@ -72,7 +72,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (6) 1.png"
+        src="../../assets/payment_images/image-removebg-preview6.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Uzcard orqali to’lov qilish</h1>
@@ -86,7 +86,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (7) 1.png"
+        src="../../assets/payment_images/image-removebg-preview7.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Humo orqali to’lov qilish</h1>
@@ -98,7 +98,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (7) 1.png"
+        src="../../assets/payment_images/image-removebg-preview7.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Humo orqali to’lov qilish</h1>
@@ -112,7 +112,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1833.png"
+        src="../../assets/payment_images/image1833.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">VISA orqali to’lov qilish</h1>
@@ -124,7 +124,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1833.png"
+        src="../../assets/payment_images/image1833.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">VISA orqali to’lov qilish</h1>
@@ -138,7 +138,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1834.png"
+        src="../../assets/payment_images/image1834.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">
@@ -152,7 +152,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image 1834.png"
+        src="../../assets/payment_images/image1834.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">
@@ -168,7 +168,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (8) 1.png"
+        src="../../assets/payment_images/image-removebg-preview8.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Naqd orqali to’lov qilish</h1>
@@ -180,7 +180,7 @@
     >
       <img
         class="flex m-10"
-        src="src/assets/payment_images/image-removebg-preview (8) 1.png"
+        src="../../assets/payment_images/image-removebg-preview8.png"
         alt=""
       />
       <h1 class="flex ml-[-40px] font-semibold">Naqd orqali to’lov qilish</h1>
