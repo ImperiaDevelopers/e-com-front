@@ -276,16 +276,32 @@
             </div>
           </div>
 
+          <!-- Search -->
           <div>
             <input
               type="text"
               placeholder="What are you looking for?"
               class="ps-5 pe-5 p-[12.3px] color-[#EBEFF3] bg-[#EBEFF3] text-[13px] w-[518px] rounded-md outline-none"
+              v-model="inputv"
+              @change="handleChange($event)"
             />
             <i
               class="fa-solid fa-magnifying-glass bg-[#134E9B] text-white p-[14px] rounded-md cursor-pointer hover:bg-[#0c56b6]"
               style="margin-left: -10px"
             ></i>
+          </div>
+          <div
+            v-if="isopen"
+            class="w-[380px] transition-transform category bg-white absolute top-[120px] right-[610px] px-[35px] py-[10px] h-auto"
+          >
+            <a
+              v-for="(item, index) in productStore.searchProducts"
+              :key="index"
+              class="flex cursor-pointer p-2 hover:bg-[#EBEFF3] transition-all rounded"
+              @click="single(item.id)"
+            >
+              {{ item.name }}
+            </a>
           </div>
         </div>
 
@@ -524,6 +540,7 @@ const change = () => {
   righ7.value = false;
   righ8.value = false;
 };
+
 let basketNumber = ref();
 let clientFav = ref();
 const otish = async (id: any) => {
@@ -533,6 +550,19 @@ const otish = async (id: any) => {
 
 const single = async (id: number) => {
   await router.push(`/product/${id}`);
+};
+
+// // // // // search
+const inputv = ref("");
+const isopen = ref(false);
+
+const handleChange = async (e: any) => {
+  inputv.value = e.target.value;
+  isopen.value = true;
+  if (e.target.value == "") {
+    isopen.value = false;
+  }
+  await productStore.getProductSearch({ name: inputv.value });
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));

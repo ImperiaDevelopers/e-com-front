@@ -14,12 +14,14 @@ interface ProductState {
   catProducts: any[];
   reiting: any[];
   stock: any[];
+  searchProducts: any[];
 }
 
 export const useProductStore = defineStore({
   id: "product",
   state: (): ProductState => ({
     products: [],
+    searchProducts: [],
     loading: false,
     images: [],
     allImages: [],
@@ -48,7 +50,7 @@ export const useProductStore = defineStore({
     async getProductSearch(params: any) {
       try {
         const res = await productApi.getProductSearch(params);
-        this.products = res.products;
+        this.searchProducts = res.products;
       } catch (err) {
         console.error(err);
       }
