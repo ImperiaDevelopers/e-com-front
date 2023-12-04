@@ -10,6 +10,8 @@ interface ProductState {
   performanse: any[];
   per_info: any[];
   product: any[];
+  reiting: any[];
+  stock: any[];
 }
 
 export const useProductStore = defineStore({
@@ -23,6 +25,8 @@ export const useProductStore = defineStore({
     performanse: [],
     per_info: [],
     product: [],
+    reiting: [],
+    stock: [],
   }),
   actions: {
     async getProducts(params: any) {
@@ -70,6 +74,7 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getFilter(payload);
         this.filter_products = res;
+        payload.last_page = Math.ceil(res.count / payload?.limit);
       } catch (err) {
         console.error(err);
       }
@@ -112,7 +117,7 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
-    async getInfoId(infoId: any) {
+    async getInfoId(infoId: string) {
       try {
         await productApi.getProInfoID(infoId);
       } catch (err) {
@@ -124,6 +129,30 @@ export const useProductStore = defineStore({
         await productApi.addProductToUserCard(payload);
       } catch (err) {
         console.log(err);
+      }
+    },
+    async getProReting(params: any) {
+      try {
+        const res = await productApi.getProReiting(params);
+        this.reiting = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProStock(params: any) {
+      try {
+        const res = await productApi.getProStock(params);
+        this.stock = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProStockById(stockId: string) {
+      try {
+        const res = await productApi.getProStockById(stockId);
+        this.stock = res;
+      } catch (err) {
+        console.error(err);
       }
     },
   },

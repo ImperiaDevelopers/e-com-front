@@ -2,7 +2,7 @@ import axiosClient from "../apiClient";
 
 interface FavouritiesApi {
   createFavourities(params?: any): Promise<any>;
-  getClientFavourities(payload): Promise<any>;
+  getClientFavourities(payload?: any): Promise<any>;
   getFavouritiesId(id: string): Promise<any>;
   updateFavourities(payload: any, id: string): Promise<any>;
   deleteFavourities(id: string): Promise<any>;

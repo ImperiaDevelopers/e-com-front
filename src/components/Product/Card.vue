@@ -65,6 +65,7 @@ const props = defineProps({
 });
 
 const parseFormattedNumber = (number: any) => {
+  number=Number(number)
   let numberString = number.toString();
   numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return numberString;

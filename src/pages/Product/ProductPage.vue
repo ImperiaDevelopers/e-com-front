@@ -1,19 +1,19 @@
 <template>
   <Header />
-  <Loading v-if="store.loading"></Loading>
-  <div v-else>
-    <router-view></router-view>
-    <div
-      v-if="products.length >= 5"
-      class="flex items-center justify-center mt-[4%]"
-    >
-      <div class="w-[1180px]">
-        <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
-      </div>
+
+  <router-view></router-view>
+  <div
+    v-if="products.length >= 5"
+    class="flex items-center justify-center mt-[4%]"
+  >
+    <div class="w-[1180px]">
+      <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
     <Products v-if="products.length >= 5" :imgs="products" />
     <Footer />
   </div>
+  <Products v-if="products.length >= 5" :imgs="products" />
+  <Footer />
 </template>
 
 <script setup lang="ts">
@@ -23,6 +23,7 @@ import Products from "../../components/Carousel/ProdCarousel.vue";
 import { onMounted, ref } from "vue";
 import Loading from "../../components/Loader/Loading.vue";
 import { useViewsStore } from "../../stores/last-views/views";
+3;
 
 const store = useViewsStore();
 
