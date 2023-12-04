@@ -85,22 +85,22 @@
             >
               <div class="flex flex-col gap-[25px] justify-center p-[40px]">
                 <a
-                  href="#"
+                  href=""
                   class="text-[#535c6a] text-[15px] flex gap-4 items-center"
                   @mousemove="opener1 = true"
+                  @click=""
                   ><i class="fa-brands fa-salesforce w-[30px] fa-2x"></i>
                   <span>Aksiyalar</span>
                 </a>
                 <a
                   v-for="(item, index) in store.categories"
-                  {{
-                  console.log(item)
-                  }}
                   href="#"
                   :key="index"
                   class="text-[#535c6a] text-[15px] flex gap-4 items-center"
                   @mousemove="opener1 = true"
-                  ><img :src="item.icon" alt="" class="w-[30px]" />
+                  @click=""
+                >
+                  <img :src="item.icon" alt="" class="w-[30px]" />
                   <span>{{ item.category_name }}</span>
                 </a>
               </div>
@@ -204,14 +204,16 @@ import { useCategoryStore } from "../../stores/category/category";
 import { useBasketStore } from "../../stores/basket/basket";
 import { useRouter } from "vue-router";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
+import { useStockStore } from "../../stores/stock/stock";
+
 const router = useRouter();
 const store = useCategoryStore();
 const store1 = useBasketStore();
 const store2 = useFavouritesStore();
+const stockStore = useStockStore();
 const city = ref("");
 
 const cookieValue = getCookie("city");
-
 if (cookieValue) {
   city.value = cookieValue;
 }
@@ -249,8 +251,6 @@ let clientFav = ref();
 const otish = async (id: any) => {
   await router.push(`/products/${id}`);
   location.reload();
-  //   setTimeout(() => {
-  //   }, 1000);
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));
