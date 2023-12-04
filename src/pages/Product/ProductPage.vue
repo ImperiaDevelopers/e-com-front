@@ -25,7 +25,6 @@ import Products from "../../components/Carousel/ProdCarousel.vue";
 import { onMounted, ref } from "vue";
 import { useViewsStore } from "../../stores/last-views/views";
 import { useProductStore } from "../../stores/products/product";
-import Card from "../../components/Product/Card.vue";
 
 const productStore = useProductStore();
 const store = useViewsStore();
@@ -51,7 +50,6 @@ const params = {
 };
 onMounted(async () => {
   await productStore.getProducts(params);
-  console.log(productStore.products);
 
   await store.getClientViews(id);
   store.views.forEach((item) => {

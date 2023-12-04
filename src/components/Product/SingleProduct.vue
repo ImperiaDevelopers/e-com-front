@@ -62,7 +62,7 @@
           <h1 class="text-[#515D6C] text-[16px]">
             Narxi
             <span class="ml-[20px] text-[32px] text-[#06172D]"
-              >{{ parseFormattedNumber(store.product?.price) }} uzs</span
+              >{{ formatPrice(store.product?.price) }} uzs</span
             >
           </h1>
           <div class="flex gap-5">
@@ -113,10 +113,11 @@ const store = useProductStore();
 
 const currentSlide = ref(0);
 
-const parseFormattedNumber = (number: any) => {
-  let numberString = number+'';
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  return numberString;
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
 };
 
 onMounted(() => {

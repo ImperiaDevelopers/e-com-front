@@ -11,6 +11,7 @@ interface ProductState {
   performanse: any[];
   per_info: any[];
   product: any[];
+  catProducts: any[];
   reiting: any[];
   stock: any[];
 }
@@ -27,6 +28,7 @@ export const useProductStore = defineStore({
     performanse: [],
     per_info: [],
     product: [],
+    catProducts: [],
     reiting: [],
     stock: [],
   }),
@@ -64,6 +66,14 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getProductId(productId);
         this.product = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProductByCatId(id: number) {
+      try {
+        const res = await productApi.getProductByCatId(id);
+        this.catProducts = res;
       } catch (err) {
         console.error(err);
       }
