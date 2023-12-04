@@ -61,7 +61,7 @@ const imgs = ref([
   {
     text: "Siz kutgan Xiaomi 12 Mi Laite     ",
     desc: "Orginallik va qulay narxni o'zida jamlagan  Xiaomi 12 Mi Laite  siz uchun eng yaxshi arziydigan takliflarimizdan biridir!ii",
-    content: "src/assets/images/product-imgs/image 1855.png",
+    content: "src/assets/images/product-imgs/image1855.png",
     bgColor: "#e6e6e6",
   },
   {
