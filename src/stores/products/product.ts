@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import productApi from "../../api/products/product";
 
 interface ProductState {
-  loading: boolean;
   products: any[];
   images: any[];
   allImages: any[];
@@ -12,13 +11,14 @@ interface ProductState {
   per_info: any[];
   product: any[];
   stocks: any[];
+  reiting: any[];
+  stock: any[];
 }
 
 export const useProductStore = defineStore({
   id: "product",
   state: (): ProductState => ({
     products: [],
-    loading: false,
     images: [],
     allImages: [],
     filter_products: [],
@@ -27,18 +27,17 @@ export const useProductStore = defineStore({
     per_info: [],
     product: [],
     stocks: [],
+    reiting: [],
+    stock: [],
   }),
   actions: {
     async getProducts(params: any) {
       try {
-        this.loading = true;
         const res = await productApi.getProduct(params);
         this.products = res;
         params.last_page = Math.ceil(res.count / params?.limit);
       } catch (err) {
         console.error(err);
-      } finally {
-        this.loading = false;
       }
     },
     async getProductSearch(params: any) {
@@ -100,14 +99,10 @@ export const useProductStore = defineStore({
     },
     async getPerformance(params: any) {
       try {
-        this.loading = true;
-
         const res = await productApi.getPerfomance(params);
         this.performanse = res;
       } catch (err) {
         console.error(err);
-      } finally {
-        this.loading = false;
       }
     },
     async getPerformanceId(perforID: string) {
@@ -125,7 +120,7 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
-    async getInfoId(infoId: any) {
+    async getInfoId(infoId: string) {
       try {
         await productApi.getProInfoID(infoId);
       } catch (err) {
@@ -145,6 +140,30 @@ export const useProductStore = defineStore({
         this.stocks = res;
       } catch (err) {
         console.log(err);
+      }
+    },
+    async getProReting(params: any) {
+      try {
+        const res = await productApi.getProReiting(params);
+        this.reiting = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProStock(params: any) {
+      try {
+        const res = await productApi.getProStock(params);
+        this.stock = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProStockById(stockId: string) {
+      try {
+        const res = await productApi.getProStockById(stockId);
+        this.stock = res;
+      } catch (err) {
+        console.error(err);
       }
     },
   },

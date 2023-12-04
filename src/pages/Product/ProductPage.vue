@@ -1,13 +1,16 @@
 <template>
   <Header />
- 
+
   <router-view></router-view>
-  <div v-if="products.length>=5" class="flex items-center justify-center mt-[4%]">
+  <div
+    v-if="products.length >= 5"
+    class="flex items-center justify-center mt-[4%]"
+  >
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
   </div>
-  <Products v-if="products.length>=5" :imgs="products" />
+  <Products v-if="products.length > 5" :imgs="products" />
   <Footer />
 </template>
 
@@ -18,9 +21,11 @@ import Products from "../../components/Carousel/ProdCarousel.vue";
 import { onMounted, ref } from "vue";
 import Loading from "../../components/Loader/Loading.vue";
 import { useViewsStore } from "../../stores/last-views/views";
-3
+import { useProductStore } from "../../stores/products/product";
+3;
 
 const store = useViewsStore();
+const storeProduct = useProductStore();
 
 function getCookie(name: string) {
   const cookieString = document.cookie;
@@ -38,13 +43,23 @@ function getCookie(name: string) {
 }
 const id = getCookie("clientId");
 const products = ref([]);
+const stocks = ref([]);
 onMounted(async () => {
+  await storeProduct.getProductInStock();
+  storeProduct.stocks.forEach((item) => {
+    item.product.to = item.to;
+    stocks.value.push(item.product);
+  });
   await store.getClientViews(id);
   store.views.forEach((item) => {
+    const matching = stocks.value.find((prod) => prod.id == item.product_id);
+    console.log(matching?.to);
+    if (matching) {
+      item.product.to = matching.to;
+    }
     products.value.push(item.product);
   });
 });
-console.log(products.value)
 </script>
 
 <style lang="scss" scoped></style>

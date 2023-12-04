@@ -7,8 +7,8 @@ interface ProductApi {
   getProductSearch(search: any): Promise<any>;
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
-  getAllImages(): Promise<any>;
-  getFilter(params?: { page?: number; limit?: number }): Promise<any>;
+  getAllImages(params?: any): Promise<any>;
+  getFilter(params?: any): Promise<any>;
   getProPerGroup(params?: any): Promise<any>;
   getProPerGroupId(id: string): Promise<any>;
   getPerfomance(params?: any): Promise<any>;
@@ -17,6 +17,9 @@ interface ProductApi {
   getProInfoID(id: string): Promise<any>;
   addProductToUserCard(payload: any): Promise<any>;
   getProductInStock():Promise<any>
+  getProReiting(params?: any): Promise<any>;
+  getProStock(params?: any): Promise<any>;
+  getProStockById(id: string): Promise<any>;
 }
 
 const productApi: ProductApi = {
@@ -44,7 +47,7 @@ const productApi: ProductApi = {
     const url = `image/products/${product_id}`;
     return axiosClient.get(url);
   },
-  getAllImages() {
+  getAllImages(params) {
     const url = `image/all`;
     return axiosClient.get(url);
   },
@@ -88,7 +91,21 @@ const productApi: ProductApi = {
   getProductInStock() {
     const url = `/product_in_stock`;
     return axiosClient.get(url);
-  }
+  },
+  // --------- Product Reiting -------- //
+  getProReiting(params) {
+    const url = `product/reiting`;
+    return axiosClient.get(url);
+  },
+  // ---------- Product in Stock --------- //
+  getProStock(params) {
+    const url = `product_in_stock`;
+    return axiosClient.get(url);
+  },
+  getProStockById(id) {
+    const url = `product_in_stock/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default productApi;
