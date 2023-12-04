@@ -26,12 +26,18 @@
           :ref="createRef(index)"
         />
       </div>
-      <button @click="verify"
+      <button
+        @click="verify"
         class="bg-[#134E9B] py-[18px] tracking-widest text-white px-[120px] rounded-md"
       >
         Verify OTP
       </button>
-      <h1 class="text-[#7c7c7c]">Didn't recieve code? <router-link to="/login" class="text-[#134E9B] cursor-pointer">Resend</router-link></h1>
+      <h1 class="text-[#7c7c7c]">
+        Didn't recieve code?
+        <router-link to="/login" class="text-[#134E9B] cursor-pointer"
+          >Resend</router-link
+        >
+      </h1>
     </div>
   </div>
 </template>
@@ -41,16 +47,16 @@ import { ref } from "vue";
 import { useClientStore } from "../../stores/client/client";
 import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute()
-const router =useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const store=useClientStore()
+const store = useClientStore();
 
 const otpValues = ref(["", "", "", ""]);
 
 const refs = Array.from({ length: 4 }, (_, i) => ref(null));
 
-const handleInput = (index, value) => {
+const handleInput = (index: any, value: any) => {
   // Allow only numeric input
   const numericValue = value.replace(/\D/g, "");
 
@@ -65,7 +71,7 @@ const handleInput = (index, value) => {
   }
 };
 
-const handleBackspace = (index) => {
+const handleBackspace = (index:any) => {
   if (otpValues.value[index] !== "") {
     otpValues.value[index] = "";
   } else if (index > 0) {
@@ -73,7 +79,7 @@ const handleBackspace = (index) => {
   }
 };
 
-const createRef = (index) => (el) => {
+const createRef = (index:any) => (el:any) => {
   refs[index].value = el;
 };
 
@@ -89,16 +95,21 @@ function getCookie(name: string) {
     }
   }
 
-  return '';
+  return "";
 }
-const verify = async() => {
+const verify = async () => {
   const clientId = getCookie("userId");
-  const verification=localStorage.getItem('details')
-  await store.verifyClient({ phone_number: route.params.phone, verification_key: verification, otp: `${otpValues.value.join('')}`, userId: `${clientId}` })
-  if (getCookie('refresh_token')) {
-    router.push('/user')
+  const verification = localStorage.getItem("details");
+  await store.verifyClient({
+    phone_number: route.params.phone,
+    verification_key: verification,
+    otp: `${otpValues.value.join("")}`,
+    userId: `${clientId}`,
+  });
+  if (getCookie("refresh_token")) {
+    router.push("/user");
   }
-}
+};
 </script>
 
 <style scoped>

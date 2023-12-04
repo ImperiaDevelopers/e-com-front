@@ -16,6 +16,7 @@ interface ProductApi {
   getProInfo(params?: any): Promise<any>;
   getProInfoID(id: string): Promise<any>;
   addProductToUserCard(payload: any): Promise<any>;
+  getProductInStock():Promise<any>
 }
 
 const productApi: ProductApi = {
@@ -33,10 +34,6 @@ const productApi: ProductApi = {
     const url = `product/${id}`;
     return axiosClient.get(url);
   },
-  getProductSearch(search) {
-    const url = `product/search`;
-    return axiosClient.post(url, { name: search });
-  },
 
   updateProduct(payload, id) {
     const url = `product/${id}`;
@@ -49,6 +46,7 @@ const productApi: ProductApi = {
   },
   getAllImages() {
     const url = `image/all`;
+    return axiosClient.get(url);
   },
   // ---------- Pro Filter -------- //
   getFilter(params) {
@@ -86,6 +84,11 @@ const productApi: ProductApi = {
     const url = `card/add`;
     return axiosClient.post(url, payload);
   },
+  // ----------Product In Stock------------- //
+  getProductInStock() {
+    const url = `/product_in_stock`;
+    return axiosClient.get(url);
+  }
 };
 
 export default productApi;

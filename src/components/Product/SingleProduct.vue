@@ -114,8 +114,15 @@ const store = useProductStore();
 const currentSlide = ref(0);
 
 const parseFormattedNumber = (number: any) => {
-  let numberString = number+'';
-  numberString = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+number = Number(number);
+  let numberString = number.toLocaleString();
+
+  // Keep only the last two digits after the decimal point
+  const decimalIndex = numberString.indexOf(".");
+  if (decimalIndex !== -1) {
+    numberString = numberString.slice(0, decimalIndex + 4);
+  }
+
   return numberString;
 };
 

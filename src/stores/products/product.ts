@@ -11,6 +11,7 @@ interface ProductState {
   performanse: any[];
   per_info: any[];
   product: any[];
+  stocks: any[];
 }
 
 export const useProductStore = defineStore({
@@ -25,6 +26,7 @@ export const useProductStore = defineStore({
     performanse: [],
     per_info: [],
     product: [],
+    stocks: [],
   }),
   actions: {
     async getProducts(params: any) {
@@ -42,7 +44,7 @@ export const useProductStore = defineStore({
     async getProductSearch(params: any) {
       try {
         const res = await productApi.getProductSearch(params);
-        this.products = res.products;
+        this.products = res;
       } catch (err) {
         console.error(err);
       }
@@ -56,14 +58,7 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
-    async getProductSearch(search: string) {
-      try {
-        const res = await productApi.getProductSearch(search);
-        this.products = res.products;
-      } catch (err) {
-        console.log(err);
-      }
-    },
+
     async getProductId(productId: string) {
       try {
         const res = await productApi.getProductId(productId);
@@ -140,6 +135,14 @@ export const useProductStore = defineStore({
     async addProductToCard(payload: any) {
       try {
         await productApi.addProductToUserCard(payload);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getProductInStock() {
+      try {
+        const res = await productApi.getProductInStock();
+        this.stocks = res;
       } catch (err) {
         console.log(err);
       }
