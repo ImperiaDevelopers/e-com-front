@@ -4,6 +4,7 @@ interface ProductApi {
   getProductSearch(params?: any): Promise<any>;
   getProduct(params?: { page?: number; limit?: number }): Promise<any>;
   getProductId(id: string): Promise<any>;
+  getProductSearch(search: any): Promise<any>;
   getProductByCatId(id: number): Promise<any>;
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
@@ -16,6 +17,7 @@ interface ProductApi {
   getProInfo(params?: any): Promise<any>;
   getProInfoID(id: string): Promise<any>;
   addProductToUserCard(payload: any): Promise<any>;
+  getProductInStock():Promise<any>
   getProReiting(params?: any): Promise<any>;
   getProStock(params?: any): Promise<any>;
   getProStockById(id: string): Promise<any>;
@@ -36,6 +38,7 @@ const productApi: ProductApi = {
     const url = `product/${id}`;
     return axiosClient.get(url);
   },
+
   getProductByCatId(id) {
     const url = `product/category/${id}`;
     return axiosClient.get(url);
@@ -90,6 +93,11 @@ const productApi: ProductApi = {
   addProductToUserCard(payload) {
     const url = `card/add`;
     return axiosClient.post(url, payload);
+  },
+  // ----------Product In Stock------------- //
+  getProductInStock() {
+    const url = `/product_in_stock`;
+    return axiosClient.get(url);
   },
   // --------- Product Reiting -------- //
   getProReiting(params) {

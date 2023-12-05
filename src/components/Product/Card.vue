@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col relative">
     <div
-      class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
+      class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center relative"
       @click="otish(props?.data?.id)"
     >
       <div class="w-[180px] cursor-pointer">
@@ -11,6 +11,18 @@
           alt="Slide Image"
         />
       </div>
+    </div>
+    <div
+    v-if="props.to"
+      class="px-[10px] py-[5px] bg-white text-[#E81504] absolute top-[4%] left-[10%] rounded-md"
+    >
+      Aksiyada
+    </div>
+    <div
+    v-if="props.to"
+      class="w-[140px] flex justify-center py-[3px] bg-white text-[#E81504] absolute top-[62%] right-[2%] rounded-md"
+    >
+      {{ formatCountdown() }}
     </div>
     <button
       @click="favourities(props?.data?.id)"
@@ -22,13 +34,14 @@
       ></i>
       <i v-else class="fa-solid fa-heart text-[#545D6A] hover:text-[black]"></i>
     </button>
+
     <div class="flex-col w-[273px]">
-      <div class="h-[56px]">
+      <div class="h-[40px]">
         <h4 class="text-start mt-2 text-[14px]">{{ props?.data?.name }}</h4>
       </div>
       <div class="flex justify-between">
         <p class="text-[20px] font-[700] text-start mt-[28px]">
-          {{ formatPrice(props?.data?.price) }} uzs
+          {{ parseFormattedNumber(props?.data?.price) }} uzs
         </p>
 
         <div class="flex gap-2">
@@ -48,12 +61,21 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import {
+  computed,
+  isRuntimeOnly,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from "vue";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
 import { useProductStore } from "../../stores/products/product";
 import { useViewsStore } from "../../stores/last-views/views";
 import Notification from "../../plugins/Notification";
 import { useRouter } from "vue-router";
+import { ITEM_RENDER_EVT } from "element-plus/es/components/virtual-list/src/defaults.mjs";
+import { dateEquals } from "element-plus";
 const router = useRouter();
 
 const formatPrice = (price: any) => {
@@ -65,11 +87,51 @@ const formatPrice = (price: any) => {
 
 const store = useProductStore();
 const storeView = useViewsStore();
+const time = ref(new Date());
+const updateCountdown = () => {
+  time.value = new Date(); // Update the current time
+};
+onMounted(() => {
+  const countdownTimer = setInterval(updateCountdown, 1000);
+  // Clear the timer when the component is unmounted
+  onUnmounted(() => clearInterval(countdownTimer));
+});
+const formatCountdown = () => {
+  const targetDate = new Date(props?.to).getTime();
+  const currentTime = time.value.getTime();
+  const timeDifference = targetDate - currentTime;
+
+  if (timeDifference <= 0) {
+    return "Expired";
+  }
+
+  const seconds = Math.floor(timeDifference / 1000);
+  const days = Math.floor(seconds / (24 * 3600));
+  const hours = Math.floor((seconds % (24 * 3600)) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  return `${days}d ${hours}h ${minutes}m ${remainingSeconds}s`;
+};
 
 const props = defineProps({
   data: Object,
   heart: Boolean,
+  to: String,
 });
+
+const parseFormattedNumber = (number: any) => {
+  number = Number(number);
+  let numberString = number.toLocaleString();
+
+  // Keep only the last two digits after the decimal point
+  const decimalIndex = numberString.indexOf(".");
+  if (decimalIndex !== -1) {
+    numberString = numberString.slice(0, decimalIndex + 4);
+  }
+
+  return numberString;
+};
 
 const storeFav = useFavouritesStore();
 const clientId = getCookie("clientId");
@@ -96,13 +158,14 @@ const otish = async (id: any) => {
 
 const heart = ref(true);
 
-onMounted(() => {
+onMounted(async () => {
   const localStorageKey = `heart_${props?.data?.id}`;
   const storedHeart = localStorage.getItem(localStorageKey);
 
   if (storedHeart !== null) {
     heart.value = JSON.parse(storedHeart);
   }
+  await store.getProductInStock();
 });
 const data = ref();
 const favourities = async (id: any) => {

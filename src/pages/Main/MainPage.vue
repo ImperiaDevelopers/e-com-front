@@ -21,20 +21,20 @@
   </div>
   <Product />
   <Category />
-  <div class="flex items-center justify-center">
+  <div v-if="stocks.length >= 5" class="flex items-center justify-center">
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Discounted products</h1>
     </div>
   </div>
-  <Product />
+  <Product v-if="stocks.length >= 5" :imgs="stocks" />
 
   <Earphone />
-  <div v-if="products.length > 5" class="flex items-center justify-center">
+  <div v-if="products.length >= 5" class="flex items-center justify-center">
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Last viewed products</h1>
     </div>
   </div>
-  <Product v-if="products.length > 5" :imgs="products" />
+  <Product v-if="products.length >= 5" :imgs="products" />
   <Footer />
 </template>
 
@@ -50,7 +50,9 @@ import Header from "../../components/Header/Header.vue";
 import { ref, onMounted } from "vue";
 import { useClientStore } from "../../stores/client/client";
 import { useViewsStore } from "../../stores/last-views/views";
+import { useProductStore } from "../../stores/products/product";
 const store = useClientStore();
+const storeProduct = useProductStore();
 const storeView = useViewsStore();
 
 const userLocation = ref({});
@@ -128,9 +130,19 @@ getUniqueUserId();
 const products = ref([]);
 
 const id = getCookie("clientId");
+const stocks = ref([]);
 onMounted(async () => {
+  await storeProduct.getProductInStock();
+  storeProduct.stocks.forEach((item) => {
+    item.product.to = item.to;
+    stocks.value.push(item.product);
+  });
   await storeView.getClientViews(id);
   storeView.views.forEach((item) => {
+    const matching = stocks.value.find((prod) => prod.id == item.product_id);
+    if (matching) {
+      item.product.to = matching.to;
+    }
     products.value.push(item.product);
   });
 });

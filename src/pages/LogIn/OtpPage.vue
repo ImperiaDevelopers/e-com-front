@@ -56,7 +56,7 @@ const otpValues = ref(["", "", "", ""]);
 
 const refs = Array.from({ length: 4 }, (_, i) => ref(null));
 
-const handleInput = (index, value) => {
+const handleInput = (index: any, value: any) => {
   // Allow only numeric input
   const numericValue = value.replace(/\D/g, "");
 
@@ -71,7 +71,7 @@ const handleInput = (index, value) => {
   }
 };
 
-const handleBackspace = (index) => {
+const handleBackspace = (index:any) => {
   if (otpValues.value[index] !== "") {
     otpValues.value[index] = "";
   } else if (index > 0) {
@@ -79,7 +79,7 @@ const handleBackspace = (index) => {
   }
 };
 
-const createRef = (index) => (el) => {
+const createRef = (index:any) => (el:any) => {
   refs[index].value = el;
 };
 

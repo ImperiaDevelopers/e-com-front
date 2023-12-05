@@ -54,11 +54,26 @@
       </div>
       <div>
         <div class="flex flex-wrap gap-8">
-          <Card
-            v-for="(item, index) in store.filter_products"
-            :data="item"
-            :key="index"
-          />
+          <div v-for="(item, index) in store.filter_products" :key="index">
+            <!-- Find the corresponding it in store.stocks based on the condition -->
+            <div
+              v-if="
+                (it = store.stocks.find(
+                  (stock) => stock.product_id === item.id
+                ))
+              "
+            >
+              <Card
+                :data="item"
+                :key="index"
+                :to="it.to ? it.to : null"
+              />
+            </div>
+            <!-- Handle the case where it.to is not available in store.stocks -->
+            <div v-else>
+              <Card :data="item" :key="index" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +106,7 @@ const route = useRoute();
 const value = ref([200000, 18000000]);
 
 const store = useProductStore();
+
 const storeBasket = useBasketStore();
 const storeFav = useFavouritesStore();
 const filter = ref([
@@ -185,6 +201,7 @@ function getCookie(name: string) {
 }
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
+  await store.getProductInStock();
   // console.log(store.filter_products);
 });
 </script>

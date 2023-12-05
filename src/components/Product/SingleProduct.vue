@@ -62,7 +62,7 @@
           <h1 class="text-[#515D6C] text-[16px]">
             Narxi
             <span class="ml-[20px] text-[32px] text-[#06172D]"
-              >{{ formatPrice(store.product?.price) }} uzs</span
+              >{{ parseFormattedNumber(store.product?.price) }} uzs</span
             >
           </h1>
           <div class="flex gap-5">
@@ -114,6 +114,18 @@ const store = useProductStore();
 
 const currentSlide = ref(0);
 
+const parseFormattedNumber = (number: any) => {
+  number = Number(number);
+  let numberString = number.toLocaleString();
+
+  // Keep only the last two digits after the decimal point
+  const decimalIndex = numberString.indexOf(".");
+  if (decimalIndex !== -1) {
+    numberString = numberString.slice(0, decimalIndex + 4);
+  }
+
+  return numberString;
+};
 const formatPrice = (price: any) => {
   if (price !== undefined) {
     return parseFloat(price).toFixed(2);

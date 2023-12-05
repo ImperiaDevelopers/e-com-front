@@ -8,7 +8,7 @@
     class="mb-[4%]"
   >
     <Slide v-for="(item, index) in imgs" :key="index">
-      <Card :data="item" :key="index" />
+      <Card :data="item" :key="index" :to="item.to ? item.to : null"/>
     </Slide>
 
     <template #addons>
