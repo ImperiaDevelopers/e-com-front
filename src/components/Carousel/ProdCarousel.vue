@@ -7,7 +7,7 @@
     :wrap-around="true"
     class="mb-[4%]"
   >
-    <Slide v-for="(item, index) in store1.products" :key="index">
+    <Slide v-for="(item, index) in imgs" :key="index">
       <Card :data="item" :key="index" :to="item.to ? item.to : null" />
     </Slide>
 
@@ -28,6 +28,9 @@ import Card from "../Product/Card.vue";
 
 const store = useBasketStore();
 const store1 = useProductStore();
+const props = defineProps({
+  imgs: Array,
+});
 
 const addProductToCard = async (item: any) => {
   const payload = {
