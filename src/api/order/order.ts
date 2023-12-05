@@ -6,6 +6,7 @@ interface OrderApi {
   getOrderId(id: string): Promise<any>;
   updateOrder(payload: any, id: string): Promise<any>;
   deleteOrder(id: string): Promise<any>;
+  getClientOrder(id: string): Promise<any>;
 }
 
 const orderApi: OrderApi = {
@@ -29,6 +30,10 @@ const orderApi: OrderApi = {
   deleteOrder(id) {
     const url = `order/delete/${id}`;
     return axiosClient.delete(url);
+  },
+  getClientOrder(id) {
+    const url = `order/client/${id}`;
+    return axiosClient.get(url);
   },
 };
 
