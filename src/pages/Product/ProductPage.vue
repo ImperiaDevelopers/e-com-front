@@ -49,7 +49,6 @@ onMounted(async () => {
     item.product.to = item.to;
     stocks.value.push(item.product);
   });
-  await productStore.getProducts(params);
 
   await store.getClientViews(id);
   store.views.forEach((item) => {
