@@ -34,6 +34,18 @@
           </div>
         </div>
         <div class="overflow-y-auto h-[700px] scroll-container">
+          <h2 class="text-[16px] font-[500] pb-2">Brendi</h2>
+          <div class="flex flex-wrap gap-2">
+            <button
+              v-for="(it, index) in store.brands"
+              :key="index"
+              :class="{ active: activeBrand === it.proBrand.id }"
+              class="py-[7px] px-[18px] rounded-[25px] bg-[#fff] text-[12px] hover:bg-[#e5effa] hover:scale-110"
+              @click="setActiveBrand(it.proBrand.id)"
+            >
+              {{ it.proBrand.name }}
+            </button>
+          </div>
           <div
             class="w-[240px] flex flex-col flex-wrap gap-3 mt-[24px]"
             v-for="(item, index) in filter"
@@ -63,11 +75,7 @@
                 ))
               "
             >
-              <Card
-                :data="item"
-                :key="index"
-                :to="it.to ? it.to : null"
-              />
+              <Card :data="item" :key="index" :to="it.to ? it.to : null" />
             </div>
             <!-- Handle the case where it.to is not available in store.stocks -->
             <div v-else>
@@ -106,24 +114,16 @@ const route = useRoute();
 const value = ref([200000, 18000000]);
 
 const store = useProductStore();
+const activeBrand = ref(null);
+const setActiveBrand = (name: any) => {
+  activeBrand.value = name;
+  // console.log(activeBrand.value);
+  // You can perform additional actions here if needed
+};
 
 const storeBasket = useBasketStore();
 const storeFav = useFavouritesStore();
 const filter = ref([
-  {
-    name: "Brendi",
-    values: [
-      "Vivo",
-      "Samsung",
-      "Apple",
-      "Tecno",
-      "Oppo",
-      "Nokia",
-      "Xiomi",
-      "Realmi",
-      "Huawei",
-    ],
-  },
   {
     name: "Tezkor xotira RAM",
     values: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"],
@@ -145,19 +145,6 @@ const filter = ref([
       "10000 mAh",
     ],
   },
-  {
-    name: "display",
-    values: [
-      "3000 mAh",
-      "4000 mAh",
-      "5000 mAh",
-      "6000 mAh",
-      "7000 mAh",
-      "8000 mAh",
-      "9000 mAh",
-      "10000 mAh",
-    ],
-  },
 ]);
 
 const payload = ref({
@@ -165,23 +152,36 @@ const payload = ref({
     from: 0,
     to: 1000000000000000000000.00001,
   },
+  brend: activeBrand.value,
   category: Number(route.params.id),
   attributes: [],
 });
 
-onMounted(() => {
-  watch(value, (value) => {
+watch(activeBrand, (value) => {
+  store.getFilter({
+    price: {
+      from: 0,
+      to: 1000000000000000000000.00001,
+    },
+     attributes: [],
+    category: Number(route.params.id),
+    brend: value,
+  });
+});
+onMounted(async() => {
+  watch(value, async(value) => {
     payload.value = {
       price: {
         from: value[0],
         to: value[1],
       },
+      brend: activeBrand.value,
       category: Number(route.params.id),
       attributes: [],
     };
-    store.getFilter(payload.value);
+   await store.getFilter(payload.value);
   });
-  store.getFilter(payload.value);
+  await store.getFilter(payload.value);
 });
 const clientId = getCookie("clientId");
 
@@ -202,6 +202,7 @@ function getCookie(name: string) {
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
   await store.getProductInStock();
+  await store.getCatBrand(route.params.id);
   // console.log(store.filter_products);
 });
 </script>
@@ -262,5 +263,10 @@ span {
   display: inline-block;
   margin-top: 10px;
   font-size: 1.2em;
+}
+.active {
+  background-color: #134e9b;
+  color: #fff;
+  // Add any other styles for the active state
 }
 </style>

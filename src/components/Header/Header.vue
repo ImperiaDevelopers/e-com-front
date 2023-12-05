@@ -86,7 +86,7 @@
               <div class="flex flex-col gap-[5px] justify-center">
                 <h1
                   class="cursor-pointer text-[15px] flex gap-4 items-center hover:bg-[#c8c9ce] transition-all rounded p-3"
-                  @click="opener1(0)"
+                  @mouseup="opener1(0)"
                 >
                   <i class="fa-brands fa-salesforce w-[30px] fa-2x"></i>
                   <span>Aksiyalar</span>
