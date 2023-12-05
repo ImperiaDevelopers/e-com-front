@@ -68,6 +68,7 @@
           <div class="flex gap-5">
             <button
               class="w-[230px] h-[56px] border-2 border-[#134E9B] text-[#134E9B] rounded-md hover:bg-[#e7f2ff]"
+              @click="addProductToCard(store.product)"
             >
               Savatga qo‘shish
             </button>
@@ -103,7 +104,7 @@
 
 <script setup lang="ts">
 import { Carousel, Slide, Navigation } from "vue3-carousel";
-
+import Notification from "../../plugins/Notification";
 import "vue3-carousel/dist/carousel.css";
 import { onMounted, ref } from "vue";
 import { useProductStore } from "../../stores/products/product";
@@ -130,6 +131,32 @@ const formatPrice = (price: any) => {
     return parseFloat(price).toFixed(2);
   }
   return "";
+};
+
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return Number(cookieValue);
+    }
+  }
+
+  return null;
+}
+
+const addProductToCard = async (item: any) => {
+  const payload = {
+    product_id: item.id,
+    client_id: getCookie("clientId"),
+    price: formatPrice(item.price),
+    quantity: 1,
+  };
+  await store.addProductToCard(payload);
+  Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
 };
 
 onMounted(() => {

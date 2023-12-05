@@ -13,13 +13,13 @@
       </div>
     </div>
     <div
-    v-if="props.to"
+      v-if="props.to"
       class="px-[10px] py-[5px] bg-white text-[#E81504] absolute top-[4%] left-[10%] rounded-md"
     >
       Aksiyada
     </div>
     <div
-    v-if="props.to"
+      v-if="props.to"
       class="w-[140px] flex justify-center py-[3px] bg-white text-[#E81504] absolute top-[62%] right-[2%] rounded-md"
     >
       {{ formatCountdown() }}
@@ -151,7 +151,18 @@ function getCookie(name: string) {
   return null;
 }
 const otish = async (id: any) => {
-  await storeView.addViews({ client_id: clientId, product_id: id });
+  await storeView.getClientViews(clientId);
+  console.log(storeView.views);
+  const hasProductId = storeView.views.some(view => view.product_id === id);
+
+  console.log(hasProductId);
+  if (!hasProductId) {
+    await storeView.addViews({ client_id: clientId, product_id: id });
+    console.log('Product added:', id);
+  } else {
+    console.log('Product already exists:', id);
+  }
+
   await router.push(`/product/${id}`);
   location.reload();
 };
@@ -187,7 +198,7 @@ const favourities = async (id: any) => {
     await storeFav.deleteFavourites(storedId);
     localStorage.setItem(localStorageKey, JSON.stringify(true));
   }
-  location.reload();
+  // location.reload();
 };
 
 const addProductToCard = async (item: any) => {

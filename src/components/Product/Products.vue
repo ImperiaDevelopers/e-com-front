@@ -34,6 +34,17 @@
           </div>
         </div>
         <div class="overflow-y-auto h-[700px] scroll-container">
+          
+            <h2 class="text-[16px] font-[500] pb-2">Brendi</h2>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="(it, index) in store.brands"
+                :key="index"
+                class="py-[7px] px-[18px] rounded-[25px] bg-[#fff] text-[12px] hover:bg-[#e5effa] hover:scale-110"
+              >
+                {{ it.name }}
+              </button>
+            </div>
           <div
             class="w-[240px] flex flex-col flex-wrap gap-3 mt-[24px]"
             v-for="(item, index) in filter"
@@ -107,23 +118,11 @@ const value = ref([200000, 18000000]);
 
 const store = useProductStore();
 
+
 const storeBasket = useBasketStore();
 const storeFav = useFavouritesStore();
 const filter = ref([
-  {
-    name: "Brendi",
-    values: [
-      "Vivo",
-      "Samsung",
-      "Apple",
-      "Tecno",
-      "Oppo",
-      "Nokia",
-      "Xiomi",
-      "Realmi",
-      "Huawei",
-    ],
-  },
+ 
   {
     name: "Tezkor xotira RAM",
     values: ["2GB", "3GB", "4GB", "6GB", "8GB", "12GB", "16GB"],
@@ -145,19 +144,7 @@ const filter = ref([
       "10000 mAh",
     ],
   },
-  {
-    name: "display",
-    values: [
-      "3000 mAh",
-      "4000 mAh",
-      "5000 mAh",
-      "6000 mAh",
-      "7000 mAh",
-      "8000 mAh",
-      "9000 mAh",
-      "10000 mAh",
-    ],
-  },
+  
 ]);
 
 const payload = ref({
@@ -202,6 +189,7 @@ function getCookie(name: string) {
 onMounted(async () => {
   await storeFav.getClientFavourites({ client_id: clientId });
   await store.getProductInStock();
+  await store.getProductBrand()
   // console.log(store.filter_products);
 });
 </script>

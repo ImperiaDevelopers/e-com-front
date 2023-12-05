@@ -17,10 +17,11 @@ interface ProductApi {
   getProInfo(params?: any): Promise<any>;
   getProInfoID(id: string): Promise<any>;
   addProductToUserCard(payload: any): Promise<any>;
-  getProductInStock():Promise<any>
+  getProductInStock(): Promise<any>;
   getProReiting(params?: any): Promise<any>;
   getProStock(params?: any): Promise<any>;
   getProStockById(id: string): Promise<any>;
+  getProductBrand(): Promise<any>;
 }
 
 const productApi: ProductApi = {
@@ -113,6 +114,10 @@ const productApi: ProductApi = {
     const url = `product_in_stock/${id}`;
     return axiosClient.get(url);
   },
+  getProductBrand() {
+    const url = `product_brand`
+    return axiosClient.get(url);
+  }
 };
 
 export default productApi;
