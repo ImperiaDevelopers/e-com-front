@@ -114,7 +114,7 @@ const store = useProductStore();
 const currentSlide = ref(0);
 
 const parseFormattedNumber = (number: any) => {
-number = Number(number);
+  number = Number(number);
   let numberString = number.toLocaleString();
 
   // Keep only the last two digits after the decimal point
@@ -124,6 +124,12 @@ number = Number(number);
   }
 
   return numberString;
+};
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
 };
 
 onMounted(() => {

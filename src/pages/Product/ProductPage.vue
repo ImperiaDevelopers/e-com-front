@@ -22,7 +22,6 @@ import { onMounted, ref } from "vue";
 import Loading from "../../components/Loader/Loading.vue";
 import { useViewsStore } from "../../stores/last-views/views";
 import { useProductStore } from "../../stores/products/product";
-3;
 
 const store = useViewsStore();
 const storeProduct = useProductStore();
@@ -50,6 +49,8 @@ onMounted(async () => {
     item.product.to = item.to;
     stocks.value.push(item.product);
   });
+  await productStore.getProducts(params);
+
   await store.getClientViews(id);
   store.views.forEach((item) => {
     const matching = stocks.value.find((prod) => prod.id == item.product_id);

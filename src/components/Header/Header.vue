@@ -81,46 +81,227 @@
             </button>
             <div
               v-if="opener"
-              class="w-[380px] category bg-[#EBEFF3] absolute top-16 right-[-45px] px-[35px] py-[10px] h-[540px]"
+              class="w-[380px] transition-transform category bg-[#EBEFF3] absolute top-16 right-[-45px] px-[35px] py-[10px] h-[540px]"
             >
-              <div class="flex flex-col gap-[25px] justify-center p-[40px]">
-                <a
-                  href="#"
-                  class="text-[#535c6a] text-[15px] flex gap-4 items-center"
-                  @mousemove="opener1 = true"
-                  ><i class="fa-brands fa-salesforce w-[30px] fa-2x"></i>
+              <div class="flex flex-col gap-[5px] justify-center">
+                <h1
+                  class="cursor-pointer text-[15px] flex gap-4 items-center hover:bg-[#c8c9ce] transition-all rounded p-3"
+                  @click="opener1(0)"
+                >
+                  <i class="fa-brands fa-salesforce w-[30px] fa-2x"></i>
                   <span>Aksiyalar</span>
-                </a>
+                </h1>
                 <a
                   v-for="(item, index) in store.categories"
-                  {{
-                  console.log(item)
-                  }}
                   href="#"
                   :key="index"
-                  class="text-[#535c6a] text-[15px] flex gap-4 items-center"
-                  @mousemove="opener1 = true"
-                  ><img :src="item.icon" alt="" class="w-[30px]" />
+                  class="text-[#535c6a] text-[15px] flex gap-4 items-center hover:bg-[#c8c9ce] transition-all rounded p-3"
+                  @click="opener1(item.id)"
+                >
+                  <img :src="item.icon" alt="" class="w-[30px]" />
                   <span>{{ item.category_name }}</span>
                 </a>
               </div>
             </div>
+
+            <!-- Aksiyalar -->
             <div
-              v-if="opener1"
+              v-if="righ1"
               class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
-            ></div>
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Aksiyadagi mahsulotlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.product.id)"
+                v-for="(item, index) in stockStore.stocks"
+                :key="index"
+              >
+                <p>{{ item.product.name }}</p>
+                <p>{{ formatPrice(item.product.price) }} so'm</p>
+                <p>
+                  Alsiya tugash muddati: <b>{{ item.duration }} kun</b>
+                </p>
+              </div>
+            </div>
+
+            <!-- Televizorlar -->
+            <div
+              v-if="righ2"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Televizorlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Smartfon va telefonlar -->
+            <div
+              v-if="righ3"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Smartfon va telefonlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Muzlatgichlar -->
+            <div
+              v-if="righ4"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Muzlatgichlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Konditsonerlar -->
+            <div
+              v-if="righ5"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Konditsonerlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Changyukgichlar -->
+            <div
+              v-if="righ6"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Changyutgichlar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Kir yuvish mashinalari -->
+            <div
+              v-if="righ7"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Kir yuvish mashinalari
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
+
+            <!-- Kompyuter va noutbuklar -->
+            <div
+              v-if="righ8"
+              class="w-[810px] category left-[175px] bg-[#fff] absolute top-16 px-[45px] py-[20px] h-[540px]"
+            >
+              <h1
+                class="text-[25px] font-medium text-[#000] font-['Roboto'] mb-4"
+              >
+                Kompyuter va noutbuklar
+              </h1>
+              <div
+                class="cursor-pointer flex justify-between hover:bg-[#c8c9ce] transition-all rounded p-3"
+                @click="single(item.id)"
+                v-for="(item, index) in productStore.catProducts"
+                :key="index"
+              >
+                <p>{{ item.name }}</p>
+                <p>{{ formatPrice(item.price) }} so'm</p>
+              </div>
+            </div>
           </div>
 
+          <!-- Search -->
           <div>
             <input
               type="text"
               placeholder="What are you looking for?"
               class="ps-5 pe-5 p-[12.3px] color-[#EBEFF3] bg-[#EBEFF3] text-[13px] w-[518px] rounded-md outline-none"
+              v-model="inputv"
+              @change="handleChange($event)"
             />
             <i
               class="fa-solid fa-magnifying-glass bg-[#134E9B] text-white p-[14px] rounded-md cursor-pointer hover:bg-[#0c56b6]"
               style="margin-left: -10px"
             ></i>
+          </div>
+          <div
+            v-if="isopen"
+            class="w-[380px] transition-transform category bg-white absolute top-[120px] right-[610px] px-[35px] py-[10px] h-auto"
+          >
+            <a
+              v-for="(item, index) in productStore.searchProducts"
+              :key="index"
+              class="flex cursor-pointer p-2 hover:bg-[#EBEFF3] transition-all rounded"
+              @click="single(item.id)"
+            >
+              {{ item.name }}
+            </a>
           </div>
         </div>
 
@@ -204,17 +385,27 @@ import { useCategoryStore } from "../../stores/category/category";
 import { useBasketStore } from "../../stores/basket/basket";
 import { useRouter } from "vue-router";
 import { useFavouritesStore } from "../../stores/favourites/favourites";
+import { useStockStore } from "../../stores/stock/stock";
+import { useProductStore } from "../../stores/products/product";
+
 const router = useRouter();
 const store = useCategoryStore();
 const store1 = useBasketStore();
 const store2 = useFavouritesStore();
+const stockStore = useStockStore();
+const productStore = useProductStore();
 const city = ref("");
 
 const cookieValue = getCookie("city");
-
 if (cookieValue) {
   city.value = cookieValue;
 }
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
+};
 
 function getCookie(name: string) {
   const cookieString = document.cookie;
@@ -239,11 +430,115 @@ const isLoggedIn = () => {
 };
 
 const opener = ref(false);
-const opener1 = ref(false);
+let righ1 = ref(false);
+let righ2 = ref(false);
+let righ3 = ref(false);
+let righ4 = ref(false);
+let righ5 = ref(false);
+let righ6 = ref(false);
+let righ7 = ref(false);
+let righ8 = ref(false);
 
+const opener1 = (index: number) => {
+  if (index == 0) {
+    righ1.value = true;
+    righ2.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    stockStore.getStocks();
+  }
+  if (index == 8) {
+    righ2.value = true;
+    righ1.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 5) {
+    righ3.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 9) {
+    righ4.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ3.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 10) {
+    righ5.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 13) {
+    righ6.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ7.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 11) {
+    righ7.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ8.value = false;
+    productStore.getProductByCatId(index);
+  }
+  if (index == 6) {
+    righ8.value = true;
+    righ1.value = false;
+    righ2.value = false;
+    righ3.value = false;
+    righ4.value = false;
+    righ5.value = false;
+    righ6.value = false;
+    righ7.value = false;
+    productStore.getProductByCatId(index);
+  }
+};
 const change = () => {
-  opener.value=!opener.value
-  opener1.value = false;
+  opener.value = !opener.value;
+  righ1.value = false;
+  righ2.value = false;
+  righ3.value = false;
+  righ4.value = false;
+  righ5.value = false;
+  righ6.value = false;
+  righ7.value = false;
+  righ8.value = false;
 };
 
 let basketNumber = ref();
@@ -251,8 +546,23 @@ let clientFav = ref();
 const otish = async (id: any) => {
   await router.push(`/products/${id}`);
   location.reload();
-  //   setTimeout(() => {
-  //   }, 1000);
+};
+
+const single = async (id: number) => {
+  await router.push(`/product/${id}`);
+};
+
+// // // // // search
+const inputv = ref("");
+const isopen = ref(false);
+
+const handleChange = async (e: any) => {
+  inputv.value = e.target.value;
+  isopen.value = true;
+  if (e.target.value == "") {
+    isopen.value = false;
+  }
+  await productStore.getProductSearch({ name: inputv.value });
 };
 onMounted(async () => {
   basketNumber.value = await store1.getClientBaskets(+getCookie("clientId"));

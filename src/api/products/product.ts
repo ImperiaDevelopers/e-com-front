@@ -5,6 +5,7 @@ interface ProductApi {
   getProduct(params?: { page?: number; limit?: number }): Promise<any>;
   getProductId(id: string): Promise<any>;
   getProductSearch(search: any): Promise<any>;
+  getProductByCatId(id: number): Promise<any>;
   updateProduct(payload: any, id: string): Promise<any>;
   getImage(product_id: any): Promise<any>;
   getAllImages(params?: any): Promise<any>;
@@ -38,6 +39,10 @@ const productApi: ProductApi = {
     return axiosClient.get(url);
   },
 
+  getProductByCatId(id) {
+    const url = `product/category/${id}`;
+    return axiosClient.get(url);
+  },
   updateProduct(payload, id) {
     const url = `product/${id}`;
     return axiosClient.put(url, payload);

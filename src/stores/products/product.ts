@@ -11,14 +11,18 @@ interface ProductState {
   per_info: any[];
   product: any[];
   stocks: any[];
+  catProducts: any[];
   reiting: any[];
   stock: any[];
+  searchProducts: any[];
 }
 
 export const useProductStore = defineStore({
   id: "product",
   state: (): ProductState => ({
     products: [],
+    searchProducts: [],
+    // loading: false,
     images: [],
     allImages: [],
     filter_products: [],
@@ -27,6 +31,7 @@ export const useProductStore = defineStore({
     per_info: [],
     product: [],
     stocks: [],
+    catProducts: [],
     reiting: [],
     stock: [],
   }),
@@ -44,6 +49,7 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getProductSearch(params);
         this.products = res;
+        this.searchProducts = res.products;
       } catch (err) {
         console.error(err);
       }
@@ -62,6 +68,14 @@ export const useProductStore = defineStore({
       try {
         const res = await productApi.getProductId(productId);
         this.product = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getProductByCatId(id: number) {
+      try {
+        const res = await productApi.getProductByCatId(id);
+        this.catProducts = res;
       } catch (err) {
         console.error(err);
       }
