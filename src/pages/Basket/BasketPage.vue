@@ -14,7 +14,7 @@
             <div
               class="w-[200px] h-[170px] bg-[#EBEFF3] rounded-md flex items-center justify-center"
             >
-              <img class="w-[120px]" :src="i.product.image[0].image" alt="" />
+              <img class="w-[120px]" :src="i.product.image[0]?.image" alt="" />
             </div>
             <div class="flex-col w-[560px] h-[170px] flex justify-around">
               <div class="flex items-start justify-between">

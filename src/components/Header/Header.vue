@@ -550,6 +550,7 @@ const otish = async (id: any) => {
 
 const single = async (id: number) => {
   await router.push(`/product/${id}`);
+  location.reload();
 };
 
 // // // // // search

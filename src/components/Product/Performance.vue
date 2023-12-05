@@ -2,14 +2,14 @@
   <div>
     <div class="flex gap-[200px]">
       <h1
-        class="text-[#929599]  text-[18px] mb-[4%] cursor-pointer"
+        class="text-[#929599] text-[18px] mb-[4%] cursor-pointer"
         @click="changer = true"
         :class="{ active: changer }"
       >
         Telefon xususiyatlari
       </h1>
       <h1
-        class=" text-[#929599] text-[18px] mb-[4%] cursor-pointer"
+        class="text-[#929599] text-[18px] mb-[4%] cursor-pointer"
         @click="changer = false"
         :class="{ active: !changer }"
       >
@@ -36,6 +36,7 @@
         <path d="M0 1H650" stroke="#B6BABF" stroke-dasharray="5 5" />
       </svg>
     </div>
+    <!-- Comments -->
     <div v-if="!changer" class="scroll-container">
       <div v-if="!changer" v-for="(item, index) in comments" :key="index">
         <div class="flex gap-10">
@@ -145,6 +146,6 @@ const getStarClass = (index: number, rating: number) => {
 .active {
   color: black;
   font-weight: 700;
- text-decoration: underline 2px;
+  text-decoration: underline 2px;
 }
 </style>

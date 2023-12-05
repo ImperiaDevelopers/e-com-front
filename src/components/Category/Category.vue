@@ -5,11 +5,11 @@
     <div class="flex flex-col">
       <div class="qator1 flex gap-[10px] mb-[10px]">
         <div class="noutbook">
-          <button><h1>Noutbooklar</h1></button>
+          <button><h1 @click="otish(6)">Noutbooklar</h1></button>
           <img src="../../assets/category_img/noutbook.png" alt="noutbook" />
         </div>
         <div class="konditsioner">
-          <button><h1>Konditseoner</h1></button>
+          <button><h1 @click="otish(10)">Konditseoner</h1></button>
 
           <img
             src="../../assets/category_img/condisioner.png"
@@ -18,7 +18,7 @@
         </div>
         <div class="telefon">
           <button>
-            <h1>Smartfonlar</h1>
+            <h1 @click="otish(5)">Smartfonlar</h1>
           </button>
           <img
             class="tel"
@@ -29,14 +29,14 @@
       </div>
       <div class="qator1 flex gap-[10px]">
         <div class="kirMashina">
-          <button><h1>Kiryuvish mashinasi</h1></button>
+          <button><h1 @click="otish(11)">Kiryuvish mashinasi</h1></button>
           <img
             src="../../assets/category_img/kirmashina.png"
             alt="kirmashina"
           />
         </div>
         <div class="tv pr-[20px]">
-          <button><h1>Televizorlar</h1></button>
+          <button><h1 @click="otish(8)">Televizorlar</h1></button>
           <img src="../../assets/category_img/tv.png" alt="tv" />
         </div>
         <div class="muzlatgich1 relative">
@@ -46,15 +46,15 @@
             alt="muz1"
           />
           <button>
-            <h1>Muzlatgichlar</h1>
+            <h1 @click="otish(9)">Muzlatgichlar</h1>
           </button>
         </div>
       </div>
     </div>
     <div>
-      <div class="koproq w-[250px] h-[57px] mb-[10px]">
+      <a href="/products" class="koproq w-[250px] h-[57px] mb-[10px]">
         <button>Ko'proq</button>
-      </div>
+      </a>
       <div class="muzlatgich2">
         <img src="../../assets/category_img/muz2.png" alt="muz2" />
       </div>
@@ -63,11 +63,14 @@
 </template>
 
 <script setup lang="ts">
-// import useCategoryStore from "../../stores/category/category.ts";
+import { useRouter } from "vue-router";
 
-// const store = useCategoryStore();
+const router = useRouter();
 
-// console.log(store);
+const otish = async (id: any) => {
+  await router.push(`/products/${id}`);
+  location.reload();
+};
 </script>
 
 <style lang="scss" scoped>

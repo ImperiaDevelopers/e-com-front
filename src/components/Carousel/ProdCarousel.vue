@@ -7,8 +7,8 @@
     :wrap-around="true"
     class="mb-[4%]"
   >
-    <Slide v-for="(item, index) in imgs" :key="index">
-      <Card :data="item" :key="index" :to="item.to ? item.to : null"/>
+    <Slide v-for="(item, index) in store1.products" :key="index">
+      <Card :data="item" :key="index" :to="item.to ? item.to : null" />
     </Slide>
 
     <template #addons>
@@ -40,10 +40,6 @@ const addProductToCard = async (item: any) => {
   Notification(`Mahsulot savatga qo'shildi: ${item.name}`, "success");
 };
 
-const props = defineProps({
-  imgs: Array,
-});
-
 const settings = {
   itemsToShow: 0.8,
   snapAlign: "center",
@@ -60,8 +56,15 @@ const breakpoints = {
   },
 };
 
+const params = {
+  page: 1,
+  limit: 10,
+  last_page: null,
+  count: null,
+};
 onMounted(async () => {
-  // store.addProductToBasket()
+  // store.addProductToBasket();
+  store1.getProducts(params);
 });
 </script>
 
