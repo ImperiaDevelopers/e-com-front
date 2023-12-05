@@ -16,7 +16,7 @@
         >
           <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item
-              :title="`${i.card.product.name}`"
+              :title="`Buyurtma id ${i.card.id}`"
               :name="`${i.id}`"
             >
               <div
