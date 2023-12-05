@@ -65,8 +65,12 @@
               <button @click="change">Edit</button>
             </div>
             <div v-else class="w-1/2 flex flex-col text-[24px]">
-              <input type="text" placeholder="First Name" />
-              <input type="text" placeholder="Last Name" />
+              <input
+                type="text"
+                placeholder="First Name"
+                :v-model="first_name"
+              />
+              <input type="text" placeholder="Last Name" :v-model="last_name" />
               <button @click="save">Save</button>
             </div>
           </div>
@@ -94,6 +98,21 @@ const change = () => {
   edit.value = false;
 };
 
+const first_name = ref("");
+const last_name = ref("");
+
+const save = async () => {
+  console.log(first_name.value);
+  await store.updateClient(
+    {
+      first_name: first_name.value,
+      last_name: last_name.value,
+    },
+    id
+  );
+
+  // await store.updateClient(payload, id);
+};
 function getCookie(name: string) {
   const cookieString = document.cookie;
   const cookies = cookieString.split("; ");
