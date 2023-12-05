@@ -9,11 +9,14 @@
         <button @click="changer = false" class="text-[24px]">Sozlamalar</button>
       </div>
       <div class="w-5/6 flex flex-col gap-3">
-        <div v-if="changer" v-for="(i, index) in orders" :key="index">
+        <div
+          v-if="changer"
+          v-for="(i, index) in orderStore.orders"
+          :key="index"
+        >
           <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item
-              class="text-[24px]"
-              :title="`${i.title}`"
+              :title="`Buyurtma id ${i.card.id}`"
               :name="`${i.id}`"
             >
               <div
@@ -22,28 +25,30 @@
                 <div>
                   <div class="flex">
                     Product:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.products }}
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.card.product.name }}
                     </p>
                   </div>
                   <div class="flex">
                     Status:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.status }}
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.status.status_name }}
                     </p>
                   </div>
                   <div class="flex">
-                    Sana:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.data }}
+                    Addres:
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.region.name }} - {{ i.district.name }}
                     </p>
                   </div>
                 </div>
-                <div class="flex pt-[15px] text-[24px]">
-                  <h1 class="">Narx:</h1>
-                  <p class="text-black font-bold">
-                    &nbsp&nbsp&nbsp{{ i.price }}
-                  </p>
+                <div class="pt-[15px] text-[24px]">
+                  <div class="flex">
+                    <h1 class="">Narx:</h1>
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ formatPrice(i.card.price) }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </el-collapse-item>
@@ -53,63 +58,20 @@
           <div
             class="w-[800px] p-5 flex gap-[50px] font-medium rounded-[10px] border bg-white border-[#12486B]/30 shadow-lg"
           >
-            <div class="w-1/2 flex flex-col">
-              <vee-form
-                :validation-schema="schema"
-                :initial-values="props.data"
-                @submit="updateProfile"
-              >
-                <VInput
-                  type="text"
-                  name="first_name"
-                  label="First Name"
-                  placeholder="Enter your name"
-                  :disabled="disabled"
-                ></VInput>
-                <VInput
-                  type="text"
-                  name="last_name"
-                  label="Last Name"
-                  placeholder="Enter your surname"
-                  :disabled="disabled"
-                ></VInput>
-                <VInput
-                  type="text"
-                  name="phone"
-                  label="Phone"
-                  placeholder="(+998)-90-123-45-67"
-                  :mask="'(+998)-##-###-##-##'"
-                  :disabled="disabled"
-                ></VInput>
-                <div v-if="!disabled" class="flex gap-5">
-                  <VButton
-                    btn_type="danger"
-                    type="button"
-                    class="mt-5 w-full text-[18px]"
-                    @click="cancel"
-                  >
-                    Cancel
-                  </VButton>
-                  <VButton
-                    v-if="!disabled"
-                    btn_type="primary"
-                    type="submit"
-                    class="mt-5 w-full text-[18px]"
-                  >
-                    Save
-                  </VButton>
-                </div>
-                <VButton
-                  v-else
-                  btn_type="primary"
-                  :isLoading="false"
-                  type="button"
-                  class="mt-5 w-full text-[18px]"
-                  @click="disabled = false"
-                >
-                  Edit
-                </VButton>
-              </vee-form>
+            <div v-if="edit" class="w-1/2 flex flex-col text-[24px]">
+              <h1>First Name: {{ store.info.first_name }}</h1>
+              <h1>Last Name: {{ store.info.last_name }}</h1>
+              <h1>Number: {{ store.info.phone_number }}</h1>
+              <button @click="change">Edit</button>
+            </div>
+            <div v-else class="w-1/2 flex flex-col text-[24px]">
+              <input
+                type="text"
+                placeholder="First Name"
+                :v-model="first_name"
+              />
+              <input type="text" placeholder="Last Name" :v-model="last_name" />
+              <button @click="save">Save</button>
             </div>
           </div>
         </div>
@@ -122,52 +84,77 @@
 <script setup lang="ts">
 import Header from "../../components/Header/Header.vue";
 import Footer from "../../components/Footer/Footer.vue";
-import VInput from "../../components/ui/VInput.vue";
-import VButton from "../../components/ui/VButton.vue";
-import { ref } from "vue";
-const changer = ref(true);
+import { onMounted, ref } from "vue";
+import { useClientStore } from "../../stores/client/client";
+import { useOrderStore } from "../../stores/order/order";
 
+const orderStore = useOrderStore();
+const edit = ref(true);
+const changer = ref(true);
+const store = useClientStore();
 const disabled = ref(true);
 
-const props = defineProps({
-  data: {
-    first_name: "",
-    last_name: "",
-    status: null,
-    phone: "",
-    image: "",
-    role: "",
-    start_date: "",
-    _id: "",
-  },
-});
-
-const orders = ref([
-  {
-    id: 1,
-    title: "iphone 13",
-    products: "pro, pro max",
-    price: "123231",
-    status: "payed",
-    data: "12.12.2012",
-  },
-  {
-    id: 2,
-    title: "iphone 13",
-    products: "pro, pro max",
-    price: "123231",
-    status: "payed",
-    data: "12.12.2012",
-  },
-]);
-const cancel = () => {
-  disabled.value = true;
+const change = () => {
+  edit.value = false;
 };
+
+const first_name = ref("");
+const last_name = ref("");
+
+const save = async () => {
+  console.log(first_name.value);
+  await store.updateClient(
+    {
+      first_name: first_name.value,
+      last_name: last_name.value,
+    },
+    id
+  );
+
+  // await store.updateClient(payload, id);
+};
+function getCookie(name: string) {
+  const cookieString = document.cookie;
+  const cookies = cookieString.split("; ");
+
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split("=");
+
+    if (cookieName === name) {
+      return cookieValue;
+    }
+  }
+
+  return "";
+}
+
+const id = getCookie("clientId");
 
 const activeNames = ref(["1"]);
 const handleChange = (val: string[]) => {
   console.log(val);
 };
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(1);
+  }
+  return "";
+};
+
+onMounted(async () => {
+  await store.getClientById(id);
+  await orderStore.getClientOrder(id);
+  console.log(orderStore.orders, "orderss");
+
+  console.log(store.info);
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+#el-collapse-head-8540 {
+  font-size: 50px;
+}
+.el-collapse-item__header {
+  font-size: 30px;
+}
+</style>
