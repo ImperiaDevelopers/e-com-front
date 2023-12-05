@@ -74,9 +74,9 @@ export const useProductStore = defineStore({
         console.error(err);
       }
     },
-    async getProductBrand() {
+    async getCatBrand(id:number) {
       try {
-        const res = await productApi.getProductBrand();
+        const res = await productApi.getCatBrand(id);
         this.brands = res;
       } catch (err) {
         console.error(err);

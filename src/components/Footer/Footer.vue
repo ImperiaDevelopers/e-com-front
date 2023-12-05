@@ -117,11 +117,11 @@
         <h1 class="font-bold mb-2">Aloqa</h1>
         <h1 class="font-bold mb-6 text-[24px]">+998 (71) 123-45-67</h1>
         <p>Savolingiz bormi?</p>
-        <input
+        <textarea
           type="text"
-          class="mt-2 rounded-lg bg-[#ededed] w-[314px] h-[54px] outline-none font-[12px] px-[20px]"
+          class="mt-2 rounded-lg bg-[#ededed] w-[314px] h-[54px] outline-none font-[12px] px-[20px] py-[15px] resize-none"
           placeholder="O'zingiz qiztirgan savollarni bering?"
-        />
+        ></textarea>
       </div>
     </div>
   </div>
@@ -130,7 +130,7 @@
 <script setup></script>
 
 <style scoped>
-input::placeholder {
+textarea::placeholder {
   font-size: 12px;
 }
 

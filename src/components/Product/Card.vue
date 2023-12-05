@@ -198,7 +198,7 @@ const favourities = async (id: any) => {
     await storeFav.deleteFavourites(storedId);
     localStorage.setItem(localStorageKey, JSON.stringify(true));
   }
-  // location.reload();
+  location.reload();
 };
 
 const addProductToCard = async (item: any) => {

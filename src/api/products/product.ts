@@ -22,6 +22,7 @@ interface ProductApi {
   getProStock(params?: any): Promise<any>;
   getProStockById(id: string): Promise<any>;
   getProductBrand(): Promise<any>;
+  getCatBrand(id: number): Promise<any>;
 }
 
 const productApi: ProductApi = {
@@ -115,9 +116,13 @@ const productApi: ProductApi = {
     return axiosClient.get(url);
   },
   getProductBrand() {
-    const url = `product_brand`
+    const url = `product_brand`;
     return axiosClient.get(url);
-  }
+  },
+  getCatBrand(id) {
+    const url = `pro-cat-brand/category/${id}`;
+    return axiosClient.get(url);
+  },
 };
 
 export default productApi;
