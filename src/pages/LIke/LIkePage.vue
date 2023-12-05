@@ -80,14 +80,14 @@ function getCookie(name: string) {
 const products = ref([]);
 const stocks = ref([]);
 onMounted(async () => {
-  await storeProduct.getProductInStock();
+  storeProduct.getProductInStock();
   storeProduct.stocks.forEach((item) => {
     item.product.to = item.to;
     stocks.value.push(item.product);
   });
 
   await store.getClientFavourites({ client_id: clientId });
-  await store.client_fav.forEach((item) => {
+  store.client_fav.forEach(async (item) => {
     const matching = stocks.value.find((prod) => prod.id == item.product_id);
     if (matching) {
       item.product.to = matching.to;

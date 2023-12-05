@@ -104,7 +104,6 @@ const router = useRouter();
 const route = useRoute();
 
 const value = ref([200000, 18000000]);
-const brend = ref();
 
 const store = useProductStore();
 

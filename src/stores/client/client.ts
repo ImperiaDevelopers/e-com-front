@@ -19,6 +19,13 @@ export const useClientStore = defineStore({
         console.error(err);
       }
     },
+    async messageOrderClient(payload: any) {
+      try {
+        await clientApi.messageorderClient(payload);
+      } catch (err) {
+        console.error(err);
+      }
+    },
     async createClient(payload: any) {
       try {
         const res = await clientApi.createClient(payload);
@@ -65,13 +72,12 @@ export const useClientStore = defineStore({
           setCookie("refresh_token", res.tokens.refresh_token, 365);
         }
         let old_id = getCookie("clientId");
-        console.log(old_id);
         changeCookieValue("userId", res.client.first_name);
         changeCookieValue("clientId", res.client.id);
         if (old_id == null) {
           old_id = "";
         }
-        if (!await this.getClientById(old_id)) {
+        if (!(await this.getClientById(old_id))) {
           this.deleteClient(old_id);
         }
         console.log(res);

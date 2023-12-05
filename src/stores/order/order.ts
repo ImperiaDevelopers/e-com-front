@@ -15,8 +15,7 @@ export const useOrderStore = defineStore({
   actions: {
     async createOrder(payload: any) {
       try {
-        const res = await orderApi.createOrder(payload);
-        this.orders = res.orders;
+        await orderApi.createOrder(payload);
       } catch (err) {
         console.error(err);
       }

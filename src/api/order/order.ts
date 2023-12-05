@@ -1,7 +1,7 @@
 import axiosClient from "../apiClient";
 
 interface OrderApi {
-  createOrder(params?: any): Promise<any>;
+  createOrder(payload?: any): Promise<any>;
   getOrders(params?: any): Promise<any>;
   getOrderId(id: string): Promise<any>;
   updateOrder(payload: any, id: string): Promise<any>;
@@ -9,9 +9,10 @@ interface OrderApi {
 }
 
 const orderApi: OrderApi = {
-  createOrder(params) {
+  createOrder(payload) {
+    console.log(payload);
     const url = `order/create`;
-    return axiosClient.post(url, params);
+    return axiosClient.post(url, payload);
   },
   getOrders(params) {
     const url = `order/all`;

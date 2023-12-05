@@ -4,6 +4,7 @@ import districtApi from "../../api/district/district";
 interface DistrictState {
   district: any[];
   districts: any[];
+  regDistricts: any[];
 }
 
 export const useDistrictStore = defineStore({
@@ -11,11 +12,12 @@ export const useDistrictStore = defineStore({
   state: (): DistrictState => ({
     district: [],
     districts: [],
+    regDistricts: [],
   }),
   actions: {
-    async getDistricts(payload: any) {
+    async getDistricts() {
       try {
-        const res = await districtApi.getDistrict(payload);
+        const res = await districtApi.getDistrict();
         this.districts = res;
         return res;
       } catch (err) {
@@ -26,6 +28,22 @@ export const useDistrictStore = defineStore({
       try {
         const res = await districtApi.getDistrictById(districtId);
         this.districts = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async getDistrictsByRegionId(id: number) {
+      try {
+        const res = await districtApi.getDistrictsByRegionId(id);
+        this.regDistricts = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    async getDistrictsByName(payload: any) {
+      try {
+        return await districtApi.getDistrictByName(payload);
       } catch (err) {
         console.error(err);
       }

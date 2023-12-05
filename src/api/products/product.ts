@@ -47,6 +47,7 @@ const productApi: ProductApi = {
     const url = `image/products/${product_id}`;
     return axiosClient.get(url);
   },
+
   getAllImages(params) {
     const url = `image/all`;
     return axiosClient.get(url);
@@ -56,6 +57,7 @@ const productApi: ProductApi = {
     const url = `product/filter/q?page=${params?.page}&limit=${params?.limit}`;
     return axiosClient.post(url, params);
   },
+
   // --------- Pro Per Group ----- //
   getProPerGroup(params) {
     const url = `pro_perfomance_group`;

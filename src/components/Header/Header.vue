@@ -86,7 +86,17 @@
               <div class="flex flex-col gap-[25px] justify-center p-[40px]">
                 <a
                   href="#"
+                  class="text-[#535c6a] text-[15px] flex gap-4 items-center"
+                  @mousemove="opener1 = true"
+                  ><i class="fa-brands fa-salesforce w-[30px] fa-2x"></i>
+                  <span>Aksiyalar</span>
+                </a>
+                <a
                   v-for="(item, index) in store.categories"
+                  {{
+                  console.log(item)
+                  }}
+                  href="#"
                   :key="index"
                   class="text-[#535c6a] text-[15px] flex gap-4 items-center"
                   @mousemove="opener1 = true"
@@ -221,7 +231,7 @@ function getCookie(name: string) {
   return "";
 }
 const isLoggedIn = () => {
-  if (getCookie("refresh_token").length>1) {
+  if (getCookie("refresh_token").length > 1) {
     return true;
   } else {
     return false;
@@ -230,10 +240,12 @@ const isLoggedIn = () => {
 
 const opener = ref(false);
 const opener1 = ref(false);
+
 const change = () => {
-  opener.value = !opener.value;
+  opener.value=!opener.value
   opener1.value = false;
 };
+
 let basketNumber = ref();
 let clientFav = ref();
 const otish = async (id: any) => {

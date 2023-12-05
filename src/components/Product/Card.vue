@@ -4,7 +4,7 @@
       class="carousel__item w-[273px] h-[280px] bg-[#EBEFF3] rounded-md flex items-center justify-center relative"
       @click="otish(props?.data?.id)"
     >
-      <div class="w-[180px]">
+      <div class="w-[180px] cursor-pointer">
         <img
           class="m-auto object-cover"
           :src="props?.data?.image[0]?.image"
@@ -77,6 +77,13 @@ import { useRouter } from "vue-router";
 import { ITEM_RENDER_EVT } from "element-plus/es/components/virtual-list/src/defaults.mjs";
 import { dateEquals } from "element-plus";
 const router = useRouter();
+
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(2);
+  }
+  return "";
+};
 
 const store = useProductStore();
 const storeView = useViewsStore();
@@ -187,7 +194,7 @@ const addProductToCard = async (item: any) => {
   const payload = {
     product_id: item.id,
     client_id: getCookie("clientId"),
-    price: item.price,
+    price: formatPrice(item.price),
     quantity: 1,
   };
   await store.addProductToCard(payload);

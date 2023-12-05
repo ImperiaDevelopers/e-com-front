@@ -53,7 +53,6 @@ onMounted(async () => {
   await store.getClientViews(id);
   store.views.forEach((item) => {
     const matching = stocks.value.find((prod) => prod.id == item.product_id);
-    console.log(matching?.to);
     if (matching) {
       item.product.to = matching.to;
     }

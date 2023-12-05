@@ -4,6 +4,7 @@ import regionApi from "../../api/region/region";
 interface RegionState {
   region: any[];
   regions: any[];
+  nameRegion: any[];
 }
 
 export const useRegionStore = defineStore({
@@ -11,11 +12,12 @@ export const useRegionStore = defineStore({
   state: (): RegionState => ({
     region: [],
     regions: [],
+    nameRegion: [],
   }),
   actions: {
-    async getRegions(payload: any) {
+    async getRegions() {
       try {
-        const res = await regionApi.getRegion(payload);
+        const res = await regionApi.getRegion();
         this.regions = res;
         return res;
       } catch (err) {
@@ -26,6 +28,15 @@ export const useRegionStore = defineStore({
       try {
         const res = await regionApi.getRegionById(regionId);
         this.regions = res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    async getRegionByName(payload: any) {
+      try {
+        const res = await regionApi.getRegionByName(payload);
+        return res;
       } catch (err) {
         console.error(err);
       }
