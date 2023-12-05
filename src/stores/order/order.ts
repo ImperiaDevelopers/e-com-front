@@ -29,6 +29,15 @@ export const useOrderStore = defineStore({
         console.error(err);
       }
     },
+    async getClientOrder(clientId: string) {
+      try {
+        const res = await orderApi.getClientOrder(clientId);
+        this.orders = res;
+        console.log(this.orders);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async getOrderId(orderId: string) {
       try {
         const res = await orderApi.getOrderId(orderId);

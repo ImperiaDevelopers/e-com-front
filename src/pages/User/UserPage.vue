@@ -9,11 +9,14 @@
         <button @click="changer = false" class="text-[24px]">Sozlamalar</button>
       </div>
       <div class="w-5/6 flex flex-col gap-3">
-        <div v-if="changer" v-for="(i, index) in orders" :key="index">
+        <div
+          v-if="changer"
+          v-for="(i, index) in orderStore.orders"
+          :key="index"
+        >
           <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item
-              class="text-[24px]"
-              :title="`${i.title}`"
+              :title="`${i.card.product.name}`"
               :name="`${i.id}`"
             >
               <div
@@ -22,28 +25,30 @@
                 <div>
                   <div class="flex">
                     Product:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.products }}
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.card.product.name }}
                     </p>
                   </div>
                   <div class="flex">
                     Status:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.status }}
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.status.status_name }}
                     </p>
                   </div>
                   <div class="flex">
-                    Sana:
-                    <p class="text-black font-bold">
-                      &nbsp&nbsp&nbsp{{ i.data }}
+                    Addres:
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ i.region.name }} - {{ i.district.name }}
                     </p>
                   </div>
                 </div>
-                <div class="flex pt-[15px] text-[24px]">
-                  <h1 class="">Narx:</h1>
-                  <p class="text-black font-bold">
-                    &nbsp&nbsp&nbsp{{ i.price }}
-                  </p>
+                <div class="pt-[15px] text-[24px]">
+                  <div class="flex">
+                    <h1 class="">Narx:</h1>
+                    <p class="text-black">
+                      &nbsp&nbsp&nbsp{{ formatPrice(i.card.price) }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </el-collapse-item>
@@ -77,32 +82,17 @@ import Header from "../../components/Header/Header.vue";
 import Footer from "../../components/Footer/Footer.vue";
 import { onMounted, ref } from "vue";
 import { useClientStore } from "../../stores/client/client";
+import { useOrderStore } from "../../stores/order/order";
 
+const orderStore = useOrderStore();
 const edit = ref(true);
 const changer = ref(true);
 const store = useClientStore();
 const disabled = ref(true);
+
 const change = () => {
   edit.value = false;
 };
-const orders = ref([
-  {
-    id: 1,
-    title: "iphone 13",
-    products: "pro, pro max",
-    price: "123231",
-    status: "payed",
-    data: "12.12.2012",
-  },
-  {
-    id: 2,
-    title: "iphone 13",
-    products: "pro, pro max",
-    price: "123231",
-    status: "payed",
-    data: "12.12.2012",
-  },
-]);
 
 function getCookie(name: string) {
   const cookieString = document.cookie;
@@ -125,11 +115,27 @@ const activeNames = ref(["1"]);
 const handleChange = (val: string[]) => {
   console.log(val);
 };
+const formatPrice = (price: any) => {
+  if (price !== undefined) {
+    return parseFloat(price).toFixed(1);
+  }
+  return "";
+};
 
 onMounted(async () => {
   await store.getClientById(id);
-  console.log(await store.info);
+  await orderStore.getClientOrder(id);
+  console.log(orderStore.orders, "orderss");
+
+  console.log(store.info);
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+#el-collapse-head-8540 {
+  font-size: 50px;
+}
+.el-collapse-item__header {
+  font-size: 30px;
+}
+</style>
