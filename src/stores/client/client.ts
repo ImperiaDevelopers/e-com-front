@@ -3,12 +3,14 @@ import clientApi from "../../api/client/client";
 
 interface ClientState {
   client: any[];
+  info: any[];
 }
 
 export const useClientStore = defineStore({
   id: "client",
   state: (): ClientState => ({
     client: [],
+    info: [],
   }),
   actions: {
     async otpClient(payload: any) {
@@ -30,7 +32,8 @@ export const useClientStore = defineStore({
     async getClientById(id: any) {
       try {
         const res = await clientApi.getClientById(id);
-        return res.phone_number;
+        this.info = res;
+        console.log(this.info);
       } catch (err) {
         console.log(err);
       }
@@ -71,7 +74,7 @@ export const useClientStore = defineStore({
         if (old_id == null) {
           old_id = "";
         }
-        if (!await this.getClientById(old_id)) {
+        if (!(await this.getClientById(old_id))) {
           this.deleteClient(old_id);
         }
         console.log(res);
