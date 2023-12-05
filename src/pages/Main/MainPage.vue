@@ -7,19 +7,19 @@
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular product</h1>
     </div>
   </div>
-  <Product />
+  <Product :imgs="storeProduct.products"/>
   <div class="flex items-center justify-center">
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular products</h1>
     </div>
   </div>
-  <Product />
+  <Product :imgs="storeProduct.products"/>
   <div class="flex items-center justify-center">
     <div class="w-[1180px]">
       <h1 class="text-[32px] font-[700] mb-[1.5%]">Most popular products</h1>
     </div>
   </div>
-  <Product />
+  <Product :imgs="storeProduct.products"/>
   <Category />
   <div v-if="stocks.length >= 5" class="flex items-center justify-center">
     <div class="w-[1180px]">
@@ -129,12 +129,21 @@ getUniqueUserId();
 
 const products = ref([]);
 
+
 const id = getCookie("clientId");
 const stocks = ref([]);
+const params = {
+  page: 1,
+  limit: 10,
+  last_page: null,
+  count: null,
+};
 onMounted(async () => {
+   storeProduct.getProducts(params)
   await storeProduct.getProductInStock();
   storeProduct.stocks.forEach((item) => {
     item.product.to = item.to;
+    console.log(item.product)
     stocks.value.push(item.product);
   });
   await storeView.getClientViews(id);
@@ -142,6 +151,7 @@ onMounted(async () => {
     const matching = stocks.value.find((prod) => prod.id == item.product_id);
     if (matching) {
       item.product.to = matching.to;
+      console.log(item.product.to)
     }
     products.value.push(item.product);
   });
