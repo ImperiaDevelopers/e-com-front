@@ -122,9 +122,6 @@
               >
                 <p>{{ item.product.name }}</p>
                 <p>{{ formatPrice(item.product.price) }} so'm</p>
-                <p>
-                  Alsiya tugash muddati: <b>{{ item.duration }} kun</b>
-                </p>
               </div>
             </div>
 
